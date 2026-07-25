@@ -5,13 +5,21 @@
 Rite is a writing loop that makes the cheap read and the deep read agree.}
 \end{quote}
 
-Advice on writing SE research papers is plentiful and good.
-Shaw taxonomized the questions reviewers ask of ICSE submissions~\cite{shaw03}; Widom gave the five questions an introduction must answer~\cite{widom06}; Williams mapped working habits onto empirical careers~\cite{williams11}; community standards now itemize what reviewers may demand~\cite{ralph21}.
-Yet a writer holding all this advice still faces it as prose: nothing connects the checklist to the text in the editor.
-The advice is never executed, so it is never checked.
+Papers are the unit of work of research.
+Fields count their progress in them; careers, grants, and graduations are measured in them, in SE as elsewhere.
 
-Rite makes some of that advice executable.
+But paper writing is slow.
+The ceremony around a submission (searching, citing, formatting, restating, self-checking) consumes months that could have gone to exploring new ideas or maturing old ones.
+Advice on that ceremony is plentiful and good: Shaw taxonomized the questions reviewers ask of ICSE submissions~\cite{shaw03}; Widom gave the five questions an introduction must answer~\cite{widom06}; Williams mapped working habits onto empirical careers~\cite{williams11}; community standards now itemize what reviewers may demand~\cite{ralph21}.
+Yet all this advice shares one flaw: none of it is executable, so none of it is checked, and none of it saves any time.
+
+Until recently that flaw was incurable, since no tool could read a literature, code it, and critique a draft.
+Large language models changed that.
+Newell's advice to a young scientist was to know your own strengths and follow them~\cite{newell91}; a pipeline can now reverse-engineer those strengths from a researcher's own recent papers, then map them onto the problems a field currently ranks as most pressing.
+
+So we built rite, which makes some of the old advice executable.
 It consists of two small repositories: a read-only \textit{engine} (github.com/timm/rite: a fourteen-step loop, eight prompt divisions, seven Python scripts) and one \textit{workdir} per paper that holds the goal, the coding vocabulary, and everything generated.
+Per its own method, this paper is written by rite and paired with a critique of itself.
 This paper asks two questions.
 
 \textbf{RQ1: Can the folklore of paper writing be encoded as a checkable pipeline?}
@@ -28,7 +36,7 @@ Contributions: (1)~the loop and its eight prompt divisions, written so a paper c
 
 Three questions reach us before any others, so we answer them first.
 
-\textbf{Doesn't encoding Newell-style problem selection~\cite{newell76} steer a career into a rut?}
+\textbf{Doesn't encoding Newell-style problem selection~\cite{newell76,newell91} steer a career into a rut?}
 In our experience, no.
 The literature step keeps forcing contact with material outside prior experience, and the experiments that follow force a critical evaluation of the tool base's premises.
 The author offers his own last five years, coded by this same pipeline, in the sequel to this draft; readers can judge the rut for themselves.

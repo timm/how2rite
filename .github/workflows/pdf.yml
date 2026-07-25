@@ -1,0 +1,53 @@
+name: pdf
+
+on:
+  push:
+    branches: [main]
+    paths: ['**.tex', 'refs.bib', '.github/workflows/pdf.yml']
+  pull_request:
+    paths: ['**.tex', 'refs.bib', '.github/workflows/pdf.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: wtfjoke/setup-tectonic@v3
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/Tectonic
+          key: tectonic-${{ hashFiles('**/*.tex', 'refs.bib') }}
+          restore-keys: tectonic-
+      - run: tectonic paper1.tex
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paper1-pdf
+          path: paper1.pdf
+      - name: Stage site
+        if: github.event_name != 'pull_request'
+        run: |
+          mkdir _site
+          cp paper1.pdf _site/
+          printf '<meta http-equiv="refresh" content="0; url=paper1.pdf">' > _site/index.html
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,362 @@
+\documentclass[sigconf,nonacm]{acmart}
+\usepackage{booktabs}
+
+\title{How to Rite: an Engine and a Ritual for Writing
+  Software Engineering Research Papers}
+
+\author{Tim Menzies}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}\state{NC}\country{USA}}
+\email{timm@ieee.org}
+
+\begin{abstract}
+Decades of good advice on writing software engineering
+(SE) research papers~\cite{shaw03,widom06,williams11}
+share one flaw: none of it is executable, so none of it
+is checked. This paper offers \textit{rite}: a
+fourteen-step writing loop, eight prompt divisions that
+encode the advice as machine-readable skills, and a
+small literature pipeline (search, knee detection,
+snowballing, keyword coding) over the OpenAlex
+index~\cite{priem22}. One rule of rite is checkable and
+surprising: coding 54 papers on multi-objective
+explanation, only 22 had open-access full text, and
+their abstracts earned barely half the topic flags that
+their bodies earned. Abstracts under-report their own
+papers; so rite requires that a paper's own
+title-plus-abstract, coded by its own pipeline, must
+match the coding of its full text. This paper is
+written by that method and, per the method, critiques
+itself. Install: clone github.com/timm/rite and run
+\texttt{etc/init.py}.
+\end{abstract}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+\begin{quote}{\em Everyone who judges a paper cheaply
+reads only its title and abstract. Rite is a writing
+loop that makes the cheap read and the deep read agree.}
+\end{quote}
+
+Advice on writing SE research papers is plentiful and
+good. Shaw taxonomized the questions reviewers ask of
+ICSE submissions~\cite{shaw03}; Widom gave the five
+questions an introduction must answer~\cite{widom06};
+Williams mapped working habits onto empirical
+careers~\cite{williams11}; community standards now
+itemize what reviewers may demand~\cite{ralph21}. Yet a
+writer holding all this advice still faces it as prose:
+nothing connects the checklist to the text in the
+editor. The advice is never executed, so it is never
+checked.
+
+Rite makes some of that advice executable. It is two
+small repositories: a read-only \textit{engine}
+(github.com/timm/rite: a fourteen-step loop, eight
+prompt divisions, seven Python scripts) and one
+\textit{workdir} per paper that holds the goal, the
+coding vocabulary, and everything generated. This paper
+asks two questions.
+
+\textbf{RQ1: Can the folklore of paper writing be
+encoded as a checkable pipeline?} Yes, partly. Of the
+fourteen steps of Table~\ref{tab:loop}, we find
+\textbf{ten} run as scripts or machine-checked gates;
+the irreducibly human residue is small (steps 10 and 12,
+plus taste).
+
+\textbf{RQ2: Is a cheap reading of the literature (title
+plus abstract) a safe substitute for the full text?}
+No, measurably. In our exhibit, abstracts earned
+\textbf{9 of 21} full-text SE flags, \textbf{3 of 10}
+multi-objective flags, and binary matching over full
+text saturated on \textbf{21 of 22} papers until a
+frequency threshold was applied
+(Section~\ref{sec:exhibit}).
+
+Contributions: (1)~the loop and its eight prompt
+divisions, written so a paper can quote the short form
+of each; (2)~a literature pipeline whose byproducts
+(knee of the citation curve, download rate, coding
+grids) become the paper's own gap argument; (3)~the
+abstract-consistency gate: a submission's
+title-plus-abstract must earn every topic flag its body
+earns; (4)~a replication package: everything at
+github.com/timm/rite and github.com/timm/how2rite.
+
+\subsection{How to install}
+
+\begin{verbatim}
+git clone https://github.com/timm/rite
+python3 rite/etc/init.py mypaper
+cd mypaper   # fill in README.md goal: line
+\end{verbatim}
+
+\subsection{How to use}
+
+Follow Table~\ref{tab:loop}. Steps 1--7 configure and
+search; step 8 gates entry (no elevator speech, no
+paper); steps 9--14 loop until the self-test passes.
+Each step names the prompt division that drives it;
+each division is a skill file whose short form fits on
+one screen.
+
+\begin{table}
+\caption{The rite loop. Divisions: ch=choose, se=search,
+en=encode, st=structure, pr=prose, cr=critics, be=bench,
+sh=ship. Steps marked $\ast$ are automatic.}
+\label{tab:loop}
+\small
+\begin{tabular}{rlp{0.9cm}}
+\toprule
+\# & step & prompts\\
+\midrule
+1 & define your area of interest & ch\\
+2 & define ``recent'' (field velocity) & se\\
+3 & list your best recent papers & ch\\
+4 & $\ast$ define what you are good at (from 3) & ch\\
+5 & $\ast$ assemble critics (venues, standards,
+    nearest ten) & cr\\
+6 & $\ast$ search: knee, snowball; code full text
+    at threshold & se,en\\
+7 & define the most relevant problem (from 6),
+    or the strangest & ch\\
+8 & write paper[0]: title, abstract, elevator
+    speech; else goto 7 & pr,st\\
+9 & i=i+1; write paper[i]; rest stays headers & st,pr\\
+10 & offline deep read, 30--60 minutes of
+    comments & cr\\
+11 & $\ast$ apply other critics; split fixes
+    auto/manual & cr\\
+12 & discuss with other humans & cr\\
+13 & $\ast$ apply auto fixes; recode own abstract,
+    must match body & en,pr\\
+14 & $\ast$ self-test; fail goto 9, pass ship with
+    replication package & sh\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure*}
+\begin{verbatim}
+ ENGINE github.com/timm/rite (read only)          WORKDIR one repo per paper
+ +------------------------------------+           +---------------------------+
+ | HOWTO.md   the 14 step loop        |  init.py  | README.md  goal:  years:  |
+ | .claude/skills/  7 divisions       | --------> | flags.py   coding facets  |
+ | etc/  fetch snowball stubs code    |           | bench.md   field norms    |
+ |       getpdfs recode init          |  scripts  | TODO.md    work orders    |
+ | pdf/  style source papers          | <-------- | lit/       all generated  |
+ +------------------------------------+  run from | paper.tex  paper.pdf      |
+                                          workdir  +---------------------------+
+\end{verbatim}
+\caption{The obligatory system diagram. The argument it
+walks: advice lives once, on the left, read-only;
+everything a paper generates lands on the right, so ten
+papers share one engine and an engine fix reaches all
+ten. The scripts run from the workdir and read its
+README and flags; nothing is configured twice.}
+\label{fig:sys}
+\end{figure*}
+
+\section{Related work}
+
+The ancestors here are excellent. Shaw's minitutorial
+remains the best census of what program committees
+actually reward, and her three reader questions (what is
+the contribution, what is the new result, why believe
+it) are the spine of every section rite
+generates~\cite{shaw03}. Widom's five-question
+introduction is the completeness test rite applies to
+its own openings~\cite{widom06}. Williams connected
+writing practice to career impact~\cite{williams11}, and
+the SIGSOFT empirical standards turned scattered
+reviewer folklore into named, checkable
+expectations~\cite{ralph21}. On the analytics side,
+OpenAlex opened the citation graph that older advice
+could only gesture at~\cite{priem22}, and length-
+normalized term weighting is textbook information
+retrieval~\cite{salton88}.
+
+None of this, however, executes. The advice papers are
+prose about prose: no script checks a manuscript against
+Shaw's questions, no gate stops a submission whose
+abstract would be miscoded by the very search tools that
+will index it. The standards~\cite{ralph21} are
+checklists for reviewers, applied after writing, not
+instruments wired into the writing loop itself.
+
+Based on the above, there exist the following open
+issues: (1)~writing advice is unexecuted and hence
+unchecked; (2)~the literature search that motivates a
+paper and the coding of that literature are rarely
+reproducible artifacts of the paper; (3)~no standard
+gate ensures a paper's abstract matches its body.
+Accordingly, the rest of this paper describes an engine
+addressing all three (Section~\ref{sec:method}), an
+exhibit measuring issue 3 in the wild
+(Section~\ref{sec:exhibit}), and a discussion of what
+broke (Section~\ref{sec:disc}).
+
+\section{The method}\label{sec:method}
+
+Rite splits into an engine and per-paper workdirs
+(Figure~\ref{fig:sys}). The engine is read-only at
+writing time; this is a trust boundary as much as a
+convenience, since a tool that edits its own rules while
+writing paper seven will eventually rot them.
+
+Two single-sources-of-truth discipline the pipeline. The
+search goal and year range live only in the workdir
+README; the coding vocabulary (topic flags and
+technology flags, regular-expression families) lives
+only in the workdir \texttt{flags.py}. Retargeting a
+paper edits two files.
+
+The pipeline then runs from the workdir: search OpenAlex
+for the goal; keep the papers above the knee of the
+sorted-citation curve; backward-snowball their
+references for the shared classics; fetch open-access
+PDFs; code abstracts, then code full texts. Full-text
+coding counts a flag only above a frequency threshold
+(0.5 matches per 1000 words), a crude form of
+length-normalized term weighting~\cite{salton88}; the
+cutoff value is ours and Section~\ref{sec:disc} owes it
+a sensitivity analysis.
+
+The loop's most opinionated gate is the
+abstract-consistency rule (step 13): run the paper's own
+coding grid on its own title plus abstract, and require
+every flag the body earns at threshold. The
+justification is Section~\ref{sec:exhibit}: in the wild,
+abstracts fail this test about half the time, and
+everyone who judges a paper cheaply (bidding PC members,
+systematic-review coders, ranking algorithms, skimming
+practitioners) reads only the abstract.
+
+\section{The exhibit}\label{sec:exhibit}
+
+We test-drove the pipeline on one goal: explanation of
+multi-objective reasoning in SE, 2021--2026. The
+numbers below are the pipeline's own outputs, kept in
+the replication package.
+
+\textbf{Finding 1: the canon is paywalled.} Of 54
+papers selected for reading (43 recent, above the
+citation knee; 11 classics, found by snowballing), only
+22 (41\%) had fetchable open-access PDFs: 47\% of the
+recents, 18\% of the classics.
+
+\textbf{Finding 2: abstracts under-report.} Coding the
+22 full texts against their abstracts
+(Table~\ref{tab:flips}): abstracts earned 9 of the 21
+SE flags, 3 of the 10 multi-objective flags, 8 of 18
+explanation flags. Roughly half the topic signal is
+invisible to a reader of abstracts alone.
+
+\textbf{Finding 3: binary matching lies in the other
+direction.} Any-match coding over full text flagged 21
+of 22 papers with every flag at once; a ten-page PDF
+mentions everything somewhere. The frequency threshold
+restores discrimination, and it discriminates most on
+the multi-objective flag (11 of 22 papers flip): half
+this corpus mentions optimization, few work on it.
+Mentions are not methods.
+
+\begin{table}
+\caption{Per-flag coding of 22 papers: abstract versus
+full text, binary versus thresholded (thr = at least
+0.5 matches per 1000 words).}
+\label{tab:flips}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+flag & abs & full-bin & full-thr & flips bin$\to$thr\\
+\midrule
+software task & 9 & 22 & 21 & 1\\
+multi-objective & 3 & 21 & 10 & 11\\
+explanation & 8 & 22 & 18 & 4\\
+benchmarking & 5 & 22 & 20 & 2\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Discussion}\label{sec:disc}
+
+\subsection{Observations}
+
+The surprise is not that abstracts compress; it is the
+asymmetry. Abstracts under-report methodology most
+(benchmarking flags: 5 in abstracts, 20 in bodies), and
+full-text binary coding over-reports in exactly the
+mirror image. Cheap reads and naive deep reads are both
+wrong, in opposite directions; only the thresholded
+middle agrees with a human coder. This is why rite's
+gate is stated on the thresholded coding, not on either
+extreme.
+
+Second, the pipeline's byproducts kept becoming the
+argument. The download rate was meant as logging and
+became Finding 1; the saturation artifact was a bug and
+became Finding 3. A reproducible search leaves evidence
+lying around, and evidence is what papers are made of.
+
+Third, the objections we anticipated have short
+answers. Does encoding Newell-style problem
+selection~\cite{newell76} steer a career into a rut?
+The method's own literature step keeps forcing contact
+with material outside prior experience; the author
+offers his last five years, coded by this same
+pipeline, in the sequel to this draft. Will automation
+flood the field with average papers? Price's law says
+the square root of a field's contributors produce half
+its output~\cite{price63}; the road into that root is
+hard thinking, and no pipeline walks it for you. Tools
+here only cut the ceremony around the thinking.
+
+\subsection{Threats to validity}
+
+\textbf{Instrument.} The 0.5-per-1000-words cutoff is
+ours, unvalidated beyond this corpus; the promised
+sensitivity analysis has not yet run. Keyword coding is
+a draft that the method itself says to hand-audit.
+
+\textbf{Selection.} One goal, one field, 22 full texts;
+the paywall excluded most classics, so Finding 2 may
+differ on an older, closed corpus.
+
+\textbf{Author as instrument.} The loop's expensive
+steps (10, 12) were run by the person who built the
+loop. This paper is deliberately pre-critics: it is
+paper[1] of its own Table~\ref{tab:loop}, awaiting
+steps 10--13.
+
+\subsection{Future work}
+
+Run this paper through its own critics (steps 10--12),
+publish the critic reports and the auto-corrected
+paper[2] beside this draft; snowball forward and
+backward from the anchor review to complete the related
+work; run the threshold sensitivity analysis; add the
+five-year self-coding exhibit.
+
+\section{Conclusion}
+
+The claims of the introduction, with their receipts:
+the folklore can be partly encoded (ten of fourteen
+steps run as scripts or gates; the engine and workdir
+are public); cheap reads are not safe (9 of 21, 3 of
+10, 8 of 18 flags visible in abstracts; 21 of 22 papers
+saturated under binary full-text coding). The method's
+one aggressive rule follows from its own measurement:
+the abstract carries the paper, so gate the abstract.
+Everything here regenerates from
+github.com/timm/rite and github.com/timm/how2rite.
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}
+
+\end{document}

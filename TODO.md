@@ -72,3 +72,17 @@ Parsed:
    not Glass's (timm confirmed). Cite: Derek J. de
    Solla Price, Little Science, Big Science, Columbia
    University Press, 1963. HOWTO Objections updated.
+9. Engine feature (loop back later): snowballing is
+   two-directional. Backward snowball (implemented)
+   finds classics; forward snowball (missing) finds
+   what cites some core documents. Let README.md offer
+   optional seed lines, e.g.
+
+       seed: doi-or-arxiv-id
+       seed: ...
+
+   fetch.py/snowball.py then treat seeds as extra
+   roots: backward from them for ancestors, forward
+   (OpenAlex cited_by) for descendants. This is also
+   how the meta-paper's anchor (arXiv 1612.03224)
+   should be wired in, per item 4.

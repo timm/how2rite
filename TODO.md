@@ -47,3 +47,28 @@ Parsed:
 6. lit/ already holds the first exhibit (the
    abstract-vs-fulltext coding study); the meta-paper
    uses it as evidence. See lit/EXHIBIT.md.
+
+7. Rut-rebuttal exhibit: timm's own encode of his last
+   five years of work (his flags, his papers, coded at
+   thr like everyone else's), as evidence for the
+   HOWTO Objections section ("decide for yourself if
+   this career was in a rut"). Verbatim source lines
+   (2026-07-25):
+
+   > well having follwoing the forumla for decades now,
+   > i can assert that ruts were not my problem. the
+   > lit review methods put me in contact with material
+   > well outside my prior experience; the subsequent
+   > experiments we ran, and the problems we
+   > encountered, forced a critical eval of the tool
+   > base's premises. you can decide for yourself if my
+   > career was "in a rut" or not, but i offer here my
+   > own encode from the last 5 years, just to suggest
+   > that fighting with our sharpest sword might be the
+   > fastest way to cut through the nonsense to find
+   > exciting new stuff.
+
+8. Verify Glass's law citation (sqrt(n) people drive
+   the field; timm dates it 1966) before it ships in
+   the meta-paper; cf. also Price's law on sqrt(n)
+   authors -- check which is the right ancestor.

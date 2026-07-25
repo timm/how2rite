@@ -68,7 +68,7 @@ Parsed:
    > fastest way to cut through the nonsense to find
    > exciting new stuff.
 
-8. Verify Glass's law citation (sqrt(n) people drive
-   the field; timm dates it 1966) before it ships in
-   the meta-paper; cf. also Price's law on sqrt(n)
-   authors -- check which is the right ancestor.
+8. RESOLVED 2026-07-25: the sqrt(n) law is Price's,
+   not Glass's (timm confirmed). Cite: Derek J. de
+   Solla Price, Little Science, Big Science, Columbia
+   University Press, 1963. HOWTO Objections updated.

@@ -69,6 +69,14 @@ Follow Table~\ref{tab:loop}.
 Steps 1--7 configure and search; step 8 gates entry (no elevator speech, no paper); steps 9--14 loop until the self-test passes.
 Each step names the prompt division that drives it, and each division is a skill file whose short form fits on one screen.
 
+\subsection{How to collaborate}
+
+The repository is the paper; there is no other copy.
+On every push to the main branch, continuous integration rebuilds the PDF and serves it at a fixed URL (here, timm.github.io/how2rite/paper1.pdf); pull requests only build, so broken \TeX\ cannot land.
+Merges stay small by construction: each section is one file under \texttt{sec/}, and prose is one sentence per line, so two authors in the same paragraph usually touch different lines.
+Humans may commit to main; agents work on branches, submit pull requests, edit only the section files an ownership table assigns them, and never touch the preamble.
+The built PDF is never committed; the served copy is the only copy.
+
 \begin{table}
 \caption{The rite loop. Divisions: ch=choose, se=search,
 en=encode, st=structure, pr=prose, cr=critics, be=bench,

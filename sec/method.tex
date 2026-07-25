@@ -28,9 +28,10 @@ body(intro=I, related=R, method=M,
 
 intro(quote=Q, questions=Qs,
       contributions=Cs, faq=A,
-      install=In, use=U) -->
+      install=In, use=U, collab=V) -->
     quote(Q), rqs(Qs), contribs(Cs),
-    faq(A), install(In), use(U).
+    faq(A), install(In), use(U),
+    collab(V).
 
 related(before=B, since=S) -->
     cites(B),  % backward snowball

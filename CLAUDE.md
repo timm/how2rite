@@ -18,3 +18,27 @@ Run pipeline scripts from this dir, e.g.:
 
 Keep intermediaries few: README, paper1, critic
 reports, paper2 (see TODO.md).
+
+## Paper layout
+
+paper1.tex is a thin root (preamble + \input); prose
+lives in sec/*.tex, one sentence per line. Edit a
+sentence, touch one line; never reflow a paragraph.
+CI rebuilds on push to main with tectonic and serves
+https://timm.github.io/how2rite/paper1.pdf; PRs build
+only. paper1.pdf is generated, never committed.
+
+## Collaboration rules
+
+Agents: branch + PR only, never push main. Prose edits
+in sec/ only; preamble, root .tex, Makefile, or
+workflow changes need a human. refs.bib: one entry per
+commit, keep sorted.
+
+Ownership (extend as authors join):
+
+| file        | owner |
+|-------------|-------|
+| sec/*.tex   | timm  |
+| paper1.tex  | timm  |
+| refs.bib    | timm  |

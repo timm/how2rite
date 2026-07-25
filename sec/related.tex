@@ -1,0 +1,14 @@
+\section{Related work}
+
+This work has excellent ancestors.
+Shaw's minitutorial remains the best census of what program committees actually reward, and her three reader questions (what is the contribution, what is the new result, why believe it) are the spine of every section rite generates~\cite{shaw03}.
+Widom's five-question introduction is the completeness test rite applies to its own openings~\cite{widom06}.
+Williams connected writing practice to career impact~\cite{williams11}, and the SIGSOFT empirical standards turned scattered reviewer folklore into named, checkable expectations~\cite{ralph21}.
+On the analytics side, OpenAlex opened the citation graph that older advice could only gesture at~\cite{priem22}, and length-normalized term weighting is textbook information retrieval~\cite{salton88}.
+
+None of this, however, executes.
+The advice papers are prose about prose: no script checks a manuscript against Shaw's questions, no gate stops a submission whose abstract would be miscoded by the very search tools that will index it.
+The standards~\cite{ralph21} are checklists for reviewers, applied after writing, not instruments wired into the writing loop itself.
+
+From this survey, three gaps stand out: (1)~writing advice is unexecuted and hence unchecked; (2)~the literature search that motivates a paper and the coding of that literature are rarely reproducible artifacts of the paper; (3)~no standard gate ensures a paper's abstract matches its body.
+Accordingly, the rest of this paper describes an engine addressing all three (Section~\ref{sec:method}), an exhibit measuring issue 3 in the wild (Section~\ref{sec:exhibit}), and a discussion of what broke (Section~\ref{sec:disc}).

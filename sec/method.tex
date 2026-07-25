@@ -1,0 +1,54 @@
+\section{The method}\label{sec:method}
+
+Rite splits into an engine and per-paper workdirs (Figure~\ref{fig:sys}).
+The engine is read-only at writing time; this is a trust boundary as much as a convenience, since a tool that edits its own rules while writing paper seven will eventually rot them.
+
+The pipeline is disciplined by two single sources of truth.
+The search goal and year range live only in the workdir README; the coding vocabulary (topic flags and technology flags, regular-expression families) lives only in the workdir \texttt{flags.py}.
+Retargeting the whole pipeline to a new paper therefore means editing just two files.
+
+The structure division pins down the shape of the paper itself.
+Figure~\ref{fig:bnf} states that shape as a definite clause grammar, in the Prolog idiom where each head argument is a \texttt{key=Variable} pair: the keys document which role each part plays, and any part of a parsed paper can be pulled out by name.
+The keywords earn their keep where one nonterminal is called twice in a single rule (in \texttt{related}, backward and forward snowballing are both just \texttt{cites}); there, position alone would be a silent trap.
+
+\begin{figure}[t]
+\begin{lstlisting}
+paper(front=F, body=B, back=K) -->
+    front(F), body(B), back(K).
+
+front(title=T, author=A, abstract=X) -->
+    title(T), author(A), abstract(X).
+
+body(intro=I, related=R, method=M,
+     results=E, discussion=D,
+     conclusion=C) -->
+    intro(I), related(R), method(M),
+    results(E), discussion(D),
+    conclusion(C).
+
+intro(quote=Q, questions=Qs,
+      contributions=Cs, faq=A,
+      install=In, use=U) -->
+    quote(Q), rqs(Qs), contribs(Cs),
+    faq(A), install(In), use(U).
+
+related(before=B, since=S) -->
+    cites(B),  % backward snowball
+    cites(S).  % forward snowball
+
+discussion(observations=O, threats=T,
+           future=W) -->
+    observations(O), threats(T),
+    future(W).
+
+back(refs=Rs) --> refs(Rs).
+\end{lstlisting}
+\caption{The shape of a standard paper, as the structure division states it: a definite clause grammar whose head arguments name their parts.}
+\label{fig:bnf}
+\end{figure}
+
+The pipeline then runs from the workdir: search OpenAlex for the goal; keep the papers above the knee of the sorted-citation curve; backward-snowball their references for the shared classics; fetch open-access PDFs; code abstracts, then code full texts.
+Full-text coding counts a flag only above a frequency threshold (0.5 matches per 1000 words), a crude form of length-normalized term weighting~\cite{salton88}; the cutoff value is ours and Section~\ref{sec:disc} owes it a sensitivity analysis.
+
+The loop's most opinionated gate is the abstract-consistency rule (step 13): run the paper's own coding grid on its own title plus abstract, and require every flag the body earns at threshold.
+The justification is Section~\ref{sec:exhibit}: in the wild, abstracts fail this test about half the time, and everyone who judges a paper cheaply (bidding PC members, systematic-review coders, ranking algorithms, skimming practitioners) reads only the abstract.

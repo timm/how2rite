@@ -1,0 +1,34 @@
+\section{The exhibit}\label{sec:exhibit}
+
+We test-drove the pipeline on one goal: explanation of multi-objective reasoning in SE, 2021--2026.
+The numbers below are the pipeline's own outputs, kept in the replication package.
+
+\textbf{Finding 1: the canon is paywalled.}
+Of 54 papers selected for reading (43 recent, above the citation knee; 11 classics, found by snowballing), only 22 (41\%) had fetchable open-access PDFs: 47\% of the recents, 18\% of the classics.
+
+\textbf{Finding 2: abstracts under-report.}
+Coding the 22 full texts against their abstracts (Table~\ref{tab:flips}): abstracts earned 9 of the 21 SE flags, 3 of the 10 multi-objective flags, 8 of 18 explanation flags.
+Roughly half the topic signal is invisible to a reader of abstracts alone.
+
+\textbf{Finding 3: binary matching lies in the other direction.}
+Any-match coding over full text flagged 21 of 22 papers with every flag at once; a ten-page PDF mentions everything somewhere.
+The frequency threshold restores discrimination, and it discriminates most on the multi-objective flag (11 of 22 papers flip): half this corpus mentions optimization, few work on it.
+Mentions are not methods.
+
+\begin{table}
+\caption{Per-flag coding of 22 papers: abstract versus
+full text, binary versus thresholded (thr = at least
+0.5 matches per 1000 words).}
+\label{tab:flips}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+flag & abs & full-bin & full-thr & flips bin$\to$thr\\
+\midrule
+software task & 9 & 22 & 21 & 1\\
+multi-objective & 3 & 21 & 10 & 11\\
+explanation & 8 & 22 & 18 & 4\\
+benchmarking & 5 & 22 & 20 & 2\\
+\bottomrule
+\end{tabular}
+\end{table}

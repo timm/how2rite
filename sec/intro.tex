@@ -1,0 +1,125 @@
+\section{Introduction}
+
+\begin{quote}
+{\em Everyone who judges a paper cheaply reads only its title and abstract.
+Rite is a writing loop that makes the cheap read and the deep read agree.}
+\end{quote}
+
+Advice on writing SE research papers is plentiful and good.
+Shaw taxonomized the questions reviewers ask of ICSE submissions~\cite{shaw03}; Widom gave the five questions an introduction must answer~\cite{widom06}; Williams mapped working habits onto empirical careers~\cite{williams11}; community standards now itemize what reviewers may demand~\cite{ralph21}.
+Yet a writer holding all this advice still faces it as prose: nothing connects the checklist to the text in the editor.
+The advice is never executed, so it is never checked.
+
+Rite makes some of that advice executable.
+It consists of two small repositories: a read-only \textit{engine} (github.com/timm/rite: a fourteen-step loop, eight prompt divisions, seven Python scripts) and one \textit{workdir} per paper that holds the goal, the coding vocabulary, and everything generated.
+This paper asks two questions.
+
+\textbf{RQ1: Can the folklore of paper writing be encoded as a checkable pipeline?}
+Yes, partly.
+Of the fourteen steps of Table~\ref{tab:loop}, we find \textbf{ten} run as scripts or machine-checked gates; the irreducibly human residue is small (steps 10 and 12, plus taste).
+
+\textbf{RQ2: Is a cheap reading of the literature (title plus abstract) a safe substitute for the full text?}
+No, measurably.
+In our exhibit, abstracts earned \textbf{9 of 21} full-text SE flags, \textbf{3 of 10} multi-objective flags, and binary matching over full text saturated on \textbf{21 of 22} papers until a frequency threshold was applied (Section~\ref{sec:exhibit}).
+
+Contributions: (1)~the loop and its eight prompt divisions, written so a paper can quote the short form of each; (2)~a literature pipeline whose byproducts (knee of the citation curve, download rate, coding grids) become the paper's own gap argument; (3)~the abstract-consistency gate: a submission's title-plus-abstract must earn every topic flag its body earns; (4)~a replication package: everything at github.com/timm/rite and github.com/timm/how2rite.
+
+\subsection{FAQ}\label{sec:faq}
+
+Three questions reach us before any others, so we answer them first.
+
+\textbf{Doesn't encoding Newell-style problem selection~\cite{newell76} steer a career into a rut?}
+In our experience, no.
+The literature step keeps forcing contact with material outside prior experience, and the experiments that follow force a critical evaluation of the tool base's premises.
+The author offers his own last five years, coded by this same pipeline, in the sequel to this draft; readers can judge the rut for themselves.
+
+\textbf{Will automation flood the field with average papers?}
+Price's law observes that the square root of a field's contributors produce half of its output~\cite{price63}.
+The road into that square root is hard thinking, and no pipeline walks it for you.
+The tools here only cut the ceremony that surrounds the thinking.
+
+\textbf{Does this kind of tooling ever find anything new?}
+It did here.
+While exploring this pipeline we found that a paper's title plus abstract does not code the same way as its full text (Section~\ref{sec:exhibit}).
+That hazard has been on record since at least 2007, when Brereton et al.\ warned that SE abstracts are too poor to rely on when selecting primary studies~\cite{brereton07}.
+But its consequences run far past review screening, since titles and abstracts are what search engines index, what readers use to decide what to read (so miscoding quietly corrupts manual literature reviews), and what bidding systems consult when assigning reviewers to papers.
+Here, then, is a sizeable problem, barely discussed in SE, uncovered by exactly the kind of LLM-assisted analysis that some researchers would decline to run on methodological or ideological grounds.
+
+\subsection{How to install}
+
+\begin{verbatim}
+git clone https://github.com/timm/rite
+python3 rite/etc/init.py mypaper
+cd mypaper
+\end{verbatim}
+
+The generated workdir README needs two lines filled in before anything else runs; for example:
+
+\begin{verbatim}
+# mypaper
+goal:  how to write SE research papers
+years: 2021-2026
+\end{verbatim}
+
+Those two lines are the single source of truth for the whole literature search: every downstream script reads its goal and year range from here and nowhere else.
+
+\subsection{How to use}
+
+Follow Table~\ref{tab:loop}.
+Steps 1--7 configure and search; step 8 gates entry (no elevator speech, no paper); steps 9--14 loop until the self-test passes.
+Each step names the prompt division that drives it, and each division is a skill file whose short form fits on one screen.
+
+\begin{table}
+\caption{The rite loop. Divisions: ch=choose, se=search,
+en=encode, st=structure, pr=prose, cr=critics, be=bench,
+sh=ship. Steps marked $\ast$ are automatic.}
+\label{tab:loop}
+\small
+\begin{tabular}{rlp{0.9cm}}
+\toprule
+\# & step & prompts\\
+\midrule
+1 & define your area of interest & ch\\
+2 & define ``recent'' (field velocity) & se\\
+3 & list your best recent papers & ch\\
+4 & $\ast$ define what you are good at (from 3) & ch\\
+5 & $\ast$ assemble critics (venues, standards,
+    nearest ten) & cr\\
+6 & $\ast$ search: knee, snowball; code full text
+    at threshold & se,en\\
+7 & define the most relevant problem (from 6),
+    or the strangest & ch\\
+8 & write paper[0]: title, abstract, elevator
+    speech; else goto 7 & pr,st\\
+9 & i=i+1; write paper[i]; rest stays headers & st,pr\\
+10 & offline deep read, 30--60 minutes of
+    comments & cr\\
+11 & $\ast$ apply other critics; split fixes
+    auto/manual & cr\\
+12 & discuss with other humans & cr\\
+13 & $\ast$ apply auto fixes; recode own abstract,
+    must match body & en,pr\\
+14 & $\ast$ self-test; fail goto 9, pass ship with
+    replication package & sh\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure*}
+\centering
+\begin{BVerbatim}[fontsize=\scriptsize]
+ ENGINE github.com/timm/rite (read only)          WORKDIR one repo per paper
+ +------------------------------------+           +---------------------------+
+ | HOWTO.md   the 14 step loop        |  init.py  | README.md  goal:  years:  |
+ | .claude/skills/  7 divisions       | --------> | flags.py   coding facets  |
+ | etc/  fetch snowball stubs code    |           | bench.md   field norms    |
+ |       getpdfs recode init          |  scripts  | TODO.md    work orders    |
+ | pdf/  style source papers          | <-------- | lit/       all generated  |
+ +------------------------------------+  run from | paper.tex  paper.pdf      |
+                                          workdir  +---------------------------+
+\end{BVerbatim}
+\caption{The obligatory system diagram.
+The argument it walks: advice lives once, on the left, read-only; everything a paper generates lands on the right, so ten papers share one engine and an engine fix reaches all ten.
+The scripts run from the workdir and read its README and flags; nothing is configured twice.}
+\label{fig:sys}
+\end{figure*}

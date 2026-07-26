@@ -5,42 +5,32 @@
 % make notes lists them all. acmart already loads xcolor.
 \newcommand{\note}[2]{\textcolor{red}{\textbf{[#1: #2]}}}
 
-% compact author block: smaller fonts, one-line affiliations
-\settopmatter{authorsperrow=4}
+% compact author block: one names line, one affils line
 \makeatletter
-\renewcommand\@authorfont{\small\sffamily}
-\renewcommand\@affiliationfont{\footnotesize\itshape}
+\renewcommand\@authorfont{\normalsize\sffamily}
+\renewcommand\@affiliationfont{\small}
 \makeatother
 
 \title{Follow Your Strengths: Writing Research Papers in the Age of
   Large Language Models}
 % \note in title breaks headers; working title, timm to confirm.
 
-\author{Tim Menzies}
-\affiliation{\institution{NC State, Raleigh, USA}\country{}}
-\email{timm@ieee.org}
-
-\author{Carmen Armenti}
-\affiliation{\institution{USI, Lugano, Switzerland}\country{}}
-\email{rmenti@usi.ch}
-
-\author{Dario Di Nucci}
-\affiliation{\institution{University of Salerno, Italy}\country{}}
-\email{d.dinucci@ieee.org}
-
-\author{Matteo Esposito}
-\affiliation{\institution{University of Oulu, Finland}\country{}}
-\email{matteo.esposito@oulu.fi}
-
-\author{Gerardo Iuliano}
-\affiliation{\institution{University of Salerno, Italy}\country{}}
-\email{geiuliano@unisa.it}
-
-\author{Valentina Lenarduzzi}
-\affiliation{\institution{University of Southern Denmark}\country{}}
-
-\author{Klaus Schmid}
-\affiliation{\institution{University of Hildesheim, Germany}\country{}}
+\author{Tim Menzies\textsuperscript{1},
+  Carmen Armenti\textsuperscript{2},
+  Dario Di Nucci\textsuperscript{3},
+  Matteo Esposito\textsuperscript{4},
+  Gerardo Iuliano\textsuperscript{3},
+  Valentina Lenarduzzi\textsuperscript{5},
+  Klaus Schmid\textsuperscript{6}}
+\affiliation{\institution{%
+  \textsuperscript{1}NC State, USA;
+  \textsuperscript{2}USI, Switzerland;
+  \textsuperscript{3}Univ.~Salerno, Italy;
+  \textsuperscript{4}Univ.~Oulu, Finland;
+  \textsuperscript{5}Univ.~Southern Denmark;
+  \textsuperscript{6}Univ.~Hildesheim, Germany}\country{}}
+\email{timm@ieee.org; rmenti@usi.ch; d.dinucci@ieee.org;
+  matteo.esposito@oulu.fi; geiuliano@unisa.it}
 
 \input{sec0/abstract}
 

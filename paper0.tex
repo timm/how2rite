@@ -1,5 +1,8 @@
 \documentclass[sigconf,nonacm]{acmart}
 \usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\settopmatter{printfolios=true}
 
 % review comments: \note{who}{what}; resolve = delete.
 % make notes lists them all. acmart already loads xcolor.
@@ -11,11 +14,21 @@
 \newenvironment{pause}[1]{%
   \refstepcounter{pausebox}\par\medskip\noindent
   \begin{lrbox}{\pauseboxsave}%
-  \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule}%
+  \begin{minipage}{\dimexpr\linewidth-9mm}%
   \small\noindent
   \textbf{\textsc{Pause \& review \thepausebox: #1}}\\[0.2em]}%
  {\end{minipage}\end{lrbox}%
-  \fbox{\usebox{\pauseboxsave}}\par\medskip}
+  \noindent\begin{tikzpicture}
+  \node[inner sep=5pt, anchor=west] (b) at (5mm,0)
+    {\usebox{\pauseboxsave}};
+  \fill[black!12]
+    ([xshift=-5mm]b.north west) rectangle (b.south west);
+  \draw[decorate, decoration={random steps, segment length=7pt,
+    amplitude=0.7pt}, line width=0.6pt]
+    ([xshift=-5mm]b.north west) -- (b.north east) --
+    (b.south east) -- (b.south west) --
+    ([xshift=-5mm]b.south west) -- cycle;
+  \end{tikzpicture}\par\medskip}
 
 % compact author block: one names line, one affils line
 \makeatletter

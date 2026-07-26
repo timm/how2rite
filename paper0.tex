@@ -5,49 +5,42 @@
 % make notes lists them all. acmart already loads xcolor.
 \newcommand{\note}[2]{\textcolor{red}{\textbf{[#1: #2]}}}
 
+% compact author block: smaller fonts, one-line affiliations
+\settopmatter{authorsperrow=4}
+\makeatletter
+\renewcommand\@authorfont{\small\sffamily}
+\renewcommand\@affiliationfont{\footnotesize\itshape}
+\makeatother
+
 \title{Follow Your Strengths: Writing Research Papers in the Age of
   Large Language Models}
 % \note in title breaks headers; working title, timm to confirm.
 
 \author{Tim Menzies}
-\affiliation{%
-  \institution{North Carolina State University}
-  \city{Raleigh}\state{NC}\country{USA}}
+\affiliation{\institution{NC State, Raleigh, USA}\country{}}
 \email{timm@ieee.org}
 
 \author{Carmen Armenti}
-\affiliation{%
-  \institution{Software Institute, USI}
-  \city{Lugano}\country{Switzerland}}
+\affiliation{\institution{USI, Lugano, Switzerland}\country{}}
 \email{rmenti@usi.ch}
 
 \author{Dario Di Nucci}
-\affiliation{%
-  \institution{University of Salerno}
-  \city{Salerno}\country{Italy}}
+\affiliation{\institution{University of Salerno, Italy}\country{}}
 \email{d.dinucci@ieee.org}
 
 \author{Matteo Esposito}
-\affiliation{%
-  \institution{University of Oulu}
-  \city{Oulu}\country{Finland}}
+\affiliation{\institution{University of Oulu, Finland}\country{}}
 \email{matteo.esposito@oulu.fi}
 
 \author{Gerardo Iuliano}
-\affiliation{%
-  \institution{University of Salerno}
-  \city{Salerno}\country{Italy}}
+\affiliation{\institution{University of Salerno, Italy}\country{}}
 \email{geiuliano@unisa.it}
 
 \author{Valentina Lenarduzzi}
-\affiliation{%
-  \institution{University of Southern Denmark}
-  \country{Denmark}}
+\affiliation{\institution{University of Southern Denmark}\country{}}
 
 \author{Klaus Schmid}
-\affiliation{%
-  \institution{University of Hildesheim}
-  \city{Hildesheim}\country{Germany}}
+\affiliation{\institution{University of Hildesheim, Germany}\country{}}
 
 \input{sec0/abstract}
 

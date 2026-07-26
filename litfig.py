@@ -269,7 +269,8 @@ with open("fig/littab.tex", "w") as f:
     f.write("\\begin{tabular}"
             "{@{}rp{0.5\\linewidth}p{0.16\\linewidth}rrccc@{}}\n"
             "\\toprule\n\\# & paper & venue & year & cites & "
-            "T & P & H\\\\\n\\midrule\n")
+            "trust & productivity & human studies\\\\\n"
+            "\\midrule\n")
     for i, w in enumerate(top):
         ttl = esc(w["title"] or "?")
         ttl = ttl[:48] + ("..." if len(ttl) > 48 else "")

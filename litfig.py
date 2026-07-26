@@ -66,14 +66,14 @@ ax1.plot(range(1, n + 1), cites, color=INK, lw=1.4)
 ax1.plot([1, n], [c0, cn], color=INK, ls=":", lw=1.0)
 # perpendicular from chord to knee, in normalized space
 u, v = knee / (n - 1), (cites[knee] - cn) / (c0 - cn)
-t = (u + v) / 2  # foot of perpendicular on chord v = 1 - u
+t = (u - v + 1) / 2  # foot of perpendicular on chord v = 1 - u
 fx, fy = 1 + t * (n - 1), cn + (1 - t) * (c0 - cn)
 ax1.plot([knee + 1, fx], [cites[knee], fy], color=RED, ls="--",
          lw=1.2)
 ax1.plot([knee + 1], [cites[knee]], "o", color=RED, ms=5)
 ax1.annotate("knee: %d papers\n(>= %d cites)" % (knee + 1, cites[knee]),
              xy=(knee + 1, cites[knee]),
-             xytext=(knee + 60, c0 * 0.45), fontsize=10, color=RED)
+             xytext=(knee + 120, c0 * 0.12), fontsize=10, color=RED)
 ax1.set_xlabel("papers, sorted by citations", fontsize=10)
 ax1.set_ylabel("citations", fontsize=10)
 ax1.tick_params(labelsize=9)

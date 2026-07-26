@@ -1,0 +1,53 @@
+\section{Setting Up to Write Together}
+
+The advice of the last section assumes a team, and teams arrive with
+unequal tooling comfort.
+Some authors live in the terminal; others have never typed a git
+command and never should.
+Forcing one tool on everyone loses authors at both ends; hence we
+offer a ladder, and each author picks a rung:
+\begin{enumerate}
+\item a reader, who watches the built PDF and mails comments; \item a
+browser writer, who drafts in a shared Google Doc with help from
+claude.ai; \item an Overleaf writer, who edits the LaTeX live in the
+browser and watches the PDF re-render; \item a git writer, who clones
+the repository, edits, and pushes; \item an agent runner, who works
+with Claude Code (or similar) on their own machine, with the agent
+reading and writing the shared source directly.
+\end{enumerate}
+Every rung is a full member of the team; the rungs differ only in
+setup cost.
+
+One piece of plumbing joins the ends of that ladder.
+An Overleaf project is also a git remote, so the same paper has two
+faces: a live browser editor for humans and an ordinary repository for
+people and agents.
+GitHub holds the source of truth; a push moves edits to Overleaf in
+seconds; a pull collects whatever the browser writers typed.
+Hence n people and n agents can write asynchronously, meeting only at
+the merge.
+
+Merges stay small because of two source-layout habits.
+Firstly, every sentence ends its line, so git diffs and merges by the
+sentence, and two edits collide only when they touch the same
+sentence.
+Secondly, prose lives in many small files (one per section) beneath a
+thin root of include statements, so writers claim a section, not the
+paper.
+Review comments follow the same philosophy: a comment is a macro in
+the source (who said it, what they said), listed by one make target
+and resolved by deleting it.
+Margin comments in web editors were rejected since they do not survive
+the trip through git.
+
+The last ritual is scheduling.
+Before any shared writing session, one owner verifies that every
+participant can already write to something: doc links delivered,
+project invites accepted, push access proven by one trivial commit.
+Access problems solved during a session cost n people an hour; solved
+the day before, they cost one person a minute.
+The prompts the team uses are versioned in the same repository as the
+prose, so every rung (browser paste or agent invocation) runs the same
+words.
+(Aside: this paper was written with exactly this setup, one author
+plus one agent, trading pushes through the bridge described above.)

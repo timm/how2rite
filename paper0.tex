@@ -1,0 +1,31 @@
+\documentclass[sigconf,nonacm]{acmart}
+\usepackage{booktabs}
+
+% review comments: \note{who}{what}; resolve = delete.
+% make notes lists them all. acmart already loads xcolor.
+\newcommand{\note}[2]{\textcolor{red}{\textbf{[#1: #2]}}}
+
+\title{Follow Your Strengths: Writing Research Papers in the Age of
+  Large Language Models}
+% \note in title breaks headers; working title, timm to confirm.
+
+\author{Tim Menzies}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}\state{NC}\country{USA}}
+\email{timm@ieee.org}
+
+\input{sec0/abstract}
+
+\keywords{LLM agents, research writing, strengths, experience base,
+  science of science}
+
+\begin{document}
+\maketitle
+
+\input{sec0/intro}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}
+
+\end{document}

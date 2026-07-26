@@ -1,25 +1,26 @@
 \section{Introduction}
 
 Three problems motivate this paper.
-Firstly, newcomers need guidance in the craft of writing research
-papers, and the standard advice is scattered across decades of
-folklore.
-Secondly, established researchers struggle to find time for research,
+\begin{enumerate}
+\item Newcomers need guidance in the craft of writing research papers,
+and the standard advice is scattered across decades of folklore.
+\item Established researchers struggle to find time for research,
 since writing papers (and maturing the papers of graduate students)
 has grown into a full-time job.
 This burden is measurably heavy in software engineering: by one
 estimate, one SE paper costs over four times the collaborative effort
 of one machine learning paper (4.09 versus 0.86 ICLR
 points~\cite{luo25,menzies26se}).
-Thirdly, when authors turn to large language models for help, those
+\item When authors turn to large language models for help, those
 models generate prose that is bland, verbose, and instantly
 recognizable as machine written.
+\end{enumerate}
 
 Our response takes guidance from two sources.
 The first is Newell's advice to a young scientist: know your own
-strengths and follow them~\cite{newell91}.
-\note{timm}{Mary Shaw retells this advice; need the exact talk or
-essay to cite for the Shaw connection.}
+strengths and follow them~\cite{newell91}; advice retold by Shaw (who
+worked with Newell at CMU) while answering an audience question at her
+FSE'26 keynote~\cite{shaw26}.
 Applied to paper writing, that advice yields a workflow of small
 interim steps, and it gives teams a natural division of labor (what
 unique strengths does each member bring?).
@@ -27,24 +28,30 @@ Hence it addresses our first problem, since a workflow of explicit
 steps is teachable in a way that folklore is not.
 
 The second source is an experience base; that is, a database, reverse
-engineered from the SE corpus, of state-of-the-art results, holes in
-that state of the art, and the experimental standards of particular
-sub-fields.
-Using LLMs, hundreds of papers can be downloaded and parsed for this
-material in minutes.
+engineered from the research corpus, holding (e.g.):
+\begin{itemize}
+\item state-of-the-art results; \item holes in that state of the art;
+\item the experimental standards of particular sub-fields; \item etc.
+\end{itemize}
+Such a base is not one-size-fits-all.
+Using LLMs, hundreds of papers can be downloaded and parsed in
+minutes, so a base can be computed fresh for the local task and the
+local authors.
 Hence our second problem shrinks, since months of manual reading
-becomes a background job.
+becomes a background job that runs per project, not once per field.
 Further, \textbf{it is now possible to reverse engineer, from a
 researcher's own papers, what their particular strengths are and how
 those strengths might attack current problems in the field}.
 To our knowledge, that inversion was impractical before LLMs.
 
-Three services augment these two ideas: (a) a catalog of anti-patterns
-seen in LLM-generated text, with rules for avoiding them; (b) a map of
-the common structures of research papers; and (c) automatically
-generated critiques which, acting as ICSE's reviewer two, report the
-weaknesses of the current draft and propose a revision that avoids at
-least some of them.
+Several services augment these two ideas:
+\begin{itemize}
+\item a catalog of anti-patterns seen in LLM-generated text, with
+rules for avoiding them; \item a map of the common structures of
+research papers; \item automatically generated critiques which, acting
+as ICSE's reviewer two, report the weaknesses of the current draft and
+propose a revision that avoids at least some of them; \item etc.
+\end{itemize}
 Hence our third problem also yields, since LLM prose need not be bland
 once the machine is told, precisely, what bland looks like.
 
@@ -55,7 +62,9 @@ the hammer that sees only nails.
 Our short reply is that strengths choose the tools while the field's
 open problems choose the targets; hence the hammer is aimed, not
 wandering.
-A longer reply appears in the companion paper.
-\note{timm}{cite paper1 here once it has a public handle}
+In our experience the method does not rut a career, for two reasons:
+its literature step keeps forcing contact with material outside prior
+experience, and its experiments force a critical evaluation of the
+tool base's own premises.
 \note{claude}{roadmap paragraph goes here once paper0's sections
 exist}

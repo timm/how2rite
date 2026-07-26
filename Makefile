@@ -9,6 +9,9 @@ help: ## show targets
 paper1.pdf: paper1.tex sec/*.tex refs.bib ## build pdf with tectonic
 	tectonic paper1.tex
 
+notes: ## list open review comments
+	@grep -n '^[^%]*\\note{' paper1.tex sec/*.tex || echo "none"
+
 fmt: ## rewrap sec/*.tex to one sentence per line
 	@python3 fmt.py sec/*.tex
 

@@ -2,5 +2,5 @@ lit/recent/pdf/
 lit/classics/pdf/
 __pycache__/
 tmp/
-build/
+.aux/
 *.pdf

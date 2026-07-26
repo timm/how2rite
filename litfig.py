@@ -77,8 +77,9 @@ ax1.annotate("knee: %d papers\n(>= %d cites)" % (knee + 1, cites[knee]),
 ax1.set_xlabel("papers, sorted by citations", fontsize=10)
 ax1.set_ylabel("citations", fontsize=10)
 ax1.tick_params(labelsize=9)
-for s in ("top", "right"):
-    ax1.spines[s].set_visible(False)
+for sp in ("top", "right"):
+    ax1.spines[sp].set_visible(False)
+ax1.set_box_aspect(1)
 
 for cx, col, lab, nn in ((0.38, RED, "AI-for-SE", len(ids["ai4se"])),
                          (0.62, BLUE, "human/social", len(ids["human"]))):

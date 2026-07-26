@@ -5,6 +5,18 @@
 % make notes lists them all. acmart already loads xcolor.
 \newcommand{\note}[2]{\textcolor{red}{\textbf{[#1: #2]}}}
 
+% pause-and-review call-out boxes: \begin{pause}{topic}...
+\newcounter{pausebox}
+\newsavebox{\pauseboxsave}
+\newenvironment{pause}[1]{%
+  \refstepcounter{pausebox}\par\medskip\noindent
+  \begin{lrbox}{\pauseboxsave}%
+  \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule}%
+  \small\noindent
+  \textbf{\textsc{Pause \& review \thepausebox: #1}}\\[0.2em]}%
+ {\end{minipage}\end{lrbox}%
+  \fbox{\usebox{\pauseboxsave}}\par\medskip}
+
 % compact author block: one names line, one affils line
 \makeatletter
 \renewcommand\@authorfont{\Large\sffamily}

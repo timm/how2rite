@@ -1,0 +1,53 @@
+\section{Reading In}
+\label{sec:lit}
+
+A topic chosen is a literature owed.
+Our lit-review rules are few enough to fit in a box:
+Figure~\ref{fig:prompt} shows the whole prompt, whose first three
+lines are machine-read configuration and whose five rules drive the
+pipeline.
+
+\begin{figure}[t]
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small
+{\ttfamily goal:~~human factors of AI assistants\\ \hspace*{4.2em}for
+software engineering\\ years:~2021-2026\\ seed:~~(one anchor DOI per
+wing)}\\[0.4em] Rules: (1)~define ``recent'' by field velocity: ten
+years default, two to three for LLM-speed fields; (2)~search for the
+goal in the year range, sort by citations, and read above the knee of
+that curve (the point farthest from the first-to-last chord);
+(3)~seeds join the reading set regardless of the knee; (4)~snowball
+backward from the reading set for the classics, and forward from the
+seeds for the newest work; (5)~the download rate is a finding: report
+it, never silently drop missing papers.
+Then code every abstract, and hunt for subsets and their overlaps.}}
+\caption{The prompt that runs the literature review
+(from the rite engine's search rules, github.com/timm/rite).}
+\label{fig:prompt}
+\end{figure}
+
+\begin{figure}[t]
+\includegraphics[width=\linewidth]{fig/lit}
+\caption{Left: the sorted-cites curve of the goal query
+(400 papers, OpenAlex, 2021--2026) with its knee: 38 papers at 612
+citations or more.
+Right: the two wings of the crossed area as separate queries, 400
+papers each; their 94-paper overlap is the candidate reading set.
+Regenerate via {\em litfig.py}.}
+\label{fig:lit}
+\end{figure}
+
+Figure~\ref{fig:lit} shows the rules running on the area that
+\S\ref{sec:map} chose.
+The knee cuts 400 fuzzy search hits down to 38 that demand attention;
+the subset overlap cuts differently, to the 94 papers that both wings
+of the team would call their own.
+Note that the two cuts disagree, and that the disagreement is
+informative.
+The top of the cites curve is crowded with general AI blockbusters
+that mention software engineering only in passing; the overlap region
+is where our actual topic lives.
+Raw search lies; hence the rules, and hence the human hours are spent
+only after the machine has shrunk four hundred papers to dozens.
+\note{claude}{next pipeline steps, when wanted: snowball both ways
+from the 94, code abstracts with flags.py vocabulary, report the
+download rate}

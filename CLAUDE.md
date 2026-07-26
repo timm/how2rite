@@ -6,8 +6,9 @@ read-only repo github.com/timm/rite, cloned at
 ~/gits/timm/rite: read its CLAUDE.md and HOWTO.md
 first; never edit it from here.
 
-This dir owns: README.md (goal: and years: lines -- the
-search SSOT), flags.py (coding vocabulary SSOT),
+This dir owns: README.md (goal:, years:, and optional
+seed: lines -- the search SSOT), flags.py (coding
+vocabulary SSOT),
 bench.md (field benchmark norms), TODO.md (the standing
 work order for the meta-paper), lit/ (generated + hand
 notes; see lit/EXHIBIT.md for what is already there).

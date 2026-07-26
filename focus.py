@@ -11,18 +11,23 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 ELEMENTS = ["Menzies", "Di Nucci", "Lenarduzzi", "Armenti",
-            "Esposito", "Schmid"]
+            "Esposito", "Schmid",
+            # ICSE'27 research-track areas as reference elements
+            "AI-for-SE", "Analytics", "Architecture", "Security",
+            "Evolution", "Human/Social", "Requirements",
+            "SE-for-AI", "Testing"]
+NTOPIC = 9  # trailing elements drawn italic
 # (left pole [1], right pole [5], ratings per element above)
 CONSTRUCTS = [
-    ("one artifact, in depth",  "corpora, at scale",      [5, 3, 3, 1, 3, 2]),
-    ("quality now (debt)",      "quality future (predict)",[5, 2, 2, 3, 3, 3]),
-    ("upfront design",          "post-hoc observation",    [5, 4, 4, 4, 3, 1]),
-    ("AI-centred",              "AI-free SE",              [1, 3, 3, 5, 1, 4]),
-    ("adversarial (security)",  "benign comprehension",    [4, 4, 3, 5, 2, 4]),
-    ("builds tools",            "runs studies",            [3, 3, 5, 1, 3, 2]),
-    ("secondary studies (SLR)", "primary experiments",     [5, 2, 1, 4, 3, 3]),
-    ("industry-facing",         "open-corpus academic",    [5, 3, 2, 4, 2, 1]),
-    ("process and people",      "code and models",         [4, 4, 3, 3, 4, 2]),
+    ("one artifact, in depth",  "corpora, at scale",      [5,3,3,1,3,2, 4,5,2,2,3,2,2,3,3]),
+    ("quality now (debt)",      "quality future (predict)",[5,2,2,3,3,3, 4,4,2,3,1,2,1,4,4]),
+    ("upfront design",          "post-hoc observation",    [5,4,4,4,3,1, 4,5,1,3,5,3,1,4,4]),
+    ("AI-centred",              "AI-free SE",              [1,3,3,5,1,4, 1,2,4,3,4,4,4,1,3]),
+    ("adversarial (security)",  "benign comprehension",    [4,4,3,5,2,4, 3,4,3,1,4,5,4,3,2]),
+    ("builds tools",            "runs studies",            [3,3,5,1,3,2, 2,3,2,2,3,4,3,3,2]),
+    ("secondary studies (SLR)", "primary experiments",     [5,2,1,4,3,3, 4,4,3,4,3,3,3,4,5]),
+    ("industry-facing",         "open-corpus academic",    [5,3,2,4,2,1, 3,5,2,3,3,3,2,3,4]),
+    ("process and people",      "code and models",         [4,4,3,3,4,2, 4,4,3,5,4,1,2,4,5]),
 ]
 NE, NC, SPAN = len(ELEMENTS), len(CONSTRUCTS), 4  # rating span 1..5
 
@@ -127,10 +132,10 @@ cmerges = single_link(corder, cdist, SPAN * NE)
 BG, RED, BLUE = "#ffffff", "#cc2222", "#2233bb"
 GREYS = {1: "#ffffff", 2: "#e8e8e8", 3: "#c9c9c9", 4: "#a5a5a5",
          5: "#8a8a8a"}
-CW, CH = 0.50, 0.32          # cell size
+CW, CH = 0.45, 0.32          # cell size
 X0, Y0 = 3.1, 1.2           # matrix lower-left
 TREE_H, TREE_W = 1.6, 1.4   # dendrogram depth
-fig, ax = plt.subplots(figsize=(8.6, 4.4 + 0.34 * NC))
+fig, ax = plt.subplots(figsize=(9.6, 4.6 + 0.34 * NC))
 fig.patch.set_facecolor(BG)
 ax.set_facecolor(BG)
 ax.set_aspect("auto")
@@ -151,19 +156,12 @@ for r in range(NC):
     ax.text(X0 + NE * CW + 0.12, y + CH / 2, RPOLE[r], ha="left",
             va="center", fontsize=11, color=BLUE)
 
-# red element labels: numbered column footers then legend list
-for c, name in enumerate(ELAB):
+# red element labels, rotated; topics italic
+for c, ei in enumerate(eorder):
     x = X0 + c * CW + CW / 2
-    ax.text(x, Y0 - 0.18, str(c + 1), ha="center", va="top",
-            fontsize=11, color=RED)
-for k, name in enumerate(reversed(ELAB)):
-    i = NE - 1 - k
-    x = X0 + i * CW + CW / 2
-    yl = Y0 - 0.50 - k * 0.28
-    ax.plot([x, x], [Y0 - 0.38, yl + 0.05], color="#ddd", lw=0.8,
-            zorder=0)
-    ax.text(x + 0.1, yl, f"{i + 1} {name}", ha="left",
-            va="center", fontsize=11, color=RED)
+    style = "italic" if ei >= NE - NTOPIC else "normal"
+    ax.text(x, Y0 - 0.14, ELEMENTS[ei], rotation=55, ha="right",
+            va="top", fontsize=10, color=RED, style=style)
 
 # --- dendrogram helpers: draw merges as right-angle trees ---
 def draw_tree(merges, leaf_pos, axis, base, depth, color, scale_lo):
@@ -190,7 +188,7 @@ etop = top + 0.15
 draw_tree(emerges,
           lambda i: X0 + eorder.index(i) * CW + CW / 2,
           "top", etop, TREE_H, RED, 60)
-cright = X0 + NE * CW + 3.05
+cright = X0 + NE * CW + 3.9
 draw_tree(cmerges,
           lambda i: top - (corder.index(i) + 1) * CH + CH / 2,
           "right", cright, TREE_W, BLUE, 60)
@@ -200,12 +198,13 @@ for pct in (100, 90, 80, 70, 60):
     y = etop + (100 - pct) / 40 * TREE_H
     ax.text(X0 - 0.25, y, str(pct), ha="right", va="center",
             fontsize=9, color=RED)
-    x = cright + (100 - pct) / 40 * TREE_W
-    ax.text(x, top + 0.12, str(pct), ha="center", va="bottom",
-            fontsize=9, color=BLUE)
+    if pct in (100, 80, 60):
+        x = cright + (100 - pct) / 40 * TREE_W
+        ax.text(x, top + 0.12, str(pct), ha="center", va="bottom",
+                fontsize=9, color=BLUE)
 
 ax.set_xlim(0, cright + TREE_W + 0.6)
-ax.set_ylim(Y0 - 0.5 - NE * 0.28 - 0.3, etop + TREE_H + 0.3)
-plt.tight_layout()
-plt.savefig("fig/focus_grid.png", dpi=300, facecolor=BG)
+ax.set_ylim(Y0 - 1.85, etop + TREE_H + 0.3)
+plt.savefig("fig/focus_grid.png", dpi=300, facecolor=BG,
+            bbox_inches="tight", pad_inches=0.02)
 print("wrote fig/focus_grid.png")

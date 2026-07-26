@@ -72,7 +72,14 @@ Parsed:
    not Glass's (timm confirmed). Cite: Derek J. de
    Solla Price, Little Science, Big Science, Columbia
    University Press, 1963. HOWTO Objections updated.
-9. Engine feature (loop back later): snowballing is
+9. RESOLVED 2026-07-25 (rite commit 10bb07f): fetch.py
+   reads optional README seed: lines (published DOI or
+   OpenAlex W-id; arXiv 10.48550 DOIs often absent
+   from OpenAlex); snowball.py forward-snowballs the
+   seeds (else kept classics) -> lit/forward.tsv.
+   Workdir README now seeds the anchor via its EMSE
+   DOI 10.1007/s10664-017-9587-0. Original note:
+   Engine feature (loop back later): snowballing is
    two-directional. Backward snowball (implemented)
    finds classics; forward snowball (missing) finds
    what cites some core documents. Let README.md offer

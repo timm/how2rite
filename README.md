@@ -2,6 +2,7 @@
 
 goal:  how to write software engineering research papers
 years: 2021-2026
+seed:  10.1007/s10664-017-9587-0
 
 The goal: and years: lines are machine-read by the
 engine's fetch.py (single source of truth for the

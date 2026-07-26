@@ -22,8 +22,16 @@ reports, paper2 (see TODO.md).
 ## Paper layout
 
 paper1.tex is a thin root (preamble + \input); prose
-lives in sec/*.tex, one sentence per line. Edit a
-sentence, touch one line; never reflow a paragraph.
+lives in sec/*.tex, one sentence per line, wrapped at
+70 (run `make fmt` after hand edits; it renormalizes).
+
+## Prose style
+
+Professional register. Never open a sentence with a
+coordinating conjunction (And, But, So, Or) or a
+relative fragment (Which is...). No sentence
+fragments in paper prose. Prefer: therefore, however,
+hence, yet-with-comma.
 CI rebuilds on push to main with tectonic and serves
 https://timm.github.io/how2rite/paper1.pdf; PRs build
 only. paper1.pdf is generated, never committed.

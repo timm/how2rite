@@ -4,6 +4,9 @@ Three problems motivate this paper.
 \begin{enumerate}
 \item Newcomers need guidance in the craft of writing research papers,
 and the standard advice is scattered across decades of folklore.
+\item When those newcomers turn to large language models for help,
+those models generate prose that is bland, verbose, and instantly
+recognizable as machine written.
 \item Established researchers struggle to find time for research,
 since writing papers (and maturing the papers of graduate students)
 has grown into a full-time job.
@@ -11,17 +14,20 @@ This burden is measurably heavy in software engineering: by one
 estimate, one SE paper costs over four times the collaborative effort
 of one machine learning paper (4.09 versus 0.86 ICLR
 points~\cite{luo25,menzies26se}).
-\item When authors turn to large language models for help, those
-models generate prose that is bland, verbose, and instantly
-recognizable as machine written.
 \end{enumerate}
 
-Our response takes guidance from two sources.
-The first is Newell's advice to a young scientist: know your own
-strengths and follow them~\cite{newell91}; advice retold by Shaw (who
+Given this, we take guidance from two sources.
+The first is Newell's advice to young scientists, retold by Shaw (who
 worked with Newell at CMU) while answering an audience question at her
-FSE'26 keynote~\cite{shaw26}.
-Applied to paper writing, that advice yields a workflow of small
+FSE'26 keynote~\cite{shaw26}:
+\begin{quote}
+{\em Know what you are good at.
+Work from those strengths, not from your weaknesses.
+Then point those strengths at whatever your field currently ranks as
+its hardest open problems.} --- after Newell~\cite{newell91}
+\end{quote}
+\note{timm}{wording is our paraphrase; tune it to your memory of the
+talk} Applied to paper writing, that advice yields a workflow of small
 interim steps, and it gives teams a natural division of labor (what
 unique strengths does each member bring?).
 Hence it addresses our first problem, since a workflow of explicit
@@ -37,7 +43,7 @@ Such a base is not one-size-fits-all.
 Using LLMs, hundreds of papers can be downloaded and parsed in
 minutes, so a base can be computed fresh for the local task and the
 local authors.
-Hence our second problem shrinks, since months of manual reading
+Hence our third problem shrinks, since months of manual reading
 becomes a background job that runs per project, not once per field.
 Further, \textbf{it is now possible to reverse engineer, from a
 researcher's own papers, what their particular strengths are and how
@@ -52,8 +58,8 @@ research papers; \item automatically generated critiques which, acting
 as ICSE's reviewer two, report the weaknesses of the current draft and
 propose a revision that avoids at least some of them; \item etc.
 \end{itemize}
-Hence our third problem also yields, since LLM prose need not be bland
-once the machine is told, precisely, what bland looks like.
+Hence our second problem also yields, since LLM prose need not be
+bland once the machine is told, precisely, what bland looks like.
 
 Before starting, one frequently asked question deserves an answer.
 Should we follow Newell's advice at all?

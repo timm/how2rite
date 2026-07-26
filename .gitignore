@@ -1,5 +1,5 @@
 lit/recent/pdf/
 lit/classics/pdf/
 __pycache__/
-build/
+tmp/
 *.pdf

@@ -100,3 +100,37 @@ plt.savefig("fig/lit.png", dpi=300, facecolor=BG,
             bbox_inches="tight", pad_inches=0.02)
 print("wrote fig/lit.png; knee %d at %d cites; overlap %d" %
       (knee + 1, cites[knee], both))
+
+# ---- second figure: inside the 94 (fig/lit2.png) ----
+d2 = json.load(open("tmp/lit2_data.json"))
+R = d2["regions"]
+fig2, ax = plt.subplots(figsize=(4.4, 4.2))
+fig2.patch.set_facecolor(BG)
+GREEN = "#1a7a3a"
+for (cx, cy), col in (((0.50, 0.60), RED), ((0.40, 0.42), BLUE),
+                      ((0.60, 0.42), GREEN)):
+    ax.add_patch(plt.Circle((cx, cy), 0.23, fc=col, alpha=0.15,
+                            ec=col, lw=1.4))
+ax.text(0.50, 0.88, "trust/reliability", fontsize=11, color=RED,
+        ha="center")
+ax.text(0.16, 0.24, "productivity", fontsize=11, color=BLUE,
+        ha="center")
+ax.text(0.84, 0.24, "human studies", fontsize=11, color=GREEN,
+        ha="center")
+for (x, y), k in (((0.50, 0.70), "Tonly"), ((0.30, 0.38), "Ponly"),
+                  ((0.70, 0.38), "Honly"), ((0.40, 0.55), "TP"),
+                  ((0.60, 0.55), "TH"), ((0.50, 0.35), "PH"),
+                  ((0.50, 0.47), "TPH")):
+    ax.text(x, y, str(R[k]), fontsize=12, ha="center", color=INK,
+            fontweight="bold" if k in ("PH", "TPH") else "normal")
+ax.text(0.5, 0.06,
+        "coded %d/%d abstracts; %d matched no flag" %
+        (d2["n_abs"], d2["n"], R["none"]),
+        fontsize=9.5, ha="center", color=INK)
+ax.set_xlim(0, 1)
+ax.set_ylim(0, 1)
+ax.set_aspect("equal")
+ax.axis("off")
+fig2.savefig("fig/lit2.png", dpi=300, facecolor=BG,
+             bbox_inches="tight", pad_inches=0.02)
+print("wrote fig/lit2.png")

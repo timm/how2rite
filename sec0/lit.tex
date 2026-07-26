@@ -48,6 +48,34 @@ that mention software engineering only in passing; the overlap region
 is where our actual topic lives.
 Raw search lies; hence the rules, and hence the human hours are spent
 only after the machine has shrunk four hundred papers to dozens.
-\note{claude}{next pipeline steps, when wanted: snowball both ways
-from the 94, code abstracts with flags.py vocabulary, report the
-download rate}
+
+\begin{figure}[t]
+\includegraphics[width=0.85\linewidth]{fig/lit2}
+\centering
+\caption{Inside the 94: abstracts coded against three
+topic flags.
+The richest cell (17 papers) studies productivity with human methods
+but never questions trust; the core (4) does all three.
+Regenerate via {\em litfig.py}.}
+\label{fig:lit2}
+\end{figure}
+
+The pipeline then ran its remaining steps on the 94.
+Backward snowballing collected 12{,}332 distinct references, of which
+198 are cited by three or more of the 94; those are the candidate
+classics.
+Forward snowballing found 16{,}754 works already citing the 94, so
+this crossed area is far from empty.
+Abstracts were retrievable for 83 of 94 papers; per our own rule, that
+download rate is reported, not hidden.
+Coding those abstracts with three topic flags (trust, productivity,
+human-method) yields Figure~\ref{fig:lit2}, and its cells argue for
+us: the largest overlap (17 papers) measures productivity via human
+studies while never questioning trust, and only four papers sit in all
+three circles.
+Hence a hole: trustworthy productivity, studied with human methods, is
+nearly unoccupied.
+Fifteen coded papers matched no flag, which is also a finding: a
+vocabulary, like a draft, needs iteration.
+\note{timm}{these three flags are paper0-local; a full run would fork
+its own workdir and flags.py, per the engine rules}

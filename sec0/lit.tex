@@ -19,7 +19,8 @@ that curve (the point farthest from the first-to-last chord);
 backward from the reading set for the classics, and forward from the
 seeds for the newest work; (5)~the download rate is a finding: report
 it, never silently drop missing papers.
-Then code every abstract, and hunt for subsets and their overlaps.}}
+Then code every abstract; hunt for subsets and their overlaps; and
+list which of the team's own papers already sit inside the set.}}
 \caption{The prompt that runs the literature review
 (from the rite engine's search rules, github.com/timm/rite).}
 \label{fig:prompt}
@@ -32,6 +33,9 @@ Then code every abstract, and hunt for subsets and their overlaps.}}
 citations or more.
 Right: the two wings of the crossed area as separate queries, 400
 papers each; their 94-paper overlap is the candidate reading set.
+On the left, the dotted line joins the most- to the least-cited paper;
+the dashed drop marks the point farthest from that line, i.e. the
+knee.
 Regenerate via {\em litfig.py}.}
 \label{fig:lit}
 \end{figure}
@@ -52,30 +56,38 @@ only after the machine has shrunk four hundred papers to dozens.
 \begin{figure}[t]
 \includegraphics[width=0.85\linewidth]{fig/lit2}
 \centering
-\caption{Inside the 94: abstracts coded against three
-topic flags.
-The richest cell (17 papers) studies productivity with human methods
-but never questions trust; the core (4) does all three.
+\caption{The reading set: a second knee, inside the 94,
+keeps 15 papers, coded here against three topic flags.
+No paper occupies all three circles.
 Regenerate via {\em litfig.py}.}
 \label{fig:lit2}
 \end{figure}
 
-The pipeline then ran its remaining steps on the 94.
-Backward snowballing collected 12{,}332 distinct references, of which
-198 are cited by three or more of the 94; those are the candidate
-classics.
-Forward snowballing found 16{,}754 works already citing the 94, so
-this crossed area is far from empty.
-Abstracts were retrievable for 83 of 94 papers; per our own rule, that
-download rate is reported, not hidden.
-Coding those abstracts with three topic flags (trust, productivity,
-human-method) yields Figure~\ref{fig:lit2}, and its cells argue for
-us: the largest overlap (17 papers) measures productivity via human
-studies while never questioning trust, and only four papers sit in all
-three circles.
+The pipeline then ran its remaining steps.
+A second knee, this time inside the 94, keeps the 15 papers of 1{,}021
+citations or more; those are what the humans read first.
+Figure~\ref{fig:lit2} codes them with three topic flags (trust,
+productivity, human-method) and its cells argue for us: no paper
+occupies all three circles, and four match no flag at all (generic AI
+reports that fuzzy search let in).
 Hence a hole: trustworthy productivity, studied with human methods, is
-nearly unoccupied.
-Fifteen coded papers matched no flag, which is also a finding: a
-vocabulary, like a draft, needs iteration.
-\note{timm}{these three flags are paper0-local; a full run would fork
+unoccupied at the top of this literature.
+Around that core, backward snowballing collected 12{,}332 distinct
+references (198 cited by three or more of the 94: the candidate
+classics), and forward snowballing found 16{,}754 works already citing
+the 94, so the area is far from empty.
+\note{timm}{the three flags are paper0-local; a full run would fork
 its own workdir and flags.py, per the engine rules}
+
+The process itself yielded findings worth recording.
+Full texts are scarce: in this workdir's companion pipeline run, only
+22 of 54 chased PDFs (41\%) could be downloaded; abstracts come easier
+(here, 83 of 94, or 88\%).
+Google Scholar is closed to scripts; OpenAlex, Semantic Scholar, and
+arXiv answer machine queries gladly, so the pipeline builds only on
+the willing.
+An earlier full-text pass showed abstract-only coding missing about
+half the flags; hence full text is coded above the knee.
+Finally, none of this paper's authors appears anywhere in the 94: the
+area chosen by our strengths is territory none of us has published in,
+which is either a warning or an invitation.

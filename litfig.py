@@ -63,13 +63,19 @@ fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 3.4))
 fig.patch.set_facecolor(BG)
 
 ax1.plot(range(1, n + 1), cites, color=INK, lw=1.4)
-ax1.set_yscale("log")
-ax1.axvline(knee + 1, color=RED, ls="--", lw=1.2)
+ax1.plot([1, n], [c0, cn], color=INK, ls=":", lw=1.0)
+# perpendicular from chord to knee, in normalized space
+u, v = knee / (n - 1), (cites[knee] - cn) / (c0 - cn)
+t = (u + v) / 2  # foot of perpendicular on chord v = 1 - u
+fx, fy = 1 + t * (n - 1), cn + (1 - t) * (c0 - cn)
+ax1.plot([knee + 1, fx], [cites[knee], fy], color=RED, ls="--",
+         lw=1.2)
+ax1.plot([knee + 1], [cites[knee]], "o", color=RED, ms=5)
 ax1.annotate("knee: %d papers\n(>= %d cites)" % (knee + 1, cites[knee]),
-             xy=(knee + 1, cites[knee]), xytext=(knee + 30, cites[5]),
-             fontsize=10, color=RED)
+             xy=(knee + 1, cites[knee]),
+             xytext=(knee + 60, c0 * 0.45), fontsize=10, color=RED)
 ax1.set_xlabel("papers, sorted by citations", fontsize=10)
-ax1.set_ylabel("citations (log)", fontsize=10)
+ax1.set_ylabel("citations", fontsize=10)
 ax1.tick_params(labelsize=9)
 for s in ("top", "right"):
     ax1.spines[s].set_visible(False)
@@ -102,7 +108,7 @@ print("wrote fig/lit.png; knee %d at %d cites; overlap %d" %
       (knee + 1, cites[knee], both))
 
 # ---- second figure: inside the 94 (fig/lit2.png) ----
-d2 = json.load(open("tmp/lit2_data.json"))
+d2 = json.load(open("tmp/lit3_data.json"))
 R = d2["regions"]
 fig2, ax = plt.subplots(figsize=(4.4, 4.2))
 fig2.patch.set_facecolor(BG)
@@ -124,8 +130,9 @@ for (x, y), k in (((0.50, 0.70), "Tonly"), ((0.30, 0.38), "Ponly"),
     ax.text(x, y, str(R[k]), fontsize=12, ha="center", color=INK,
             fontweight="bold" if k in ("PH", "TPH") else "normal")
 ax.text(0.5, 0.06,
-        "coded %d/%d abstracts; %d matched no flag" %
-        (d2["n_abs"], d2["n"], R["none"]),
+        "above-knee reading set: %d papers (>= %d cites);\n"
+        "coded %d abstracts; %d matched no flag" %
+        (d2["n"], d2["kneecites"], d2["n_abs"], R["none"]),
         fontsize=9.5, ha="center", color=INK)
 ax.set_xlim(0, 1)
 ax.set_ylim(0, 1)

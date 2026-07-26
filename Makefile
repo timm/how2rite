@@ -9,6 +9,9 @@ help: ## show targets
 paper1.pdf: paper1.tex sec/*.tex refs.bib ## build pdf with tectonic
 	tectonic paper1.tex
 
+fmt: ## rewrap sec/*.tex to one sentence per line
+	@python3 fmt.py sec/*.tex
+
 push: ## add+commit+push+status (CI rebuilds + serves pdf)
 	@git add -A
 	@printf "msg (empty=save): "; read m </dev/tty; git commit -m "$${m:-save}" || true

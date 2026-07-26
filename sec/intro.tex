@@ -1,59 +1,114 @@
 \section{Introduction}
 
 \begin{quote}
-{\em Everyone who judges a paper cheaply reads only its title and abstract.
-Rite is a writing loop that makes the cheap read and the deep read agree.}
+{\em Everyone who judges a paper cheaply reads only its title and
+abstract.
+Rite is a writing loop that makes the cheap read and the deep read
+agree.}
 \end{quote}
 
-The point of research is not the paper; it is the ideas behind the papers.
-Yet the paper is research's unit of work: fields count their progress in them, and careers, grants, and graduations are measured in them, in SE as elsewhere.
-The paper is the receipt, not the goods.
+The point of research should not be the paper; it shold be the ideas
+behind the papers.
+Yet aloost uviersally, paper output is how we measure researcher
+effectiveness: fields count their progress in paper generation and
+ciations; careers, grants, and graduations are measured in terms of
+paper poutput.
+Which is strange since the paper is merely a receipt of effort spent,
+not the goods.
 
 And writing the receipt is slow.
-The ceremony around a submission (searching, citing, formatting, restating, self-checking) consumes months; an advisor who rewrites every draft of every student loses those months many times over.
-So an academic's life can run long on writing and short on the research the writing is supposed to report.
-Advice on that ceremony is plentiful and good: Shaw taxonomized the questions reviewers ask of ICSE submissions~\cite{shaw03}; Widom gave the five questions an introduction must answer~\cite{widom06}; Williams mapped working habits onto empirical careers~\cite{williams11}; community standards now itemize what reviewers may demand~\cite{ralph21}.
-Yet all this advice shares one flaw: none of it is executable, so none of it is checked, and applying it by hand is exactly the labor that makes writing slow.
+The ceremony around a submission (searching, citing, formatting,
+restating, self-checking) consumes months; an advisor who rewrites
+every draft of every student loses those months many times over.
+So an academic's life can run long on writing and short on the
+research the writing is supposed to report.
+Advice on that ceremony is plentiful and good: Shaw taxonomized the
+questions reviewers ask of ICSE submissions~\cite{shaw03}; Widom gave
+the five questions an introduction must answer~\cite{widom06};
+Williams mapped working habits onto empirical
+careers~\cite{williams11}; community standards now itemize what
+reviewers may demand~\cite{ralph21}.
+Yet all this advice shares one flaw: none of it is executable, so none
+of it is checked, and applying it by hand is exactly the labor that
+makes writing slow.
 
-Until recently that flaw was incurable, since no tool could read a literature, code it, and critique a draft.
+Until recently that flaw was incurable, since no tool could read a
+literature, code it, and critique a draft.
 Large language models changed that.
-Newell's advice to a young scientist was to know your own strengths and follow them~\cite{newell91}; a pipeline can now reverse-engineer those strengths from a researcher's own recent papers, then map them onto the problems a field currently ranks as most pressing.
+Newell's advice to a young scientist was to know your own strengths
+and follow them~\cite{newell91}; a pipeline can now reverse-engineer
+those strengths from a researcher's own recent papers, then map them
+onto the problems a field currently ranks as most pressing.
 
 So we built rite, which makes some of the old advice executable.
-It consists of two small repositories: a read-only \textit{engine} (github.com/timm/rite: a fourteen-step loop, eight prompt divisions, seven Python scripts) and one \textit{workdir} per paper that holds the goal, the coding vocabulary, and everything generated.
-Per its own method, this paper is written by rite and paired with a critique of itself.
+It consists of two small repositories: a read-only \textit{engine}
+(github.com/timm/rite: a fourteen-step loop, eight prompt divisions,
+seven Python scripts) and one \textit{workdir} per paper that holds
+the goal, the coding vocabulary, and everything generated.
+Per its own method, this paper is written by rite and paired with a
+critique of itself.
 This paper asks two questions.
 
-\textbf{RQ1: Can the folklore of paper writing be encoded as a checkable pipeline?}
+\textbf{RQ1: Can the folklore of paper writing be encoded as a
+checkable pipeline?}
 Yes, partly.
-Of the fourteen steps of Table~\ref{tab:loop}, we find \textbf{ten} run as scripts or machine-checked gates; the irreducibly human residue is small (steps 10 and 12, plus taste).
+Of the fourteen steps of Table~\ref{tab:loop}, we find \textbf{ten}
+run as scripts or machine-checked gates; the irreducibly human residue
+is small (steps 10 and 12, plus taste).
 
-\textbf{RQ2: Is a cheap reading of the literature (title plus abstract) a safe substitute for the full text?}
+\textbf{RQ2: Is a cheap reading of the literature (title plus
+abstract) a safe substitute for the full text?}
 No, measurably.
-In our exhibit, abstracts earned \textbf{9 of 21} full-text SE flags, \textbf{3 of 10} multi-objective flags, and binary matching over full text saturated on \textbf{21 of 22} papers until a frequency threshold was applied (Section~\ref{sec:exhibit}).
+In our exhibit, abstracts earned \textbf{9 of 21} full-text SE flags,
+\textbf{3 of 10} multi-objective flags, and binary matching over full
+text saturated on \textbf{21 of 22} papers until a frequency threshold
+was applied (Section~\ref{sec:exhibit}).
 
-Contributions: (1)~the loop and its eight prompt divisions, written so a paper can quote the short form of each; (2)~a literature pipeline whose byproducts (knee of the citation curve, download rate, coding grids) become the paper's own gap argument; (3)~the abstract-consistency gate: a submission's title-plus-abstract must earn every topic flag its body earns; (4)~a replication package: everything at github.com/timm/rite and github.com/timm/how2rite.
+Contributions: (1)~the loop and its eight prompt divisions, written so
+a paper can quote the short form of each; (2)~a literature pipeline
+whose byproducts (knee of the citation curve, download rate, coding
+grids) become the paper's own gap argument; (3)~the
+abstract-consistency gate: a submission's title-plus-abstract must
+earn every topic flag its body earns; (4)~a replication package:
+everything at github.com/timm/rite and github.com/timm/how2rite.
 
 \subsection{FAQ}\label{sec:faq}
 
 Three questions reach us before any others, so we answer them first.
 
-\textbf{Doesn't encoding Newell-style problem selection~\cite{newell76,newell91} steer a career into a rut?}
+\textbf{Doesn't encoding Newell-style problem
+selection~\cite{newell76,newell91} steer a career into a rut?}
 In our experience, no.
-The literature step keeps forcing contact with material outside prior experience, and the experiments that follow force a critical evaluation of the tool base's premises.
-The author offers his own last five years, coded by this same pipeline, in the sequel to this draft; readers can judge the rut for themselves.
+The literature step keeps forcing contact with material outside prior
+experience, and the experiments that follow force a critical
+evaluation of the tool base's premises.
+The author offers his own last five years, coded by this same
+pipeline, in the sequel to this draft; readers can judge the rut for
+themselves.
 
 \textbf{Will automation flood the field with average papers?}
-Price's law observes that the square root of a field's contributors produce half of its output~\cite{price63}.
-The road into that square root is hard thinking, and no pipeline walks it for you.
+Price's law observes that the square root of a field's contributors
+produce half of its output~\cite{price63}.
+The road into that square root is hard thinking, and no pipeline walks
+it for you.
 The tools here only cut the ceremony that surrounds the thinking.
 
 \textbf{Does this kind of tooling ever find anything new?}
 It did here.
-While exploring this pipeline we found that a paper's title plus abstract does not code the same way as its full text (Section~\ref{sec:exhibit}).
-That hazard has been on record since at least 2007, when Brereton et al.\ warned that SE abstracts are too poor to rely on when selecting primary studies~\cite{brereton07}.
-But its consequences run far past review screening, since titles and abstracts are what search engines index, what readers use to decide what to read (so miscoding quietly corrupts manual literature reviews), and what bidding systems consult when assigning reviewers to papers.
-Here, then, is a sizeable problem, barely discussed in SE, uncovered by exactly the kind of LLM-assisted analysis that some researchers would decline to run on methodological or ideological grounds.
+While exploring this pipeline we found that a paper's title plus
+abstract does not code the same way as its full text
+(Section~\ref{sec:exhibit}).
+That hazard has been on record since at least 2007, when Brereton et
+al.\ warned that SE abstracts are too poor to rely on when selecting
+primary studies~\cite{brereton07}.
+But its consequences run far past review screening, since titles and
+abstracts are what search engines index, what readers use to decide
+what to read (so miscoding quietly corrupts manual literature
+reviews), and what bidding systems consult when assigning reviewers to
+papers.
+Here, then, is a sizeable problem, barely discussed in SE, uncovered
+by exactly the kind of LLM-assisted analysis that some researchers
+would decline to run on methodological or ideological grounds.
 
 \subsection{How to install}
 
@@ -63,7 +118,8 @@ python3 rite/etc/init.py mypaper
 cd mypaper
 \end{verbatim}
 
-The generated workdir README needs two lines filled in before anything else runs; for example:
+The generated workdir README needs two lines filled in before anything
+else runs; for example:
 
 \begin{verbatim}
 # mypaper
@@ -71,26 +127,37 @@ goal:  how to write SE research papers
 years: 2021-2026
 \end{verbatim}
 
-Those two lines are the single source of truth for the whole literature search: every downstream script reads its goal and year range from here and nowhere else.
+Those two lines are the single source of truth for the whole
+literature search: every downstream script reads its goal and year
+range from here and nowhere else.
 
 \subsection{How to use}
 
 Follow Table~\ref{tab:loop}.
-Steps 1--7 configure and search; step 8 gates entry (no elevator speech, no paper); steps 9--14 loop until the self-test passes.
-Each step names the prompt division that drives it, and each division is a skill file whose short form fits on one screen.
+Steps 1--7 configure and search; step 8 gates entry (no elevator
+speech, no paper); steps 9--14 loop until the self-test passes.
+Each step names the prompt division that drives it, and each division
+is a skill file whose short form fits on one screen.
 
 \subsection{How to collaborate}
 
 The repository is the paper; there is no other copy.
-On every push to the main branch, continuous integration rebuilds the PDF and serves it at a fixed URL (here, timm.github.io/how2rite/paper1.pdf); pull requests only build, so broken \TeX\ cannot land.
-Merges stay small by construction: each section is one file under \texttt{sec/}, and prose is one sentence per line, so two authors in the same paragraph usually touch different lines.
-Humans may commit to main; agents work on branches, submit pull requests, edit only the section files an ownership table assigns them, and never touch the preamble.
+On every push to the main branch, continuous integration rebuilds the
+PDF and serves it at a fixed URL (here,
+timm.github.io/how2rite/paper1.pdf); pull requests only build, so
+broken \TeX\ cannot land.
+Merges stay small by construction: each section is one file under
+\texttt{sec/}, and prose is one sentence per line, so two authors in
+the same paragraph usually touch different lines.
+Humans may commit to main; agents work on branches, submit pull
+requests, edit only the section files an ownership table assigns them,
+and never touch the preamble.
 The built PDF is never committed; the served copy is the only copy.
 
 \begin{table}
 \caption{The rite loop. Divisions: ch=choose, se=search,
-en=encode, st=structure, pr=prose, cr=critics, be=bench,
-sh=ship. Steps marked $\ast$ are automatic.}
+en=encode, st=structure, pr=prose, cr=critics, be=bench, sh=ship.
+Steps marked $\ast$ are automatic.}
 \label{tab:loop}
 \small
 \begin{tabular}{rlp{0.9cm}}
@@ -137,7 +204,10 @@ sh=ship. Steps marked $\ast$ are automatic.}
                                           workdir  +---------------------------+
 \end{BVerbatim}
 \caption{The obligatory system diagram.
-The argument it walks: advice lives once, on the left, read-only; everything a paper generates lands on the right, so ten papers share one engine and an engine fix reaches all ten.
-The scripts run from the workdir and read its README and flags; nothing is configured twice.}
+The argument it walks: advice lives once, on the left, read-only;
+everything a paper generates lands on the right, so ten papers share
+one engine and an engine fix reaches all ten.
+The scripts run from the workdir and read its README and flags;
+nothing is configured twice.}
 \label{fig:sys}
 \end{figure*}

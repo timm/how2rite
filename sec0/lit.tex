@@ -4,21 +4,28 @@
 A topic chosen is a literature owed.
 Our lit-review rules are few enough to fit in a box:
 Figure~\ref{fig:prompt} shows the whole prompt, whose first three
-lines are machine-read configuration and whose five rules drive the
+lines are machine-read configuration and whose rules drive the
 pipeline.
 
 \begin{figure}[t]
 \fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small
 {\ttfamily goal:~~human factors of AI assistants\\ \hspace*{4.2em}for
-software engineering\\ years:~2021-2026\\ seed:~~(one anchor DOI per
+[software engineering]\\ years:~2021-2026\\ seed:~~(one anchor DOI per
 wing)}\\[0.4em] Rules: (1)~define ``recent'' by field velocity: ten
-years default, two to three for LLM-speed fields; (2)~search for the
-goal in the year range, sort by citations, and read above the knee of
-that curve (the point farthest from the first-to-last chord);
-(3)~seeds join the reading set regardless of the knee; (4)~snowball
-backward from the reading set for the classics, and forward from the
-seeds for the newest work; (5)~the download rate is a finding: report
-it, never silently drop missing papers.
+years default, two to three for LLM-speed fields; (2)~the bracketed
+goal term is a venue filter: the initial grab searches only inside
+that field's venues, per a reviewable venue list;\footnote{Sources for
+the list: se-deadlines.github.io, Google Scholar's venue index for
+``software engineering'', OpenAlex sources whose names contain
+``software'', and the venues of the team's own recent papers.
+CORE no longer lists journals.}
+(3)~sort the hits by citations and read above the knee of that curve
+(the point farthest from the first-to-last chord); (4)~seeds join the
+reading set regardless of the knee; (5)~snowballing is unrestricted:
+backward from the reading set for the classics and forward from the
+seeds for the newest work, roaming outside the field on purpose;
+(6)~the download rate is a finding: report it, never silently drop
+missing papers.
 Then code every abstract; hunt for subsets and their overlaps; and
 list which of the team's own papers already sit inside the set.}}
 \caption{The prompt that runs the literature review
@@ -28,87 +35,88 @@ list which of the team's own papers already sit inside the set.}}
 
 \begin{figure}[t]
 \includegraphics[width=\linewidth]{fig/lit}
-\caption{Left: the sorted-cites curve of the goal query
-(400 papers, OpenAlex, 2021--2026) with its knee: 38 papers at 612
-citations or more.
-Right: the two wings of the crossed area as separate queries, 400
-papers each; their 94-paper overlap is the candidate reading set.
-On the left, the dotted line joins the most- to the least-cited paper;
-the dashed drop marks the point farthest from that line, i.e. the
-knee.
+\caption{Left: the sorted-cites curve of the goal
+query, searched within SE venues only (\litSE{} papers, OpenAlex,
+2021--2026).
+The dotted line joins the most- to the least-cited paper; the dashed
+drop marks the point farthest from that line, i.e.\ the knee:
+\litKnee{} papers at \litKneeCites{} citations or more.
+Right: the two wings as separate queries, same venues; their
+\litBoth-paper overlap.
 Regenerate via {\em litfig.py}.}
 \label{fig:lit}
 \end{figure}
 
 Figure~\ref{fig:lit} shows the rules running on the area that
 \S\ref{sec:map} chose.
-The knee cuts 400 fuzzy search hits down to 38 that demand attention;
-the subset overlap cuts differently, to the 94 papers that both wings
-of the team would call their own.
-Note that the two cuts disagree, and that the disagreement is
-informative.
-The top of the cites curve is crowded with general AI blockbusters
-that mention software engineering only in passing; the overlap region
-is where our actual topic lives.
-Raw search lies; hence the rules, and hence the human hours are spent
-only after the machine has shrunk four hundred papers to dozens.
+The venue rule earned its place twice.
+A first draft of this section skipped it, and the reading set filled
+with general AI blockbusters (a machine learning survey, the GPT-4
+report, a metaverse position paper) from venues nowhere near software
+engineering.
+A second draft filtered venues after a citation-sorted fetch, and that
+failed too: of the top 1{,}000 hits, only nine sat in SE venues, since
+mega-cited outsiders crowd out the field long before the filter runs.
+Hence the venue list joins the query itself, and the human hours are
+spent only on papers our field would recognize.
 
 \begin{figure}[t]
-\includegraphics[width=0.62\linewidth]{fig/lit2}
 \centering
-\caption{The reading set: the 38 papers above the knee of
-Figure~\ref{fig:lit}, coded against three topic flags.
-Only three papers occupy all three circles.
+\includegraphics[width=0.62\linewidth]{fig/lit2}
+\caption{The reading set (the \litKnee{} above-knee
+papers of Figure~\ref{fig:lit}), coded against three topic flags.
 Regenerate via {\em litfig.py}.}
 \label{fig:lit2}
 \end{figure}
 
-The pipeline then ran its remaining steps.
-A second knee, this time inside the 94, keeps the 15 papers of 1{,}021
-citations or more; those are what the humans read first.
-Figure~\ref{fig:lit2} codes them with three topic flags (trust,
-productivity, human-method) and its cells argue for us: no paper
-occupies all three circles, and four match no flag at all (generic AI
-reports that fuzzy search let in).
-Hence a hole: trustworthy productivity, studied with human methods, is
-unoccupied at the top of this literature.
-Around that core, backward snowballing collected 12{,}332 distinct
-references (198 cited by three or more of the 94: the candidate
-classics), and forward snowballing found 16{,}754 works already citing
-the 94, so the area is far from empty.
-Table~\ref{tab:read} lists the reading set itself.
+The reading set is what sits above the knee: \litKnee{} papers, of
+which \litAbs{} had retrievable abstracts.
+Figure~\ref{fig:lit2} codes those with three topic flags (trust,
+productivity, human-method); \litTPH{} papers occupy all three
+circles, and \litNone{} match no flag.
+Table~\ref{tab:read} lists the reading set itself, with its flags.
 
 \begin{table*}[t]
-\caption{The 38 above-knee papers: title (first author),
-venue, year, citations.
+\caption{The reading set: title (first author), venue,
+year, citations, and the three topic flags of Figure~\ref{fig:lit2} (T
+trust, P productivity, H human studies).
 Generated by {\em litfig.py} from OpenAlex; venues as recorded there.}
 \label{tab:read}
 \scriptsize \setlength{\tabcolsep}{3pt}
 \centering
 \input{fig/littab}
 \end{table*}
+
+Snowballing then ran from that set, deliberately unfiltered by venue,
+since good ancestors and good critics live anywhere: backward
+collection found \litRefs{} distinct references (\litClassics{} cited
+by two or more of the reading set: the candidate classics); forward
+collection found \litCiting{} works already citing the reading set.
 \note{timm}{the three flags are paper0-local; a full run would fork
 its own workdir and flags.py, per the engine rules}
 
 The process itself yielded findings worth recording.
 Full texts are scarce: in this workdir's companion pipeline run, only
 22 of 54 chased PDFs (41\%) could be downloaded; abstracts come easier
-(here, 83 of 94, or 88\%).
+(here, \litAbs{} of \litKnee).
 Google Scholar is closed to scripts; OpenAlex, Semantic Scholar, and
 arXiv answer machine queries gladly, so the pipeline builds only on
 the willing.
 An earlier full-text pass showed abstract-only coding missing about
 half the flags; hence full text is coded above the knee.
-Finally, none of this paper's authors appears anywhere in the 94: the
-area chosen by our strengths is territory none of us has published in,
-which is either a warning or an invitation.
+Finally, the own-papers rule paid off: \litOwn{} papers by this team
+(Di Nucci on accessibility, Schmid on MLOps, Esposito on AI agents)
+already sit in the venue-filtered goal results.
+The territory is adjacent to us without yet being occupied by us.
 
 \begin{pause}{the search}
 Ask: are the goal line and the two wing queries the right words?
 Is 2021 the right floor for ``recent''?
-Are the three coding flags the vocabulary you would use, and is a knee
-that keeps only 15 papers too greedy?\\[0.2em] To change the outcome:
-edit the query strings and {\ttfamily FLAGS} in {\ttfamily litfig.py},
-delete the cache in {\ttfamily tmp/}, and rerun; both figures and
-every count in this section regenerate.
+Is the venue list (see the box) the SE you mean, and are the three
+coding flags the vocabulary you would use?
+Is a knee that keeps \litKnee{} of \litSE{} papers too
+greedy?\\[0.2em] To change the outcome: edit the query strings,
+{\ttfamily VENUES}, and {\ttfamily FLAGS} in {\ttfamily litfig.py},
+delete the cache in {\ttfamily tmp/}, and rerun; both figures, the
+table, and every number in this section regenerate.
 \end{pause}

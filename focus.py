@@ -170,10 +170,11 @@ def draw_tree(merges, leaf_pos, axis, base, depth, color, scale_lo):
     """axis='top' or 'right'; base = matrix edge coordinate."""
     pos = {frozenset([i]): (leaf_pos(i), base) for i in
            [i for m in merges for s in m[:2] for i in s]}
+    gap = depth / 14  # min step past children, breaks ties
     for x, y, match in merges:
         span = (100 - match) / (100 - scale_lo) * depth
         px, bx = pos.get(x), pos.get(y)
-        h = base + span
+        h = max(base + span, px[1] + gap, bx[1] + gap)
         if axis == "top":
             for p in (px, bx):
                 ax.plot([p[0], p[0]], [p[1], h], color=color, lw=1.1)

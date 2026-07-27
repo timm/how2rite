@@ -1,0 +1,79 @@
+\section{Map the Team to the Field}
+\label{sec:map}
+
+Questions three and four of Newell ask where a team can work, and
+which important issues live there.
+For ``where,'' we use the nine areas of the ICSE'27 research track
+call for
+papers:\footnote{conf.researchr.org/track/icse-2027/icse-2027-research-track}
+AI for SE; analytics; architecture and design; dependability and
+security; evolution; human and social aspects; requirements and
+modeling; SE for AI; and testing and analysis.
+
+We score each area on the same nine constructs as the people.
+The areas then join Figure~\ref{fig:focus} as reference elements (the
+italic columns).
+Each area column is an archetype.
+It shows how the usual highly cited researcher of that area scores.
+We judged the archetypes from the call for papers, not from a corpus.
+\note{claude}{upgrade path: make each area column from its ICSE
+distinguished papers of the last five years, coded like the author
+papers; then people and areas have one source}
+
+The red tree then answers a question that a topic list cannot answer:
+who stands nearest to which area.
+Some pairs are strong.
+Menzies stands at 92\% match to analytics.
+Di Nucci stands at 89\% to evolution.
+Schmid stands at 89\% to requirements and to architecture, and
+Esposito stands at 86\% to SE for AI.
+Some pairs are loose.
+The nearest areas of Lenarduzzi (evolution, architecture) reach only
+72\%, and the nearest area of Armenti (human and social aspects)
+reaches 69\%.
+Thus, those two members are less typecast than the rest of us.
+Thus, question three answers itself: the natural territory of the team
+is the set of areas adjacent to a member.
+
+The far columns are also important.
+No author is nearer than 85\% to security (best: Esposito, 78\%) or to
+testing (best: 72\%).
+Those two areas hold to each other, not to a person.
+That is the priced blind spot of this team.
+Papers there would go against the grain, or the team needs a new
+collaborator who brings that column nearer.
+
+The red tree also shows a larger shape: the team divides in two.
+One wing measures.
+That wing is Menzies and Esposito, together with analytics and the two
+AI areas.
+One wing crafts.
+That wing is Schmid, Armenti, Di Nucci, and Lenarduzzi, together with
+architecture, requirements, human aspects, and evolution.
+This split is also a division of labor.
+When a paper observes a corpus and builds a thing, each wing takes one
+half.
+
+Last, the grid can propose a topic for the full team.
+Three calculations use the same matrix: (a)~the area nearest to the
+centroid of the six persons (SE for AI and evolution, tied at 83\%);
+(b)~the area with the best worst member (evolution, worst member at
+64\%); (c)~the midpoint of each pair of areas, scored the same way,
+where the best pairs (analytics plus human aspects at 68\%; AI for SE
+plus human aspects, average 76\%) beat each single area.
+Thus, blends win.
+A topic that crosses the two wings serves this team better than one
+area.
+The best blend is AI for SE crossed with human and social aspects.
+That blend describes the paper that you now read.
+
+\begin{pause}{the topic}
+Ask: do the archetype columns agree with your reading of the call for
+papers?
+Would you spend money on the winning blend?
+Or must a new collaborator repair the blind spot (security,
+testing)?\\[0.2em] To change the outcome: edit the nine area columns
+in {\ttfamily focus.py} (or use the area list of a different venue),
+then do {\ttfamily make focus}; the centroid, maximin, and blend
+scores follow.
+\end{pause}

@@ -1,0 +1,117 @@
+\section{Set Up to Write Together}
+
+The advice of the last section needs a team.
+Team members have different comfort with tools.
+Some live in the terminal.
+Some never used git, and they do not need to.
+If we make everyone use one tool, we lose people at both ends.
+Thus, we give a ladder, and each author selects a rung:
+\begin{enumerate}
+\item A reader.
+The reader looks at the built PDF and sends comments.
+\item A browser writer.
+This person writes in a shared Google Doc, with help from claude.ai.
+\item An Overleaf writer.
+This person edits the LaTeX in the browser and sees the PDF change.
+\item A git writer.
+This person clones the repository, edits, and pushes.
+\item An agent runner.
+This person works with an agent, for example Claude Code, on their own
+computer.
+The agent reads and writes the shared source.
+\end{enumerate}
+Each rung is a full member of the team.
+Only the setup cost is different.
+
+One piece of plumbing connects the ends of the ladder
+(Figure~\ref{fig:faces}).
+An Overleaf project is also a git remote.
+Thus, the same paper has two faces.
+Humans see a live editor in the browser.
+People and agents see a usual repository.
+GitHub holds the source of truth.
+A push moves edits to Overleaf in seconds, and a pull collects the
+text that the browser writers typed.
+Thus, many people and many agents write at the same time, and they
+only meet at the merge.
+
+Two habits keep the merges small.
+First, each sentence ends its line.
+Git then compares texts by the sentence.
+Two edits only collide when they touch the same sentence.
+Second, the prose lives in many small files, one for each section,
+under a thin root of input statements.
+Writers then claim a section, not the paper.
+
+Comments follow the same idea.
+A comment is a macro in the source.
+It shows who spoke and what they said.
+One make target lists the open comments.
+To resolve a comment, delete it.
+We do not use the margin comments of web editors, because those
+comments do not go through git.
+
+The last ritual is the schedule.
+Before a shared writing session, one owner makes sure that each person
+can write to something.
+Doc links must arrive.
+Project invitations must be accepted.
+Push access must be shown with one small commit.
+An access problem in a session costs each person an hour.
+The same problem, solved one day before, costs one person a minute.
+
+The prompts of the team live in the same repository as the prose.
+Thus, each rung runs the same words.
+Note: one author and one agent wrote this paper with this method, and
+they traded pushes through the bridge above.
+Table~\ref{tab:bridge} makes the ladder concrete for this repository.
+
+\begin{table*}[t]
+\caption{How to start on this paper, by rung.
+The rung 2 writer must get an Overleaf invitation from the first
+author.
+The rung 3 and 4 writers must get GitHub push access from the same
+author.
+Each LaTeX rung obeys two habits: start a new line after each full
+stop, and keep the prose in many small files under a thin root.}
+\label{tab:bridge}
+\small
+\begin{tabular}{@{}lp{0.42\textwidth}p{0.34\textwidth}@{}}
+\toprule
+rung & one-time setup & daily cycle\\
+\midrule
+2: Overleaf browser &
+accept the project invitation; open the project; set
+{\ttfamily Menu\,$\to$\,Settings\,$\to$\,Main document}
+to the paper &
+edit the prose in {\ttfamily sec2/}; start a new line after each
+full stop; comment with
+{\ttfamily \textbackslash note\{you\}\{...\}};
+{\ttfamily Cmd-Enter} makes the PDF again\\[0.4em]
+3: GitHub &
+{\ttfamily git clone github.com/timm/how2rite} &
+pull; edit; {\ttfamily make fmt}; commit; push\\[0.4em]
+4: the git bridge &
+rung 3, plus: in Overleaf, {\ttfamily Account
+Settings\,$\to$\,Git Integration\,$\to$\,Generate token} (the
+username is {\ttfamily git}, the password is the token); then\newline
+{\ttfamily git remote add overleaf}\newline
+{\ttfamily ~~https://git.overleaf.com/}\newline
+{\ttfamily ~~6a665a138dbd6c9b6ef7d809} &
+{\ttfamily git pull overleaf main} (this collects the browser
+edits); edit; {\ttfamily make fmt}; build; push to the two remotes:
+{\ttfamily git push origin main; git push overleaf main:main}\\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{pause}{the team's tooling}
+Ask: can each team member read and write the files of the paper?
+Does each member use a technology where they are productive and
+comfortable?
+Does the team help everyone, also when system skills are very
+different?\\[0.2em] To change the outcome: move people to a different
+rung of Table~\ref{tab:bridge} (no rung outranks another), send the
+missing invitations or tokens, and name a sync captain who carries
+edits between the faces of Figure~\ref{fig:faces}.
+\end{pause}

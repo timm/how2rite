@@ -51,3 +51,47 @@ prose, so every rung (browser paste or agent invocation) runs the same
 words.
 (Aside: this paper was written with exactly this setup, one author
 plus one agent, trading pushes through the bridge described above.)
+
+Table~\ref{tab:bridge} makes the ladder concrete for this
+paper's own repository: what each co-author does once, and
+what they do daily.
+
+\begin{table*}[t]
+\caption{Getting started on this paper, by rung.
+One-time setup, then the daily cycle.
+Rung 2 needs an Overleaf project invite from the first
+author; rungs 3--4 need GitHub push access from the same.}
+\label{tab:bridge}
+\small
+\begin{tabular}{@{}lp{0.42\textwidth}p{0.34\textwidth}@{}}
+\toprule
+rung & one-time setup & daily cycle\\
+\midrule
+2: Overleaf browser &
+accept the project invite; open the project; set
+{\ttfamily Menu\,$\to$\,Settings\,$\to$\,Main document}
+to the paper being built &
+edit prose in {\ttfamily sec0/}; new line after every
+full stop; comment via
+{\ttfamily \textbackslash note\{you\}\{...\}};
+{\ttfamily Cmd-Enter} recompiles\\[0.4em]
+3: GitHub &
+{\ttfamily git clone
+github.com/timm/how2rite} &
+pull; edit {\ttfamily sec0/}; {\ttfamily make fmt};
+commit; push\\[0.4em]
+4: the git bridge &
+rung 3, plus: in Overleaf, {\ttfamily Account
+Settings\,$\to$\,Git Integration\,$\to$\,Generate
+token} (username is {\ttfamily git}, password is the
+token); then\newline
+{\ttfamily git remote add overleaf}\newline
+{\ttfamily ~~https://git.overleaf.com/}\newline
+{\ttfamily ~~6a665a138dbd6c9b6ef7d809} &
+{\ttfamily git pull overleaf main} (collect browser
+edits); edit; {\ttfamily make fmt}; build; push to both:
+{\ttfamily git push origin main; git push overleaf
+main:main}\\
+\bottomrule
+\end{tabular}
+\end{table*}

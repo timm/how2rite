@@ -21,7 +21,16 @@ setup cost.
 One piece of plumbing joins the ends of that ladder.
 An Overleaf project is also a git remote, so the same paper has two
 faces: a live browser editor for humans and an ordinary repository for
-people and agents.
+people and agents (Figure~\ref{fig:faces}).
+
+\begin{figure}[t]
+\includegraphics[width=0.49\linewidth]{fig/claude}\hfill
+\includegraphics[width=0.49\linewidth]{fig/overleaf}
+\caption{The same paper, two faces: an agent working the
+repository in Claude Code (left, rung 4) and the live
+Overleaf editor (right, rung 2).}
+\label{fig:faces}
+\end{figure}
 GitHub holds the source of truth; a push moves edits to Overleaf in
 seconds; a pull collects whatever the browser writers typed.
 Hence n people and n agents can write asynchronously, meeting only at

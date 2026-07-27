@@ -1,26 +1,26 @@
 \section{Introduction}
 
 \begin{flushright}
-{\em If you cannot---in the long run---tell everyone\\ what you have
+{\em If you cannot---in the long run---tell everyone what\\ you have
 been doing, your doing has been worthless.}\\ --- Schr\"odinger,
 closing a 1950 public lecture~\cite{schrodinger51}
 \end{flushright}
 
-Scientists must write papers.
-Society grants science a large measure of money, freedom, and trust;
-in return, scientists owe society a report of what they found.
-There are also institutional pressures to publish; e.g. to impress
-funding, hiring, promotion, or graduation committees.
-Whatever the reason, the writing must happen.
+Scientists must write papers,for at least two reaons.
+Firstly, society grants science a large measure of money, freedom, and
+trust; in return, scientists owe society a report of what they found.
+Seocnodly, there are also institutional motivations for publication;
+e.g. to impress funding, hiring, promotion, or graduation committees.
 
-However, writing is hard:
+Whatever the reason, the writing must happen.
+But writing is hard:
 \begin{enumerate}
 \item Newcomers need guidance in the craft of writing research papers,
 but the standard advice is scattered across decades of folklore.
 Also, for nearly all that advice, there is no tool support.
 \item When those newcomers turn to large language models for help,
-those models generate prose that is bland, verbose, and scorned by
-many readers as ``AI slop''.\footnote{``Slop'' is low-quality
+those models generate prose that is bland, verbose, and spurnedd many
+readers as low quality ``AI slop''.\footnote{``Slop'' is low-quality
 machine-generated content produced at volume; Merriam-Webster made it
 the 2025 word of the year~\cite{mw25slop}.
 Its reach into science is measurable: one excess-vocabulary study of
@@ -35,12 +35,10 @@ mapped~\cite{shaib25}.}
 since writing papers (and maturing the papers of graduate students)
 has grown into a full-time job.
 This burden is measurably heavy in software engineering: by one
-estimate, one SE paper costs over four times the collaborative effort
-of one machine learning paper (4.09 versus 0.86 ICLR
-points~\cite{luo25,menzies26se}).
+estimate, one SE paper costs over four times the effort than papers in
+other field such as machine learning paper~\cite{luo25,menzies26se}).
 \end{enumerate}
-
-Given this, we take guidance from two sources.
+To cure these problems, we take guidance from two sources.
 The first is Newell's advice to young scientists, retold by Shaw (who
 worked with Newell at CMU) while answering an audience question at her
 FSE'26 keynote~\cite{shaw26}:
@@ -51,9 +49,9 @@ Then point those strengths at whatever your field currently ranks as
 its hardest open problems.} --- after Newell~\cite{newell91}
 \end{quote}
 \note{timm}{wording is our paraphrase; tune it to your memory of the
-talk} Applied to paper writing, that advice yields a workflow of small
-interim steps, and it gives teams a natural division of labor.
-That division is found by asking four questions:
+talk} As shown in this paper, when applied to paper writing, this
+advice yields a workflow of small interim steps, all of which can be
+supported by LLMs:
 \begin{enumerate}
 \item ``Hello team: what are our recent best papers?''\footnote{Here,
 ``recent'' might mean the last five years.
@@ -61,8 +59,8 @@ However, for fast-moving fields such as LLMs, ``recent'' might be as
 little as 12 to 24 months.}\footnote{ For newcomers to a field, we
 recommend a small variant of this question: for the people we can talk
 to in our local area, what are their recent best papers?}
-\item ``What do those papers reveal, via reverse engineering, as our
-unique and greatest strengths?''
+\item ``What do those papers reveal about our unique and greatest
+strengths?''
 \item ``Given those strengths, in what research or application areas
 could we work?''
 \item ``How could our strengths address the important issues of those
@@ -75,9 +73,13 @@ insightful: (a)~if everyone is doing something, is everyone doing that
 something wrong (in some way)?
 (b)~if everyone is doing something, can we optimize that something
 (even a little)?}
+\item etc (see rest of this paper).
 \end{enumerate}
-Hence it addresses our first problem, since a workflow of explicit
-steps is teachable in a way that folklore is not.
+Such a workflow of explicit steps, supported by LLM tooing, can be
+taught to newcomers.
+Also, as shown later in this paper, LLM tooling can be used to avoid
+blankd and verose LLM text.
+In this waym we can address the first two problems listed above.
 
 The second source is an experience base; that is, a database, reverse
 engineered from the research corpus, holding (e.g.):
@@ -85,7 +87,7 @@ engineered from the research corpus, holding (e.g.):
 \item state-of-the-art results; \item holes in that state of the art;
 \item the experimental standards of particular sub-fields; \item etc.
 \end{itemize}
-Such a base is not one-size-fits-all.
+Imortantly, this base need not be not one-size-fits-all.
 Using LLMs, hundreds of papers can be downloaded and parsed in
 minutes, so a base can be computed fresh for the local task and the
 local authors.
@@ -96,40 +98,47 @@ researcher's own papers, what their particular strengths are and how
 those strengths might attack current problems in the field}.
 To our knowledge, that inversion was impractical before LLMs.
 
-Several services augment these two ideas:
+Further, several services (defined in this paper) augment these two
+ideas:
 \begin{itemize}
 \item a catalog of anti-patterns seen in LLM-generated text, with
 rules for avoiding them; \item a map of the common structures of
 research papers; \item automatically generated critiques which, acting
-as ICSE's reviewer two, report the weaknesses of the current draft and
-propose a revision that avoids at least some of them; \item etc.
+as ``conference reviewer2'' , report the weaknesses of the current
+draft and propose a revision that avoids at least some of them; \item
+etc.
 \end{itemize}
-Hence our second problem also yields, since LLM prose need not be
-bland once the machine is told, precisely, what bland looks like.
-
+\subsection{Frequently Asked Questions}
 Before starting, two frequently asked questions deserve answers.
-\begin{itemize}
-\item {\em Should we follow Newell's advice at all?}
-If everyone focuses on their own tricks, each of us risks the guilt of
-the hammer that sees only nails.
-Our short reply is that strengths choose the tools while the field's
-open problems choose the targets; hence the hammer is aimed, not
-wandering.
-In our experience the method does not rut a career, for two reasons:
-its literature step keeps forcing contact with material outside prior
-experience, and its experiments force a critical evaluation of the
-tool base's own premises.
-\item {\em Are we trying to automate science?}
+Firstly, {\em Should we follow Newell's advice at all?}
+Is it wise to focus on your personal strengths?
+When all you know is hammers, then all you can see are nails.
+If everyone focuses on just their own tricks, then we run the risk
+needless experimentation of inappropriate chocies, On the other hand,
+even if our personal strengths choose the tools, a field's open
+problems choose the targets.
+Hence the hammer is aimed, not wandering.
+In our experience the method does not drive a career into a rut, for
+two reasons.
+Firstly, the literature review step (described below) forcing contact
+with material outside prior experience, and the resulting experiments
+force a critical evaluation and maturation of the basic premises.
+
+Our second FAQ is this : {\em Are we trying to automate science?}
 No. \textbf{We aim to reduce the effort scientists spend working
 together.}
-The process of this paper is not a CI pipeline where resumes drop in
-at one end and papers roll off the other.
-Rather, it pauses repeatedly at numbered review points where humans
-receive succinct conclusions to inspect, dispute, and change; every
-change re-runs the downstream steps.
+The process of this paper is not a CI pipeline where (e.g.) resumes
+drop in at one end and papers roll off the other.
+Rather, we propose a human-AI partnership where, at many points, we
+pause to reflect on current progress and possibly change direction.
+At many points in the process described below, humans receive succinct
+conclusions which they can inspect, dispute, and change before moving
+onwards.
+\begin{pause}{Pause and reflect}
 In what follows, those pauses appear as boxed call-outs, each listing
 the questions a reviewer should ask and naming exactly what to edit so
 that the rest of the processing follows the reviewer, not the machine.
-\end{itemize}
+\end{pause}
+
 \note{claude}{roadmap paragraph goes here once paper0's sections
 exist}

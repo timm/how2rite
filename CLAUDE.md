@@ -22,9 +22,11 @@ reports, paper2 (see TODO.md).
 
 ## Paper layout
 
-paper1.tex is a thin root (preamble + \input); prose
-lives in sec/*.tex, one sentence per line, wrapped at
-70 (run `make fmt` after hand edits; it renormalizes).
+Papers are thin roots (preamble + \input): paper1.tex
+reads sec/, paper0/paper2 read sec0/. Prose is one
+sentence per line, wrapped at 70 (run `make fmt` after
+hand edits; it renormalizes). CI builds all three,
+serves them at timm.github.io/how2rite/paperN.pdf.
 
 ## Prose style
 

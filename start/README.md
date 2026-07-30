@@ -54,10 +54,10 @@ Two habits keep n people from treading on each other:
    and let fmt tidy the rest later.
 
 2. **Content lives in lots of small files.** The root
-   files (`paper1.tex`, `paper0.tex`) are thin: preamble
-   plus `\input` lines, nothing else. Prose goes in one
-   file per section (`sec/intro.tex`, `sec0/intro.tex`,
-   ...). Small files mean two writers rarely open the same
+   files (`paper0.tex`, `paper1.tex`, `paper2.tex`) are
+   thin: preamble plus `\input` lines, nothing else.
+   Prose goes in one file per section (`sec/intro.tex`,
+   `sec0/intro.tex`, `sec2/intro.tex`, ...). Small files mean two writers rarely open the same
    file at all; claim a section, not the paper.
 
 ## Before any writing session

@@ -122,72 +122,108 @@ characterization in Shaw's scheme, generated for the very topic that
 \S\ref{sec:map} nominated, then frozen here as exhibits rather than
 polished into claims.
 
+\begin{figure}[t]
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{%
+\scriptsize\ttfamily
+intro --> hook, gap, elevator, move,\\
+\mbox{}~~~~~~~~~~rqs, contribs, [caveat]*.\\[0.5em]
+hook --> [quantified\_pain]\\
+\mbox{}~~~~~~~; [anchor]\\
+\mbox{}~~~~~~~; [setting].\\[0.5em]
+gap --> [problem], [naive\_fails],\\
+\mbox{}~~~~~~[prior\_fails], [key\_idea].\\[0.5em]
+elevator --> [epigram].\\[0.5em]
+move --> [this\_paper\_does], [christening].\\[0.5em]
+rqs --> ([rq], [answer])+.\\[0.5em]
+contribs --> [contrib]+, [repro\_url].}}
+\caption{The shape of an introduction, reverse engineered from four
+exemplars~\cite{shannon40,kocaguneli12,fu17,ladisa23} and Widom's
+audit questions~\cite{widom06}.
+Figure~\ref{fig:sample} instantiates every production; its boldface
+labels are this grammar's leaves.}
+\label{fig:introbnf}
+\end{figure}
+
+\newcommand{\bnfleaf}[1]{\par\medskip\noindent
+{\bfseries [#1]}\hspace{0.5em}}
+
 \begin{figure*}[t!]
 \fbox{\begin{minipage}[t][0.58\textheight][t]{\dimexpr\textwidth-2\fboxsep-2\fboxrule}
-\normalsize\linespread{1.4}\selectfont
-\begin{center}
-{\scshape\bfseries Example output (synthetic)}\\[0.1em]
-{\footnotesize The step-8 draft of {\ttfamily paper[0]} for the
-topic nominated in \S\ref{sec:map}; unedited machine text, before
-the critics of steps 10--14.
-Bracketed bold numbers are placeholders that step 9's experiments
-must earn.
-Nothing here is a measured claim of this paper.}
-\end{center}
-\vspace{0.5em}
+\scriptsize\linespread{1.9}\selectfont
 \begin{minipage}[t]{0.47\textwidth}
-\textbf{Title} (a question, no hyphens).\\[0.3em]
-{\Large\em Does the Corpus Know Your Team Better Than the Team
-Does?}\\[0.7em]
-\vspace{0.9em}
-\textbf{Opening move} (cost hook, arithmetic shown).\\[0.3em]
+{\large\em Does the Corpus Know Your Team Better Than the Team
+Does?}\par\medskip
+\bnfleaf{quantified\_pain}
 Six authors, five top-cited papers each, over two time windows: a
 1{,}200-record scan that once meant a month of reading now runs
 during a coffee break.
-The bottleneck of team formation is no longer the reading; it is
-knowing what to ask of the record.\\[0.7em]
-\vspace{0.9em}
-\textbf{Elevator speech} (the hypothesis, stated as the
-conclusion).\\[0.3em]
+\bnfleaf{problem}
+Team formation still stalls on its oldest question: what is this
+team actually good at, and where does that talent meet the field?
+\bnfleaf{naive\_fails}
+Self-report answers badly: the flattering account and the true
+account are both in the room, and the team cannot tell them apart.
+\bnfleaf{prior\_fails}
+The trust and productivity literatures measure individuals; their
+averages erase exactly the between-member differences that make a
+team a team.
+\bnfleaf{key\_idea}
+Read the record instead: a repertory grid, computed from the
+team's own coded papers, makes strengths and blind spots adjacent
+and countable.
+\bnfleaf{epigram}
 \begin{quote}
 {\em Asking a team what it is good at is the mistake; reading what
 it already wrote is the fix.}
 \end{quote}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.47\textwidth}
-\textbf{Research questions}, answered on the spot.\\[0.3em]
+\bnfleaf{this\_paper\_does}
+This paper computes that grid for six authors, scores them against
+the nine ICSE'27 research areas, and prices the team's blind
+spots.
+\bnfleaf{christening}
+We name the instrument the FOCUS grid and use that name hereafter.
+\bnfleaf{rq}
 RQ1: Can a team's strengths be read from its corpus alone?
+\bnfleaf{answer}
 \textbf{Yes: the corpus grid reproduced [17 of 19] merged
-constructs on author review.}\\[0.3em]
-\vspace{0.5em}
+constructs on author review.}
+\bnfleaf{rq}
 RQ2: Does corpus measurement beat self-report?
+\bnfleaf{answer}
 \textbf{Yes: corpus columns matched the areas of the team's next
-accepted papers at [83\%], against [61\%] for self-description.}\\[0.3em]
-\vspace{0.5em}
+accepted papers at [83\%], against [61\%] for self-description.}
+\bnfleaf{rq}
 RQ3: Where should this team not work alone?
+\bnfleaf{answer}
 \textbf{Security and testing: no member within [78\%] of either
-area; both flagged for recruitment.}\\[0.7em]
-\textbf{Contributions.}
-\begin{itemize}
-\item a strengths instrument computed from public records (grid
-plus FOCUS sort), runnable on any team in minutes;
-\item a measured map of six researchers against the nine ICSE'27
-areas, with its two blind spots priced;
-\item blend arithmetic showing cross-wing topics beat every single
-area for this team;
-\item a replication package: github.com/timm/how2rite.
-\end{itemize}
+area; both flagged for recruitment.}
+\bnfleaf{contrib}
+a strengths instrument computed from public records (grid plus
+FOCUS sort), runnable on any team in minutes;
+\bnfleaf{contrib}
+a measured map of six researchers against the nine ICSE'27 areas,
+with its two blind spots priced;
+\bnfleaf{contrib}
+blend arithmetic showing cross-wing topics beat every single area
+for this team;
+\bnfleaf{repro\_url}
+a replication package: github.com/timm/how2rite.
 \end{minipage}
 \end{minipage}}
-\caption{The step-8 sample: title, opening move, elevator speech,
-questions with their answers inline, contributions ending in the
-replication URL.
-Boxed and labeled so no reader mistakes machine draft for
-result.}
+\caption{Example output (synthetic): the step-8 draft of
+{\ttfamily paper[0]} for the topic nominated in \S\ref{sec:map};
+unedited machine text, before the critics of steps 10--14.
+Bracketed bold numbers are placeholders that step 9's experiments
+must earn; nothing here is a measured claim of this paper.
+The boldface bracketed labels are the leaves of the introduction
+grammar (Figure~\ref{fig:introbnf}, \S\ref{sec:write}), shown in
+grammar order.}
 \label{fig:sample}
 \end{figure*}
 
-\begin{figure*}[b!]
+\begin{figure*}[t!]
 \fbox{\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule}
 \small
 \begin{center}

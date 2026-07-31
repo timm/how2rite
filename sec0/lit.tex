@@ -122,20 +122,26 @@ characterization in Shaw's scheme, generated for the very topic that
 \S\ref{sec:map} nominated, then frozen here as exhibits rather than
 polished into claims.
 
+\newcommand{\bnfc}[1]{{\rmfamily\itshape\ \%\ #1}}
 \begin{figure}[t]
 \fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{%
 \scriptsize\ttfamily
 intro --> hook, gap, elevator, move,\\
 \mbox{}~~~~~~~~~~rqs, contribs, [caveat]*.\\[0.5em]
-hook --> [quantified\_pain]\\
-\mbox{}~~~~~~~; [anchor]\\
-\mbox{}~~~~~~~; [setting].\\[0.5em]
-gap --> [problem], [naive\_fails],\\
-\mbox{}~~~~~~[prior\_fails], [key\_idea].\\[0.5em]
-elevator --> [epigram].\\[0.5em]
-move --> [this\_paper\_does], [christening].\\[0.5em]
-rqs --> ([rq], [answer])+.\\[0.5em]
-contribs --> [contrib]+, [repro\_url].}}
+hook --> [quantified\_pain]\bnfc{1,200 records in a coffee break}\\
+\mbox{}~~~~~~~; [anchor]\bnfc{we extend Kelly's grid (1955)}\\
+\mbox{}~~~~~~~; [setting].\bnfc{six authors, one ICSE'27 team}\\[0.5em]
+gap --> [problem],\bnfc{what is this team good at?}\\
+\mbox{}~~~~~~[naive\_fails],\bnfc{self-report cannot say}\\
+\mbox{}~~~~~~[prior\_fails],\bnfc{the literature counts individuals}\\
+\mbox{}~~~~~~[key\_idea].\bnfc{so read the team's own corpus}\\[0.5em]
+elevator --> [epigram].\bnfc{asking is the mistake;}\\
+\mbox{}~~~~~~~~~~~~~~~~~~~~\bnfc{reading is the fix}\\[0.5em]
+move --> [this\_paper\_does],\bnfc{grid six authors, nine areas}\\
+\mbox{}~~~~~~~~~[christening].\bnfc{name it the FOCUS grid}\\[0.5em]
+rqs --> ([rq], [answer])+.\bnfc{RQ1: ...? Yes: [17 of 19] ...}\\[0.5em]
+contribs --> [contrib]+,\bnfc{instrument; map; blends}\\
+\mbox{}~~~~~~~~~~~~~[repro\_url].\bnfc{github.com/timm/how2rite}}}
 \caption{The shape of an introduction, reverse engineered from four
 exemplars~\cite{shannon40,kocaguneli12,fu17,ladisa23} and Widom's
 audit questions~\cite{widom06}.
@@ -148,8 +154,8 @@ labels are this grammar's leaves.}
 {\bfseries [#1]}\hspace{0.5em}}
 
 \begin{figure*}[t!]
-\fbox{\begin{minipage}[t][0.58\textheight][t]{\dimexpr\textwidth-2\fboxsep-2\fboxrule}
-\scriptsize\linespread{1.9}\selectfont
+\fbox{\begin{minipage}[t][0.52\textheight][t]{\dimexpr\textwidth-2\fboxsep-2\fboxrule}
+\scriptsize
 \begin{minipage}[t]{0.47\textwidth}
 {\large\em Does the Corpus Know Your Team Better Than the Team
 Does?}\par\medskip
@@ -157,20 +163,38 @@ Does?}\par\medskip
 Six authors, five top-cited papers each, over two time windows: a
 1{,}200-record scan that once meant a month of reading now runs
 during a coffee break.
+A decade ago the same audit cost so much that nobody ran it, and
+teams formed on hearsay instead.
+The scan now costs less than the meeting that discusses it, which
+moves the question from ``can we afford to look?'' to ``what
+should we ask of what we see?''
 \bnfleaf{problem}
 Team formation still stalls on its oldest question: what is this
 team actually good at, and where does that talent meet the field?
+The ICSE'27 call names nine research areas; a six-person team can
+staff at most three or four of them well.
+Choosing wrongly wastes the scarcest resource a research team has,
+which is the attention of its senior members.
 \bnfleaf{naive\_fails}
-Self-report answers badly: the flattering account and the true
-account are both in the room, and the team cannot tell them apart.
+Self-report answers badly.
+The flattering account and the true account are both in the room,
+and the team cannot tell them apart.
+Members also underrate the skills they find easy, since routine
+excellence reads, from the inside, as nothing special.
+Surveys inherit both biases and add a vocabulary problem: two
+members who name one skill differently count as two skills.
 \bnfleaf{prior\_fails}
 The trust and productivity literatures measure individuals; their
 averages erase exactly the between-member differences that make a
 team a team.
+Bibliometric profiling comes closer, yet it counts topics rather
+than strengths: it can say what a team wrote about, never what the
+writing was reliably good at.
 \bnfleaf{key\_idea}
-Read the record instead: a repertory grid, computed from the
-team's own coded papers, makes strengths and blind spots adjacent
-and countable.
+Read the record instead.
+A repertory grid, computed from the team's own coded papers, rates
+every member on every elicited strength; sorted, the grid makes
+strengths and blind spots adjacent and countable.
 \bnfleaf{epigram}
 \begin{quote}
 {\em Asking a team what it is good at is the mistake; reading what
@@ -179,35 +203,46 @@ it already wrote is the fix.}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.47\textwidth}
 \bnfleaf{this\_paper\_does}
-This paper computes that grid for six authors, scores them against
-the nine ICSE'27 research areas, and prices the team's blind
-spots.
+This paper computes that grid for six authors.
+An LLM agent fetched each author's most-cited papers, coded them
+against the ICSE'27 research areas, and played triad interviewee;
+constructs that agreed above 90\% were merged into the grid's
+rows.
+The team is then scored against the nine areas, and its blind
+spots are priced: which skills live in exactly one member, and
+which areas no member can serve.
 \bnfleaf{christening}
-We name the instrument the FOCUS grid and use that name hereafter.
+We name the instrument the FOCUS grid, after the sorting algorithm
+it borrows from Shaw and Gaines, and use that name hereafter.
 \bnfleaf{rq}
 RQ1: Can a team's strengths be read from its corpus alone?
 \bnfleaf{answer}
-\textbf{Yes: the corpus grid reproduced [17 of 19] merged
-constructs on author review.}
+\textbf{Yes: on author review, the corpus grid reproduced [17 of
+19] merged constructs, and the two misses were vocabulary
+disputes, not new skills.}
 \bnfleaf{rq}
 RQ2: Does corpus measurement beat self-report?
 \bnfleaf{answer}
 \textbf{Yes: corpus columns matched the areas of the team's next
-accepted papers at [83\%], against [61\%] for self-description.}
+accepted papers at [83\%], against [61\%] for self-description,
+and the corpus found both scarce skills that self-report missed.}
 \bnfleaf{rq}
 RQ3: Where should this team not work alone?
 \bnfleaf{answer}
-\textbf{Security and testing: no member within [78\%] of either
-area; both flagged for recruitment.}
+\textbf{Security and testing: no member sits within [78\%] of
+either area, the two areas cling to each other rather than to any
+person, and both are flagged for recruitment rather than
+retraining.}
 \bnfleaf{contrib}
 a strengths instrument computed from public records (grid plus
-FOCUS sort), runnable on any team in minutes;
+FOCUS sort), runnable on any team in minutes, with no survey and
+no interview;
 \bnfleaf{contrib}
 a measured map of six researchers against the nine ICSE'27 areas,
 with its two blind spots priced;
 \bnfleaf{contrib}
-blend arithmetic showing cross-wing topics beat every single area
-for this team;
+blend arithmetic showing that cross-wing topics beat every single
+area for this team;
 \bnfleaf{repro\_url}
 a replication package: github.com/timm/how2rite.
 \end{minipage}

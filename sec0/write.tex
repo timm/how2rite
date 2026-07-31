@@ -3,8 +3,8 @@
 
 Advice on writing introductions is usually folklore; this section
 states it as a grammar.
-Four introductions, spanning nine decades, were reverse engineered
-for the shape they share: Shannon's thesis on switching
+We reverse engineered four introductions, nine decades apart, for
+the shape they share: Shannon's thesis on switching
 circuits~\cite{shannon40}, an effort-estimation study~\cite{kocaguneli12},
 a deep-learning replication~\cite{fu17}, and a security
 taxonomy~\cite{ladisa23}.
@@ -12,42 +12,45 @@ Widom's writing guide supplied the audit questions~\cite{widom06}.
 Figure~\ref{fig:introbnf} shows the result as a definite clause
 grammar.
 
-The notation reads as follows:
+The notation, which the figure borrows from logic programming,
+reads as follows.
 \begin{itemize}
 \item Lower-case names are nonterminals; {\ttfamily -->} rewrites
 the left side into the sequence on the right, and commas order that
 sequence.
-\item Semicolons separate alternatives: a hook is any one of its
-three forms.
+\item Semicolons separate alternatives; hence a hook is any one of
+its three forms.
 \item Bracketed names are leaves, and each leaf is one prose move,
 a sentence to a short paragraph long.
 \item {\ttfamily +} means one or more; {\ttfamily *} means zero or
 more.
 \end{itemize}
 
-The productions carry the craft:
+Each production also carries a rule of craft, as follows.
 \begin{itemize}
-\item {\ttfamily hook}: open with a number that hurts (dollars,
+\item {\ttfamily hook} opens with a number that hurts (dollars,
 hours, incident counts), an anchor to a prior result, or a lived
 setting.
 The importance argument lives inside those numbers, which is why no
 separate why-this-matters clause exists.
-\item {\ttfamily gap}: the Stanford four clauses, in order: name and
-define the problem; show why the naive approach fails; show why
-prior work has not already fixed it; state the key idea in one
-sentence, which the rest of the paper unpacks.
-\item {\ttfamily elevator}: the hypothesis stated as the conclusion,
+\item {\ttfamily gap} walks the Stanford four clauses in order.
+Name and define the problem.
+Show why the naive approach fails, and why prior work has not
+already fixed it.
+State the key idea in one sentence, which the rest of the paper
+unpacks.
+\item {\ttfamily elevator} states the hypothesis as the conclusion,
 displayed as a quote of two to three lines.
 Papers carry at most one or two displayed claims, and the elevator
 speech spends one of them.
-\item {\ttfamily move}: what this paper does, plus a christening:
-the method gets a name at first use and keeps it ever after.
-\item {\ttfamily rqs}: every question is answered on the spot, its
-headline number in bold; an introduction holds no suspense.
-\item {\ttfamily contribs}: a short bullet list whose final bullet
-is always the replication URL.
-\item {\ttfamily [caveat]*}: zero or more digressions that answer
-the obvious objection before a reviewer raises it.
+\item {\ttfamily move} says what this paper does, then christens
+it; the method gets a name at first use and keeps it ever after.
+\item {\ttfamily rqs} answers every question on the spot, its
+headline number in bold, since an introduction holds no suspense.
+\item {\ttfamily contribs} is a short bullet list whose final
+bullet is always the replication URL.
+\item {\ttfamily [caveat]*} allows zero or more digressions, each
+answering an obvious objection before a reviewer raises it.
 \end{itemize}
 
 \begin{pause}{the introduction}

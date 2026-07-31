@@ -115,83 +115,134 @@ already sit in the venue-filtered goal results.
 The territory is adjacent to us without yet being occupied by us.
 
 Reading done, the loop starts writing.
-Figure~\ref{fig:sample} shows what that looks like: the step-8 draft
-(title, elevator speech, abstract, questions, contributions) plus the
-step-9 lit-review pivot, generated for the very topic that
-\S\ref{sec:map} nominated, then frozen here as an exhibit rather than
-polished into a claim.
+Figures~\ref{fig:sample} and~\ref{fig:samplelit} show what that looks
+like: the step-8 draft (title, opening move, elevator speech,
+questions with answers, contributions) and the step-9 literature
+characterization in Shaw's scheme, generated for the very topic that
+\S\ref{sec:map} nominated, then frozen here as exhibits rather than
+polished into claims.
+
+\begin{figure*}[t!]
+\fbox{\begin{minipage}[t][0.58\textheight][t]{\dimexpr\textwidth-2\fboxsep-2\fboxrule}
+\normalsize\linespread{1.4}\selectfont
+\begin{center}
+{\scshape\bfseries Example output (synthetic)}\\[0.1em]
+{\footnotesize The step-8 draft of {\ttfamily paper[0]} for the
+topic nominated in \S\ref{sec:map}; unedited machine text, before
+the critics of steps 10--14.
+Bracketed bold numbers are placeholders that step 9's experiments
+must earn.
+Nothing here is a measured claim of this paper.}
+\end{center}
+\vspace{0.5em}
+\begin{minipage}[t]{0.47\textwidth}
+\textbf{Title} (a question, no hyphens).\\[0.3em]
+{\Large\em Does the Corpus Know Your Team Better Than the Team
+Does?}\\[0.7em]
+\vspace{0.9em}
+\textbf{Opening move} (cost hook, arithmetic shown).\\[0.3em]
+Six authors, five top-cited papers each, over two time windows: a
+1{,}200-record scan that once meant a month of reading now runs
+during a coffee break.
+The bottleneck of team formation is no longer the reading; it is
+knowing what to ask of the record.\\[0.7em]
+\vspace{0.9em}
+\textbf{Elevator speech} (the hypothesis, stated as the
+conclusion).\\[0.3em]
+\begin{quote}
+{\em Corpus beats self-report: a strengths grid computed in minutes
+from a team's public papers predicts its fit to a field better than
+the team's own account of itself.
+Asking a team what it is good at is the mistake; reading what it
+already wrote is the fix.}
+\end{quote}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+\textbf{Research questions}, answered on the spot.\\[0.3em]
+RQ1: Can a team's strengths be read from its corpus alone?
+\textbf{Yes: the corpus grid reproduced [17 of 19] merged
+constructs on author review.}\\[0.3em]
+\vspace{0.5em}
+RQ2: Does corpus measurement beat self-report?
+\textbf{Yes: corpus columns matched the areas of the team's next
+accepted papers at [83\%], against [61\%] for self-description.}\\[0.3em]
+\vspace{0.5em}
+RQ3: Where should this team not work alone?
+\textbf{Security and testing: no member within [78\%] of either
+area; both flagged for recruitment.}\\[0.7em]
+\textbf{Contributions.}
+\begin{itemize}
+\item a strengths instrument computed from public records (grid
+plus FOCUS sort), runnable on any team in minutes;
+\item a measured map of six researchers against the nine ICSE'27
+areas, with its two blind spots priced;
+\item blend arithmetic showing cross-wing topics beat every single
+area for this team;
+\item a replication package: github.com/timm/how2rite.
+\end{itemize}
+\end{minipage}
+\end{minipage}}
+\caption{The step-8 sample: title, opening move, elevator speech,
+questions with their answers inline, contributions ending in the
+replication URL.
+Boxed and labeled so no reader mistakes machine draft for
+result.}
+\label{fig:sample}
+\end{figure*}
 
 \begin{figure*}[b!]
 \fbox{\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule}
 \small
 \begin{center}
 {\scshape\bfseries Example output (synthetic)}\\[0.1em]
-{\footnotesize What the loop emits at step 8 for the topic
-nominated in \S\ref{sec:map}; unedited machine draft, before the
-critics of steps 10--14. Nothing here is a measured claim of this
-paper.}
+{\footnotesize The step-9 literature characterization for the same
+topic, written in Shaw's scheme: classify each paper by its
+question, its result, and its validation; map who did what, where;
+then let the empty cells argue.}
 \end{center}
 \vspace{0.3em}
 \begin{minipage}[t]{0.47\textwidth}
-\textbf{paper[0]: title, elevator speech, abstract.}\\[0.3em]
-{\em Do AI Assistants Amplify or Erase a Team's Measured
-Strengths?}\\[0.4em]
-\begin{quote}
-Six researchers, measured from their own corpus, split into a wing
-that measures and a wing that crafts.
-When LLM assistants join the loop, does the work drift toward those
-peaks, or toward the model's mean?
-We propose an instrument that answers this per team, in minutes,
-from public records.
-\end{quote}
-{\em Abstract:} Teams adopt LLM writing assistants faster than they
-can measure the effect on their own output.
-We reverse engineer a team's strengths from its published corpus
-(repertory grid over coded papers, FOCUS sorted), instrument one
-year of assisted and unassisted writing, and measure drift between
-the two against the team's own baseline.
-The instrument runs from public records in minutes.
-Scripts, data, and grids: github.com/timm/how2rite.
+Shaw sorts research papers by three axes: the question asked
+(method of development, method of analysis, design or evaluation of
+an instance, generalization, feasibility), the result produced
+(procedure, qualitative model, empirical model, analytic model,
+tool, solution, report), and the validation offered (analysis,
+evaluation, experience, example, persuasion, assertion).
+The reading set of Figure~\ref{fig:lit} sorts cleanly under that
+scheme.
+Generalization questions with report results own the citation knee:
+Giray's review of deep defect prediction (JSS'22) and Zhang's
+mapping of critical-scenario testing (TSE'22) both validate by
+analysis of a coded corpus.
+Design-and-evaluation questions cluster in the tooling wing: Xu's
+in-IDE code generation study (TOSEM'22) and Amaral's compliance
+checker (TSE'22) each ship a tool validated by evaluation.
 \end{minipage}\hfill
 \begin{minipage}[t]{0.47\textwidth}
-\textbf{Research questions} (answers land inline, in bold, once
-step 9's experiments run).\\
-RQ1: Can a team's strengths be recovered from its public corpus
-alone?\\
-RQ2: Does assisted output sit nearer the team's measured centroid,
-or the model's default register?\\
-RQ3: Which member-to-area pairings does the drift evidence
-support?\\[0.5em]
-\textbf{Contributions.}
-(1)~a corpus-derived strengths instrument (grid plus FOCUS sort);
-(2)~a measured map of six researchers against the nine ICSE'27
-areas;
-(3)~blend arithmetic that nominates cross-wing topics;
-(4)~a replication package: github.com/timm/how2rite.\\[0.5em]
-\textbf{Step 9, the lit-review pivot} (form: respect, then
-disrespect, then the open-issues list).\\[0.3em]
-Prior work earns respect on two fronts: trust in AI assistants is
-now measured at the level of the individual developer, and
-productivity effects are quantified across thousands of sessions.
-However, the corpora end where teams begin: the trust studies
-observe single subjects, and the productivity numbers average away
-exactly the between-member differences that define a team.
-Based on the above, three issues remain open: (i)~team-level
-measures of strength, (ii)~drift of assisted output against such
-measures, and (iii)~longitudinal designs that separate tool effects
-from team learning.
-The sections that follow address (i) and (ii); issue (iii) is
-future work.
+The newest wing runs on experience: C\^amara's report on generative
+AI in modeling (SoSyM'23) and Khojah's observational study of
+ChatGPT use (Proc.\ ACM'24) both study individual practitioners,
+validated by lived usage.
+The team's own seeds sit in that same report-and-experience cell
+(Gregorio on accessibility, EMSE; Faubel on MLOps and Su on AI
+agents, IEEE Software).
+Mapped so, the field shows one crowded cell and one empty row:
+reports of individual usage abound, while empirical models of
+teams are absent, and no paper here validates a team-level claim by
+evaluation.
+Based on the above, there exist the following open issues:
+(1)~team-level empirical models of strength; (2)~evaluation-grade
+validation of assistant drift; (3)~longitudinal designs separating
+tool effect from team learning.
+Accordingly, the rest of this paper addresses (1) and (2), and
+leaves (3) to future work.
 \end{minipage}
 \end{minipage}}
-\caption{A worked sample of the loop's own prose products, boxed
-and labeled so no reader mistakes it for a result.
-The form follows the engine's structure rules (github.com/timm/rite):
-question-form title without hyphens, elevator speech in a quote
-block, research questions answered inline, contributions ending in
-the replication URL, and a lit review that pivots on its
-open-issues list.}
-\label{fig:sample}
+\caption{The step-9 sample: a literature characterization in Shaw's
+question, result, and validation scheme, naming who did what and
+where, closing on the open-issues pivot that the rest of the sample
+paper must trace to.}
+\label{fig:samplelit}
 \end{figure*}
 
 \begin{pause}{the search}

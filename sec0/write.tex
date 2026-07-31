@@ -1,19 +1,14 @@
 \section{The Introduction}
 \label{sec:write}
 
-Advice on writing introductions is usually folklore; this section
-states it as a grammar.
-We reverse engineered four introductions, nine decades apart, for
-the shape they share: Shannon's thesis on switching
-circuits~\cite{shannon40}, an effort-estimation study~\cite{kocaguneli12},
-a deep-learning replication~\cite{fu17}, and a security
-taxonomy~\cite{ladisa23}.
-Widom's writing guide supplied the audit questions~\cite{widom06}.
-Figure~\ref{fig:introbnf} shows the result as a definite clause
-grammar.
+Figure~\ref{fig:introbnf} proposes a structure for an introduction.
+Notice that we say ``a structure'', not ``the structure''.
+Rules are made to be broken; hence, if you have a better way to
+introduce an audience to your paper, you should certainly take it.
+Just for this paper, we assume Figure~\ref{fig:introbnf} and move
+on.
 
-The notation, which the figure borrows from logic programming,
-reads as follows.
+That figure uses the following notation.
 \begin{itemize}
 \item Lower-case names are nonterminals; {\ttfamily -->} rewrites
 the left side into the sequence on the right, and commas order that
@@ -51,13 +46,15 @@ headline number in bold, since an introduction holds no suspense.
 bullet is always the replication URL.
 \item {\ttfamily [caveat]*} allows zero or more digressions, each
 answering an obvious objection before a reviewer raises it.
+\item {\ttfamily [roadmap]} closes the introduction with ``the rest
+of this paper is structured as follows''.
 \end{itemize}
 
 \begin{pause}{the introduction}
 Ask: would your own last paper parse under this grammar, and which
 leaf would fail first?
-Does your field replace any production (some venues demand a
-roadmap paragraph; this grammar omits one)?\\[0.2em]
+Does your field replace any production (some venues ban the
+roadmap paragraph; this grammar ends with one)?\\[0.2em]
 To change the outcome: edit the grammar here, then regenerate the
 sample of Figure~\ref{fig:sample} against the new productions.
 \end{pause}

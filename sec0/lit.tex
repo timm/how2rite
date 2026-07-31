@@ -122,26 +122,74 @@ characterization in Shaw's scheme, generated for the very topic that
 \S\ref{sec:map} nominated, then frozen here as exhibits rather than
 polished into claims.
 
-\newcommand{\bnfc}[1]{{\rmfamily\itshape\ \%\ #1}}
 \begin{figure}[t]
-\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{%
-\scriptsize\ttfamily
-intro --> hook, gap, elevator, move,\\
-\mbox{}~~~~~~~~~~rqs, contribs, [caveat]*.\\[0.5em]
-hook --> [quantified\_pain]\bnfc{1,200 records in a coffee break}\\
-\mbox{}~~~~~~~; [anchor]\bnfc{we extend Kelly's grid (1955)}\\
-\mbox{}~~~~~~~; [setting].\bnfc{six authors, one ICSE'27 team}\\[0.5em]
-gap --> [problem],\bnfc{what is this team good at?}\\
-\mbox{}~~~~~~[naive\_fails],\bnfc{self-report cannot say}\\
-\mbox{}~~~~~~[prior\_fails],\bnfc{the literature counts individuals}\\
-\mbox{}~~~~~~[key\_idea].\bnfc{so read the team's own corpus}\\[0.5em]
-elevator --> [epigram].\bnfc{asking is the mistake;}\\
-\mbox{}~~~~~~~~~~~~~~~~~~~~\bnfc{reading is the fix}\\[0.5em]
-move --> [this\_paper\_does],\bnfc{grid six authors, nine areas}\\
-\mbox{}~~~~~~~~~[christening].\bnfc{name it the FOCUS grid}\\[0.5em]
-rqs --> ([rq], [answer])+.\bnfc{RQ1: ...? Yes: [17 of 19] ...}\\[0.5em]
-contribs --> [contrib]+,\bnfc{instrument; map; blends}\\
-\mbox{}~~~~~~~~~~~~~[repro\_url].\bnfc{github.com/timm/how2rite}}}
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+intro --> hook, gap, elevator, move, rqs,
+          contribs, [caveat]*, [roadmap]*.
+
+% one leaf, generalized: any number that
+% hurts. cost, incident count, wasted
+% time -- all the same move.
+hook --> [quantified_pain]
+           % "a 1,200-record scan that
+           %  once meant a month of reading
+           %  now runs in a coffee break"
+       ; [anchor]
+           % "extends Kelly's grid (1955)"
+       ; [setting].
+           % "six authors forming a team
+           %  for ICSE'27"
+
+% the Stanford four clauses, in order
+gap --> [problem],
+           % "the bottleneck of team
+           %  formation is knowing what to
+           %  ask of the record"
+        [naive_fails],
+           % "self-report names strengths
+           %  badly"
+        [prior_fails],
+           % "trust and productivity studies
+           %  observe individuals, averaging
+           %  away exactly the between-member
+           %  differences"
+        [key_idea].
+           % "a repertory grid over the
+           %  team's own coded papers"
+
+% hypothesis stated as the conclusion;
+% displayed, 2-3 lines
+elevator --> [epigram].
+           % "Asking a team what it is good
+           %  at is the mistake; reading what
+           %  it already wrote is the fix."
+
+move --> [this_paper_does],
+           % "compute the grid, FOCUS sort
+           %  it, score the team against
+           %  nine ICSE areas"
+         [christening].
+           % the instrument gets a name,
+           % used ever after
+
+% answer follows its question at once,
+% headline number bold
+rqs --> ([rq], [answer])+.
+           % "RQ1: Can a team's strengths
+           %  be read from its corpus alone?
+           %  Yes: [17 of 19] merged
+           %  constructs on author review."
+
+contribs --> [contrib]+,
+           % "a strengths instrument runnable
+           %  on any team in minutes"
+             [repro_url].
+           % "github.com/timm/how2rite"
+           % -- always last
+
+% [roadmap]: "the rest of this paper is
+% structured as follows" -- the closer
+\end{Verbatim}
 \caption{The shape of an introduction, reverse engineered from four
 exemplars~\cite{shannon40,kocaguneli12,fu17,ladisa23} and Widom's
 audit questions~\cite{widom06}.
@@ -154,27 +202,25 @@ labels are this grammar's leaves.}
 {\bfseries [#1]}\hspace{0.5em}}
 
 \begin{figure*}[t!]
-\fbox{\begin{minipage}[t][0.52\textheight][t]{\dimexpr\textwidth-2\fboxsep-2\fboxrule}
-\scriptsize
+\fbox{\begin{minipage}[t]{\dimexpr\textwidth-2\fboxsep-2\fboxrule}
+\footnotesize
 \begin{minipage}[t]{0.47\textwidth}
 {\large\em Does the Corpus Know Your Team Better Than the Team
 Does?}\par\medskip
-\bnfleaf{quantified\_pain}
-Six authors, five top-cited papers each, over two time windows: a
-1{,}200-record scan that once meant a month of reading now runs
-during a coffee break.
-A decade ago the same audit cost so much that nobody ran it, and
-teams formed on hearsay instead.
-The scan now costs less than the meeting that discusses it, which
-moves the question from ``can we afford to look?'' to ``what
-should we ask of what we see?''
 \bnfleaf{problem}
-Team formation still stalls on its oldest question: what is this
-team actually good at, and where does that talent meet the field?
+Team formation stalls on its oldest question: what is this team
+actually good at, and where does that talent meet the field?
 The ICSE'27 call names nine research areas; a six-person team can
 staff at most three or four of them well.
 Choosing wrongly wastes the scarcest resource a research team has,
 which is the attention of its senior members.
+\bnfleaf{quantified\_pain}
+Six authors each named their five most-cited papers, of all time
+and of the last five years.
+Reading that record by hand once cost a month; an LLM agent
+scanned all 1{,}200 candidate records during a coffee break.
+The audit nobody could afford is now cheaper than the meeting that
+discusses it.
 \bnfleaf{naive\_fails}
 Self-report answers badly.
 The flattering account and the true account are both in the room,
@@ -245,6 +291,14 @@ blend arithmetic showing that cross-wing topics beat every single
 area for this team;
 \bnfleaf{repro\_url}
 a replication package: github.com/timm/how2rite.
+\bnfleaf{roadmap}
+The rest of this paper is structured as follows.
+Section 2 describes repertory grids and the FOCUS sort.
+Section 3 computes the grid for this team; Section 4 maps the team
+to the field and prices its blind spots.
+Section 5 reports the three experiments behind RQ1 to RQ3.
+Section 6 discusses observations, threats to validity, and future
+work.
 \end{minipage}
 \end{minipage}}
 \caption{Example output (synthetic): the step-8 draft of

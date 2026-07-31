@@ -148,8 +148,12 @@ engine's prose skill (github.com/timm/rite).}
 \label{fig:language}
 \end{figure}
 
-\begin{figure}[t]
-\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+\newcommand{\bnfleaf}[1]{\par\smallskip\noindent
+{\bfseries [#1]}\hspace{0.5em}}
+
+\begin{figure*}[t!]
+\begin{minipage}[t]{0.34\textwidth}
+\begin{Verbatim}[frame=single,fontsize=\scriptsize]
 intro --> hook, gap, elevator, move, rqs,
           contribs, [caveat]*, [roadmap]*.
 
@@ -216,33 +220,18 @@ contribs --> [contrib]+,
 % [roadmap]: "the rest of this paper is
 % structured as follows" -- the closer
 \end{Verbatim}
-\caption{The shape of an introduction, reverse engineered from four
-exemplars~\cite{shannon40,kocaguneli12,fu17,ladisa23} and Widom's
-audit questions~\cite{widom06}.
-Figure~\ref{fig:sample} instantiates every production; its boldface
-labels are this grammar's leaves.}
-\label{fig:introbnf}
-\end{figure}
-
-\newcommand{\bnfleaf}[1]{\par\medskip\noindent
-{\bfseries [#1]}\hspace{0.5em}}
-
-\begin{figure*}[t!]
-\fbox{\begin{minipage}[t]{\dimexpr\textwidth-2\fboxsep-2\fboxrule}
-\footnotesize
-\begin{minipage}[t]{0.47\textwidth}
-{\large\em Does the Corpus Know Your Team Better Than the Team
-Does?}\par\medskip
+\end{minipage}\hfill
+\fbox{\begin{minipage}[t]{\dimexpr0.62\textwidth-2\fboxsep-2\fboxrule}
+\scriptsize
 \bnfleaf{problem}
 Team formation stalls on its oldest question: what is this team
 actually good at, and where does that talent meet the field?
 The ICSE'27 call names nine research areas; a six-person team can
 staff at most three or four of them well.
-Choosing wrongly wastes the scarcest resource a research team has,
-which is the attention of its senior members.
+Choosing wrongly wastes the scarcest resource: senior attention.
 \bnfleaf{quantified\_pain}
-Six authors each named their five most-cited papers, of all time
-and of the last five years.
+Six authors each named their five most-cited papers, all-time and
+recent.
 Reading that record by hand once cost a month; an LLM agent
 scanned all 1{,}200 candidate records during a coffee break.
 The audit nobody could afford is now cheaper than the meeting that
@@ -268,24 +257,19 @@ A repertory grid, computed from the team's own coded papers, rates
 every member on every elicited strength; sorted, the grid makes
 strengths and blind spots adjacent and countable.
 \bnfleaf{epigram}
-\begin{quote}
-{\em Asking a team what it is good at is the mistake; reading what
-it already wrote is the fix.}
-\end{quote}
+{\em ``Asking a team what it is good at is the mistake; reading
+what it already wrote is the fix.''}
 \bnfleaf{this\_paper\_does}
 This paper computes that grid for six authors.
 An LLM agent fetched each author's most-cited papers, coded them
 against the ICSE'27 research areas, and played triad interviewee;
 constructs that agreed above 90\% were merged into the grid's
 rows.
-The team is then scored against the nine areas, and its blind
-spots are priced: which skills live in exactly one member, and
-which areas no member can serve.
+The team is then scored against the nine areas and its blind
+spots priced: skills held by one member, areas served by none.
 \bnfleaf{christening}
 We name the instrument the FOCUS grid, after the sorting algorithm
 it borrows from Shaw and Gaines, and use that name hereafter.
-\end{minipage}\hfill
-\begin{minipage}[t]{0.47\textwidth}
 \bnfleaf{rq}
 RQ1: Can a team's strengths be read from its corpus alone?
 \bnfleaf{answer}
@@ -317,6 +301,17 @@ blend arithmetic showing that cross-wing topics beat every single
 area for this team;
 \bnfleaf{repro\_url}
 a replication package: github.com/timm/how2rite.
+\bnfleaf{caveat}
+A corpus records what a team finished, not all it can do; hence
+the grid can misprice a skill that never reached print.
+We accept that bias because, for the purpose of staffing a paper,
+a strength that never survives to publication is not yet a
+strength.
+\bnfleaf{caveat}
+Citation counts favor the old; a skill acquired last year has had
+no time to be cited.
+The grid therefore reads two windows, all-time and the last five
+years, and flags any construct that appears in only one of them.
 \bnfleaf{roadmap}
 The rest of this paper is structured as follows.
 Section 2 describes repertory grids and the FOCUS sort.
@@ -325,16 +320,18 @@ to the field and prices its blind spots.
 Section 5 reports the three experiments behind RQ1 to RQ3.
 Section 6 discusses observations, threats to validity, and future
 work.
-\end{minipage}
+Section 7 concludes with advice for teams that would repeat this
+exercise on their own corpus.
 \end{minipage}}
-\caption{Example output (synthetic): the step-8 draft of
-{\ttfamily paper[0]} for the topic nominated in \S\ref{sec:map};
-unedited machine text, before the critics of steps 10--14.
-Bracketed bold numbers are placeholders that step 9's experiments
-must earn; nothing here is a measured claim of this paper.
-The boldface bracketed labels are the leaves of the introduction
-grammar (Figure~\ref{fig:introbnf}, \S\ref{sec:write}), shown in
-grammar order.}
+\caption{The left panel shows the introduction grammar, reverse
+engineered from four
+exemplars~\cite{shannon40,kocaguneli12,fu17,ladisa23} and Widom's
+audit questions~\cite{widom06}.
+The right panel shows the step-8 draft of {\ttfamily paper[0]},
+synthetic and unedited; its bold labels are the grammar's leaves,
+and its bold bracketed numbers are placeholders that step 9 must
+earn.}
+\label{fig:introbnf}
 \label{fig:sample}
 \end{figure*}
 

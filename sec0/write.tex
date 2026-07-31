@@ -1,5 +1,32 @@
-\section{The Introduction}
+\section{Writing}
 \label{sec:write}
+
+Most of the text that trained an LLM was written to stop a thumb.
+Feed prose (Medium essays, LinkedIn stories, video captions) must
+re-earn attention every twenty seconds, or the reader swipes away.
+Such text sells constantly: hooks, punchlines, one-line paragraphs,
+dramatic colons.
+A technical paper faces a different reader.
+Past the title and the abstract, that reader has committed to at
+least a skim, and often to an hour.
+Selling to the committed is noise; what the committed reader wants
+is density, order, and a voice that does not perform.
+
+Hence the language rules of this paper pull in two directions at
+once.
+From simplified technical English we take the skeleton: short
+sentences, active voice, one topic per paragraph, one meaning per
+word.
+From the engagement register we subtract the tells: the hook
+vocabulary, the staged emphasis, the paragraph shaped like
+applause.
+Figure~\ref{fig:language} lists the rules we kept.
+The subtraction list is longer and it dates quickly, so it ships as
+a linter rather than as prose.
+The engine's {\ttfamily style.py} counts banned words, colon rates,
+and paragraph shapes; this paper passes it.
+
+\subsection{The introduction}
 
 Figure~\ref{fig:introbnf} proposes a structure for an introduction.
 Notice that we say ``a structure'', not ``the structure''.
@@ -52,8 +79,11 @@ of this paper is structured as follows''.
 \end{itemize}
 
 \begin{pause}{the introduction}
-Ask: would your own last paper parse under this grammar, and which
-leaf would fail first?
+Ask: is the opening keen, and does it capture the interests of the
+writing team?
+Would it hold a technical audience, a generalist audience, or both?
+Would your own last paper parse under this grammar, and which leaf
+would fail first?
 Does your field replace any production (some venues ban the
 roadmap paragraph; this grammar ends with one)?\\[0.2em]
 To change the outcome: edit the grammar here, then regenerate the

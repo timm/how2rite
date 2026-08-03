@@ -1,0 +1,108 @@
+\documentclass[sigconf,nonacm]{acmart}
+\usepackage{booktabs}
+\usepackage{fancyvrb}
+\usepackage{wrapfig}
+\usepackage{listings}
+% dcg grammar panels: nonterminals blue, leaves red (matching the
+% grid figure's two tree colors), "% e.g." snippets grey italic
+\lstdefinestyle{dcg}{
+  basicstyle=\ttfamily\scriptsize,
+  commentstyle=\color{gray}\itshape,
+  comment=[l]{\%},
+  alsoletter={_},
+  keywordstyle=\color{blue!70!black}\bfseries,
+  morekeywords={intro,hook,gap,elevator,move,rqs,contribs,lit,
+    scheme,wings,ours,holes,issues,pivot,methods,data,rig,
+    baselines,measures,stats,hyperparams,ttv,paper,litreview,
+    results,result,discussion,observations,threats},
+  keywordstyle=[2]\color{red!65!black},
+  morekeywords=[2]{quantified_pain,anchor,setting,problem,
+    naive_fails,prior_fails,key_idea,epigram,this_paper_does,
+    christening,rq,answer,contrib,repro_url,caveat,roadmap,
+    axes,wing,where_we_sit,crowded,empty,issue,claimed,deferred,
+    source,filters,step,rival,metric,tests,thresholds,settings,
+    justification,ablation,worked_example,construct,internal,
+    external,conclusion,charts,comments,observation,summary,
+    future_work},
+  frame=single,
+  keepspaces=true}
+\usepackage{array}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\settopmatter{printfolios=true}
+\input{fig/litnums}
+
+% review comments: \note{who}{what}; resolve = delete.
+% make notes lists them all. acmart already loads xcolor.
+\newcommand{\note}[2]{\textcolor{red}{\textbf{[#1: #2]}}}
+
+% pause-and-review call-out boxes: \begin{pause}{topic}...
+\newcounter{pausebox}
+\newsavebox{\pauseboxsave}
+\newenvironment{pause}[1]{%
+  \refstepcounter{pausebox}\par\medskip\noindent
+  \begin{lrbox}{\pauseboxsave}%
+  \begin{minipage}{\dimexpr\linewidth-9mm}%
+  \small\noindent
+  \textbf{\textsc{Pause \& review \thepausebox: #1}}\\[0.2em]}%
+ {\end{minipage}\end{lrbox}%
+  \noindent\begin{tikzpicture}
+  \node[inner sep=5pt, anchor=west] (b) at (5mm,0)
+    {\usebox{\pauseboxsave}};
+  \fill[black!12]
+    ([xshift=-5mm]b.north west) rectangle (b.south west);
+  \draw[decorate, decoration={random steps, segment length=7pt,
+    amplitude=0.7pt}, line width=0.6pt]
+    ([xshift=-5mm]b.north west) -- (b.north east) --
+    (b.south east) -- (b.south west) --
+    ([xshift=-5mm]b.south west) -- cycle;
+  \end{tikzpicture}\par\medskip}
+
+% compact author block: one names line, one affils line
+\makeatletter
+\renewcommand\@authorfont{\Large\sffamily}
+\renewcommand\@affiliationfont{\normalsize}
+\makeatother
+
+\title{Follow Your Strengths: Writing Papers with LLMs}
+% \note in title breaks headers; working title, timm to confirm.
+
+\author{Tim Menzies\textsuperscript{1},
+  Carmen Armenti\textsuperscript{2},
+  Dario Di Nucci\textsuperscript{3},\\
+  Matteo Esposito\textsuperscript{4},
+  Valentina Lenarduzzi\textsuperscript{4},
+  Klaus Schmid\textsuperscript{5}}
+\affiliation{\institution{%
+  \textsuperscript{1}NC State, USA;
+  \textsuperscript{2}USI, Switzerland;
+  \textsuperscript{3}Univ.~Salerno, Italy;\\
+  \textsuperscript{4}Univ.~Southern Denmark;
+  \textsuperscript{5}Univ.~Hildesheim, Germany\\
+  timm@ieee.org; carmen.armenti@usi.ch; d.dinucci@ieee.org;\\
+  \{esposito,lenarduzzi\}@imada.sdu.dk; schmid@sse.uni-hildesheim.de}\country{}}
+
+\input{sec0/abstract}
+
+\keywords{LLM agents, research writing, strengths, experience base,
+  science of science}
+
+\begin{document}
+\maketitle
+
+\input{sec0/intro}
+\input{sec0/know}
+\input{sec0/map}
+\input{sec0/lit}
+\input{sec0/write}
+\input{sec0/critic}
+\input{sec0/summary}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}
+
+\appendix
+\section*{Appendix}
+\input{sec0/together}
+
+\end{document}

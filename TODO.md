@@ -118,3 +118,12 @@ Parsed:
     bench division (workdir bench.md: stats gates are
     per-field norms), and Matteo's note in intro.tex
     about 30 years of EDA errors (TOSEM 3799715).
+
+12. RESOLVED 2026-08-02: working meta-paper is now
+    paper3.tex (content of paper0, which is archived in
+    old/ beside paper1 and paper2). Motive: Valentina's
+    Overleaf commit ea437de filed paper0/paper1 and
+    narrowed CI with an internal contradiction (built a
+    root paper1.tex the same commit had moved); paper3
+    is the fresh, unambiguous name. CI builds paper3
+    only. Timm emails Valentina.

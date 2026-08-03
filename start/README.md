@@ -10,7 +10,7 @@ is open).
 ## The ladder
 
 **Rung 0: reader.** Watch the built PDF at
-https://timm.github.io/how2rite/paper1.pdf and send
+https://timm.github.io/how2rite/paper3.pdf and send
 comments by mail or chat. Zero setup.
 
 **Rung 1: Google Docs + claude.ai.** Draft and comment in
@@ -54,11 +54,11 @@ Two habits keep n people from treading on each other:
    and let fmt tidy the rest later.
 
 2. **Content lives in lots of small files.** The root
-   files (`paper0.tex`, `paper1.tex`, `paper2.tex`) are
-   thin: preamble plus `\input` lines, nothing else.
-   Prose goes in one file per section (`sec/intro.tex`,
-   `sec0/intro.tex`, `sec2/intro.tex`, ...). Small files mean two writers rarely open the same
-   file at all; claim a section, not the paper.
+   file (`paper3.tex`) is thin: preamble plus `\input`
+   lines, nothing else. Prose goes in one file per
+   section (`sec0/intro.tex`, ...). Small files mean two
+   writers rarely open the same file at all; claim a
+   section, not the paper.
 
 ## Before any writing session
 

@@ -3,7 +3,11 @@
 
 Steps 10 to 12 of the loop of Section 1 turn from writing to
 attack.
-The cheapest attacker is an LLM told to be hostile.
+The first and most expensive critic is a human: step 10 is an
+offline read of 30 to 60 minutes, social media off, and it
+cannot be delegated.
+The cheapest attacker, used at steps 5 and 11, is an LLM told to
+be hostile.
 Figure~\ref{fig:critic} shows the prompt: the model plays
 Reviewer 2 at the target venue, and the prompt embeds the
 venue's own review criteria.
@@ -13,6 +17,9 @@ outcomes are accept, major revision, and reject.
 Structuring the critique under the venue's headings matters,
 since those headings are exactly the form in which the real
 rejection would arrive.
+Reviewer 2 is one of four critics the loop assembles; the others
+compare the draft against the venue's award winners, the ACM
+empirical standards, and the ten nearest prior papers.
 The same figure shows that critic running on the generated
 drafts of Figures~\ref{fig:sample} and~\ref{fig:samplelit};
 each finding quotes the text it fails.
@@ -98,3 +105,11 @@ Figure~\ref{fig:critic}: part 1 is applied at step 11 of the
 loop; part 2 goes to the humans at step 12.}
 \label{fig:fixes}
 \end{figure}
+
+Two steps then close the loop.
+At step 13, the fixes are applied, and one automatic check
+guards the paper's front door: the title and abstract are recoded
+with the same flags as the reading set, and they must match the
+body's coding with zero flips.
+At step 14, a failed self-test returns the loop to step 9;
+otherwise the paper ships, with its replication package.

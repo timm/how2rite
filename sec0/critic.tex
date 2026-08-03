@@ -1,0 +1,115 @@
+\section{Generating Criticism}
+\label{sec:critic}
+
+Steps 10 to 12 of the loop of Section 1 turn from writing to
+attack.
+The first and most expensive critic is a human: step 10 is an
+offline read of 30 to 60 minutes, social media off, and it
+cannot be delegated.
+The cheapest attacker, used at steps 5 and 11, is an LLM told to
+be hostile.
+Figure~\ref{fig:critic} shows the prompt: the model plays
+Reviewer 2 at the target venue, and the prompt embeds the
+venue's own review criteria.
+For ICSE'27 those criteria are five: novelty, rigor, relevance,
+verifiability and transparency, and presentation; the track's
+outcomes are accept, major revision, and reject.
+Structuring the critique under the venue's headings matters,
+since those headings are exactly the form in which the real
+rejection would arrive.
+Reviewer 2 is one of four critics the loop assembles; the others
+compare the draft against the venue's award winners, the ACM
+empirical standards, and the ten nearest prior papers.
+The same figure shows that critic running on the generated
+drafts of Figures~\ref{fig:sample} and~\ref{fig:samplelit};
+each finding quotes the text it fails.
+
+\begin{figure}[t]
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small
+{\bfseries Prompt.}
+{\ttfamily You are Reviewer 2 for the ICSE'27 research track.
+Below are the track's five review criteria, quoted from its call
+for papers, and a draft.
+Assess the draft under each criterion in turn, quoting the text
+that fails it.
+End with one of the track's three outcomes: accept, major
+revision, or reject.}\\[0.4em]
+{\bfseries Output} (on the drafts of Figures~\ref{fig:sample}
+and~\ref{fig:samplelit}; abridged):\\[0.2em]
+{\bfseries Novelty.}
+The FOCUS christening claims a new instrument, yet offers no
+delta against existing repertory-grid tooling; the contribution
+may be assembly, not invention.\\[0.2em]
+{\bfseries Rigor.}
+Every headline number is a bracketed placeholder ([17 of 19],
+[83\%]): the paper claims an evaluation it has not run, names no
+statistical test, and uses one rater.\\[0.2em]
+{\bfseries Relevance.}
+Matching people to tasks matters to every team; however, evidence
+from one six-person team, studying itself, bounds the claimed
+impact.\\[0.2em]
+{\bfseries Verifiability and transparency.}
+Six papers (Giray, Zhang, Xu, Amaral, C\^amara, Khojah) carry no
+citations, so none can be verified; RQ2's ground truth, ``the
+team's next accepted papers'', cannot exist at submission time.
+The promised replication package is the one strong point.\\[0.2em]
+{\bfseries Presentation.}
+Clear, and the grammar labels aid navigation; minor: the
+introduction defines the grid twice.\\[0.2em]
+{\bfseries Outcome: reject}, with encouragement to resubmit once
+the evaluation exists.}}
+\caption{The reviewer-2 critic.
+The prompt embeds the five review criteria of the ICSE'27
+research track (novelty, rigor, relevance, verifiability and
+transparency, presentation), quoted from its call for papers
+(conf.researchr.org/track/icse-2027/icse-2027-research-track);
+the output, abridged, assesses the step-8 drafts of
+Figures~\ref{fig:sample} and~\ref{fig:samplelit} under those
+same headings and ends with one of the track's three outcomes.}
+\label{fig:critic}
+\end{figure}
+
+The review is half the service; triage is the other half.
+Figure~\ref{fig:fixes} shows the follow-up prompt.
+It divides the review's findings into part 1, fixes the model
+can apply alone, and part 2, issues that need a human decision.
+The split prices the remaining work.
+Clarifications, reorderings, prunings, and citation lookups are
+cheap; experiments, ground-truth choices, and scope decisions
+are not.
+The loop applies part 1 automatically at step 11 and queues
+part 2 for the humans at step 12.
+
+\begin{figure}[t]
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small
+{\bfseries Prompt.}
+{\ttfamily Here is a reviewer's report on the draft.
+Whatever its outcome (reject or major revision), divide its
+findings into part 1, fixes you can apply yourself
+(clarification, reordering, pruning, citation lookup), and
+part 2, issues that need a human decision (experiments, ground
+truth, scope).
+Apply nothing; output the two lists.}\\[0.4em]
+{\bfseries Output} (on the review of Figure~\ref{fig:critic};
+abridged):\\[0.2em]
+{\bfseries Part 1} (the model applies): find and verify
+citations for the six named papers; prune the duplicated grid
+definition; reorder the RQ2 answer so evidence precedes claim;
+use one term, self-report, throughout.\\[0.3em]
+{\bfseries Part 2} (the humans decide): run the experiments
+that earn the bracketed numbers; pick a defensible ground truth
+for RQ2; recruit an independent rater for the constructs; add
+more teams, or shrink every generalization claim.}}
+\caption{The triage prompt splits the review of
+Figure~\ref{fig:critic}: part 1 is applied at step 11 of the
+loop; part 2 goes to the humans at step 12.}
+\label{fig:fixes}
+\end{figure}
+
+Two steps then close the loop.
+At step 13, the fixes are applied, and one automatic check
+guards the paper's front door: the title and abstract are recoded
+with the same flags as the reading set, and they must match the
+body's coding with zero flips.
+At step 14, a failed self-test returns the loop to step 9;
+otherwise the paper ships, with its replication package.

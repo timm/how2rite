@@ -14,6 +14,16 @@ regular-expression families) lives only in the workdir
 Retargeting the whole pipeline to a new paper therefore means editing
 just two files.
 
+The advice itself is small enough to print.
+Every prompt in the engine obeys one format rule: a short quotable
+form first, full detail after.
+Figure~\ref{fig:prompts} reproduces the short forms of all eight
+divisions verbatim; the engine's skills directory holds the detail
+behind each line.
+The figure is therefore the method at reading-glance resolution: a
+referee who checks a submitted paper against these forty lines has
+applied most of the checklist that produced it.
+
 The structure division pins down the shape of the paper itself.
 Figure~\ref{fig:bnf} states that shape as a definite clause grammar,
 in the Prolog idiom where each head argument is a
@@ -61,6 +71,98 @@ back(refs=Rs) --> refs(Rs).
 \label{fig:bnf}
 \end{figure}
 
+\newcommand{\division}[2]{\par\noindent\textbf{#1}
+\begin{itemize}#2
+\end{itemize}\vspace{0.2em}}
+
+\begin{figure*}[t]
+\footnotesize
+\begin{minipage}[t]{0.48\textwidth}
+\division{choose}{ \item Audit your toolkit: what are you reliably
+good at?
+\item Scan the era's bottlenecks; force the two lists to collide.
+\item Default = Newell (price work by the era).
+\item Protected slice = Wheeler (which strange thing, and why is
+nobody looking?).
+\item Keep the tension; do not resolve it.}
+\division{search}{ \item Define ``recent'' by field velocity: 10 years
+default; 2--3 for LLM-speed fields.
+\item Goal and years live in the workdir README only.
+\item Optional seed lines join the reading set regardless of the knee,
+and anchor the forward snowball.
+\item Read above the knee of the sorted-cites curve; snowball backward
+to classics, forward from the seeds.
+\item The download rate is a finding; report it, never silently drop
+missing papers.}
+\division{encode}{ \item Two facets in the workdir \texttt{flags.py}:
+topic (which literature) and technology (how the method works); edit
+nowhere else.
+\item Never code from title plus abstract: measured here, abstracts
+miss about half the flags.
+\item Binary matching over full text saturates; use the per-1000-word
+threshold.
+\item The cutoff value is ours, not the literature's:
+sensitivity-check it before publishing.
+\item Keyword coding is a draft; hand-audit while reading.
+\item Before submission, your own title plus abstract must earn every
+flag your body earns at threshold.
+Zero flips.}
+\division{structure}{ \item Intro owns RQs (answered inline) plus
+contributions; last contribution = repro URL.
+\item Lit review = respect then disrespect, ending in the open-issues
+pivot.
+\item Discussion = Observations / Threats / Future Work; papers live
+or die on Observations.
+\item Conclusion = intro with receipts; nothing new.
+\item Coding artifacts: topic Venn to intro and lit review; tech facet
+to Methods; instrument tables to Threats.
+\item Widom's five: answer all, never write her five paragraphs.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\division{prose}{ \item Whiteboard voice; read aloud or rewrite.
+\item Pick one opening move on page 1; elevator speech in its quote
+block, 2--3 lines.
+\item The abstract carries the paper: everyone who judges it cheaply
+reads nothing else.
+\item Kill the LLM tells (full ban list in the skill).
+\item Numbers with their arithmetic; claims gated by stats.}
+\division{critics}{ \item Critic 1 is you: offline, social media off,
+30--60 minutes of comments.
+\item Auto critics: above-knee papers from target venues; a reviewer-2
+pass over the CFP; ACM empirical standards; nearest-10 papers, delta
+them-versus-you.
+\item Shaw's three reader questions: what contribution, what new
+result, why believe it.
+\item Split critic fixes into auto and manual; discuss with other
+humans before applying.
+\item Laurie: data talk, statistics shout; never superlatives.}
+\division{bench (per paper)}{ \item Public datasets by canonical name;
+report per-dataset; persist raw per-run numbers.
+\item Floor = random search; ceiling = strongest SOTA with a public,
+runnable implementation.
+\item 20+ repeats; distributions not means; significance and effect
+size, conjunctively; Scott-Knott for multi-treatment rankings.
+\item Budgets (labels bought, wall-clock) stated up front.
+\item Replication package to SIGSOFT artifact standard;
+construct-validity paragraph; include tasks where the method loses.
+\item {[verify]} marks must be confirmed against the coded papers
+before any number ships.}
+\division{ship}{ \item Run every line of the checklist; any failure
+means another loop iteration.
+\item Stats gates and benchmark furniture: see the workdir
+\texttt{bench.md}.
+\item Ship = replication package (code, data, seeds, raw results);
+last contribution bullet is its URL.}
+\end{minipage}
+\caption{The eight prompt divisions, short forms reproduced verbatim
+from the engine (the per-paper bench division from this workdir's
+\texttt{bench.md}).
+Each division also carries a longer detail section, loaded by the
+agent on demand; the format rule (short quotable form first, full
+detail after) exists so that this figure can exist.}
+\label{fig:prompts}
+\end{figure*}
+
 The pipeline then runs from the workdir: search OpenAlex for the goal;
 keep the papers above the knee of the sorted-citation curve;
 backward-snowball their references for the shared classics; fetch
@@ -77,3 +179,47 @@ The justification is Section~\ref{sec:exhibit}: in the wild, abstracts
 fail this test about half the time, and everyone who judges a paper
 cheaply (bidding PC members, systematic-review coders, ranking
 algorithms, skimming practitioners) reads only the abstract.
+
+\subsection{The bench division: norms of the target field}
+\label{sec:bench}
+
+Seven divisions travel with the engine; the eighth is written fresh
+for each paper.
+The bench division records, in the workdir \texttt{bench.md}, the
+benchmarking norms of the field the paper is aimed at: which datasets,
+baselines, statistics, and reporting habits a referee there treats as
+furniture.
+The sources for this paper's instance are the ACM SIGSOFT Empirical
+Standards (the Benchmarking, OptimizationStudies, and
+SystematicReviews standards) plus the norms visible in the field's own
+methodological papers.
+
+For the target field of this method (software analytics and
+search-based optimization), the recorded norms are as follows.
+Datasets are public corpora cited by canonical name (the
+PROMISE/SEACRAFT lineage for defect data, MOOT for multi-objective
+tasks); results are reported per dataset with raw per-run numbers
+persisted, since aggregate-only reporting is a named antipattern.
+Every comparison carries a floor and a ceiling: the floor is random
+search, mandatory for never-tackled problems, and the ceiling is the
+strongest state of the art with a public, runnable implementation (the
+standards list ``baseline unavailable'' as an invalid excuse).
+Statistical practice is 20 or more repeats per dataset-treatment pair;
+distributions, not means; significance and effect size demanded
+conjunctively, never significance alone; Scott-Knott for ranking
+multiple treatments.
+Budgets, whether labels bought or wall-clock time, are stated before
+results.
+Shipping requires a replication package to the SIGSOFT artifact
+standard, a construct-validity paragraph, and the inclusion of tasks
+where the method loses.
+
+Two properties make this division different from the other seven.
+Firstly, it is per-paper by construction: the norms above would be
+wrong for, say, a human-factors venue, hence the engine cannot carry
+them.
+Secondly, it is self-checking: any number in \texttt{bench.md} not yet
+confirmed against the coded papers carries a \texttt{[verify]} mark,
+and step 14 refuses to ship while one survives.
+The division is therefore less a style guide than a contract with a
+reviewer who has not been met yet.

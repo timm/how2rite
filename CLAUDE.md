@@ -22,12 +22,13 @@ reports, paper2 (see TODO.md).
 
 ## Paper layout
 
-Papers are thin roots (preamble + \input): paper1.tex
-reads sec/, paper0.tex reads sec0/, paper2.tex (the
-ASD-STE100 rewrite of paper0) reads sec2/. Prose is one
-sentence per line, wrapped at 70 (run `make fmt` after
-hand edits; it renormalizes). CI builds all three,
-serves them at timm.github.io/how2rite/paperN.pdf.
+paper3.tex is the working meta-paper (formerly
+paper0); it is a thin root (preamble + \input) reading
+sec0/. Retired roots live in old/ (paper0, paper1, the
+ASD-STE100 paper2). Prose is one sentence per line,
+wrapped at 70 (run `make fmt` after hand edits; it
+renormalizes). CI builds paper3 and serves it at
+timm.github.io/how2rite/paper3.pdf.
 
 ## Prose style
 
@@ -51,6 +52,6 @@ Ownership (extend as authors join):
 
 | file        | owner |
 |-------------|-------|
-| sec/*.tex   | timm  |
-| paper1.tex  | timm  |
+| sec0/*.tex  | timm  |
+| paper3.tex  | timm  |
 | refs.bib    | timm  |

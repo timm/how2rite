@@ -24,17 +24,17 @@ jobs:
           path: ~/.cache/Tectonic
           key: tectonic-${{ hashFiles('**/*.tex', 'refs.bib') }}
           restore-keys: tectonic-
-      - run: for p in paper0 paper1 paper2; do tectonic $p.tex; done
+      - run: tectonic paper3.tex
       - uses: actions/upload-artifact@v4
         with:
           name: pdfs
-          path: "paper*.pdf"
+          path: paper3.pdf
       - name: Stage site
         if: github.event_name != 'pull_request'
         run: |
           mkdir _site
-          cp paper0.pdf paper1.pdf paper2.pdf _site/
-          printf '<meta http-equiv="refresh" content="0; url=paper1.pdf">' > _site/index.html
+          cp paper3.pdf _site/
+          printf '<meta http-equiv="refresh" content="0; url=paper3.pdf">' > _site/index.html
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
 

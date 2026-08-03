@@ -93,3 +93,37 @@ Parsed:
    (OpenAlex cited_by) for descendants. This is also
    how the meta-paper's anchor (arXiv 1612.03224)
    should be wired in, per item 4.
+
+10. OPEN 2026-08-02: paper0 needs a subsection on the
+    title and the abstract. They deserve their own
+    treatment because they select the reviewers: PCs
+    bid and are assigned from title+abstract alone, so
+    those two artifacts choose who judges the paper.
+    Candidate home: section 5, beside the introduction
+    grammar; Shaw's abstract shape (state of the art,
+    the problem, the contribution, the evidence) and
+    the house rule "the abstract carries the paper"
+    are the raw material. Also connects to loop step
+    13's recode gate (title+abstract must code the
+    same as the body, zero flips).
+
+11. OPEN 2026-08-02: paper0 needs a stats discussion.
+    The methods grammar names the gates (repeats,
+    Cliff's delta, KS, bootstrap) but the paper never
+    says how to choose tests, thresholds, or effect
+    sizes, or what "indistinguishable from best"
+    means. Candidate raw material: SNAP2's top-tier
+    procedure (median sort + per-dataset significance
+    cluster; Cliff's delta < 0.195, KS at 95%), the
+    bench division (workdir bench.md: stats gates are
+    per-field norms), and Matteo's note in intro.tex
+    about 30 years of EDA errors (TOSEM 3799715).
+
+12. RESOLVED 2026-08-02: working meta-paper is now
+    paper3.tex (content of paper0, which is archived in
+    old/ beside paper1 and paper2). Motive: Valentina's
+    Overleaf commit ea437de filed paper0/paper1 and
+    narrowed CI with an internal contradiction (built a
+    root paper1.tex the same commit had moved); paper3
+    is the fresh, unambiguous name. CI builds paper3
+    only. Timm emails Valentina.

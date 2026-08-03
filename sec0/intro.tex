@@ -11,27 +11,6 @@ Firstly, society grants science a large measure of money, freedom, and
 trust; in return, scientists owe society a report of what they found.
 Secondly, there are also institutional motivations for publication;
 e.g. to impress funding, hiring, promotion, or graduation committees.
-\begin{figure*}[t]
-\centering
-\begin{tabular}{c@{\hspace{0.5em}}c@{\hspace{0.8em}}c}
- & {\small\bf AI assistant} & {\small\bf shared document}\\[0.3em]
-\raisebox{0.95in}{\small\bf\shortstack{browser only\\(rungs 1--2)}} &
-\begin{tikzpicture}[inner sep=0]\node[anchor=south west] (i) {\includegraphics[height=1.9in]{fig/gemini}};\node[anchor=south west, font=\fontsize{50}{50}\selectfont\bfseries, black] at ([xshift=4mm,yshift=4mm]i.south west) {A};\end{tikzpicture} &
-\begin{tikzpicture}[inner sep=0]\node[anchor=south west] (i) {\includegraphics[height=1.9in]{fig/docs}};\node[anchor=south west, font=\fontsize{50}{50}\selectfont\bfseries, black] at ([xshift=4mm,yshift=4mm]i.south west) {B};\end{tikzpicture}\\[0.6em]
-\raisebox{0.95in}{\small\bf\shortstack{repository\\(rungs 3--4)}} &
-\begin{tikzpicture}[inner sep=0]\node[anchor=south west] (i) {\includegraphics[height=1.9in]{fig/claude}};\node[anchor=south west, font=\fontsize{50}{50}\selectfont\bfseries, white] at ([xshift=4mm,yshift=4mm]i.south west) {C};\end{tikzpicture} &
-\begin{tikzpicture}[inner sep=0]\node[anchor=south west] (i) {\includegraphics[height=1.9in]{fig/overleaf}};\node[anchor=south west, font=\fontsize{50}{50}\selectfont\bfseries, black] at ([xshift=4mm,yshift=4mm]i.south west) {D};\end{tikzpicture}\\
-\end{tabular}
-\caption{There are many ways for teams to use the advice of
-this paper to collaboratively write papers.
-Columns: AI assistants and shared documents.
-Rows: the browser-only world of rungs 1--2 (A:~Gemini,
-B:~Google Docs) and the repository world of rungs 3--4
-(C:~Claude Code working the git bridge, D:~Overleaf rendering
-the same paper).}
-\label{fig:faces}
-\end{figure*}
-
 Whatever the reason, the writing must happen.
 But writing is hard:
 \begin{enumerate}
@@ -58,8 +37,8 @@ This burden is measurably heavy in software engineering: by one
 estimate, one SE paper costs over four times the effort than papers in
 other field such as machine learning paper~\cite{luo25,menzies26se}).
 \end{enumerate}
-To cure these problems, we take guidance from two sources.
-The first is Newell's advice to young scientists, retold by Shaw (who
+To cure these problems, we take guidance from Newell's advice to
+young scientists, retold by Shaw (who
 worked with Newell at CMU) while answering an audience question at her
 FSE'26 keynote~\cite{shaw26}:
 \begin{quote}
@@ -69,56 +48,97 @@ Then point those strengths at whatever your field currently ranks as
 its hardest open problems.} --- after Newell~\cite{newell91}
 \end{quote}
 \note{timm}{wording is our paraphrase; tune it to your memory of the
-talk} As shown in this paper, when applied to paper writing, this
-advice yields a workflow of small interim steps, all of which can be
-supported by LLMs:
+talk}
+\begin{figure}[b!]
+\includegraphics[width=\linewidth]{fig/focus_grid}
+\caption{Repertory grid of six authors (upright columns)
+plus the nine ICSE'27 areas as reference elements (italic columns; see
+\S\ref{sec:map}).
+Grey cells score each column from the left pole (1) to the right pole
+(5) of each construct; trees join neighbors by percentage match;
+regenerate via {\em make focus}.}
+\label{fig:focus}
+\end{figure}
+Two tools make this advice actionable at team scale.
+Firstly, large language models can read hundreds of megabytes of a
+team's artifacts (here, research papers) in minutes.
+Secondly, repertory grids~\cite{kelly55} can show partial matches
+between (e.g.)~human skills and (e.g.)~task requirements.
+A repertory grid rates a set of elements against bipolar
+constructs elicited by comparing elements three at a time.
+Hierarchical clustering of its elements and constructs then shows
+what is near and what is far.
+For example, Figure~\ref{fig:focus} was generated from the papers
+of this paper's authors and the areas of the ICSE'27 call for
+papers (for details of that process, see \S\ref{sec:know}).
+Reading that grid, we can say that Menzies's work is mostly in
+analytics, that Di Nucci's work is on evolution, and that those
+two areas are somewhat distant from each other.
+
+Using LLMs and repertory grids, we define the following procedure
+for applying Newell's heuristic, making the most of the skills of
+research team members (we quote the loop's short form here; its
+full detail lives in the engine at github.com/timm/rite):
 \begin{enumerate}
-\item ``Hello team: what are our recent best papers?''\footnote{Here,
-``recent'' might mean the last five years.
-However, for fast-moving fields such as LLMs, ``recent'' might be as
-little as 12 to 24 months.}\footnote{ For newcomers to a field, we
-recommend a small variant of this question: for the people we can talk
-to in our local area, what are their recent best papers?}
-\item ``What do those papers reveal about our unique and greatest
-strengths?''
-\item ``Given those strengths, in what research or application areas
-could we work?''
-\item ``How could our strengths address the important issues of those
-areas?''\footnote{We do not presume to say what ``important issues''
+\item Define the team's area of interest.
+\item Define ``recent'' for that area.\footnote{Here, ``recent''
+might mean the last five to ten years.
+However, for fast-moving fields such as LLMs, ``recent'' might be
+as little as 12 to 24 months.}
+\item List the team's best recent papers.\footnote{For newcomers
+to a field, we recommend a small variant: for the people we can
+talk to in our local area, what are their recent best papers?}
+\item Extract, from those papers, what the team is good at.
+\item Assemble critics: top-venue exemplars, a reviewer-2 prompt,
+the empirical standards, the nearest prior papers.
+\item Search the literature: read above the citation knee;
+snowball backward to classics and forward from seeds; code the
+full texts.
+\item From that reading, define the most relevant open
+problem.\footnote{We do not presume to say what ``relevant''
 might mean to the reader.
-It could be many things: the area of most current commercial interest;
-a ``hole'', i.e. an area no one is looking at; a ``mountain'', i.e. an
-area everyone is working on; etc. For mountains, two questions can be
-insightful: (a)~if everyone is doing something, is everyone doing that
-something wrong (in some way)?
-(b)~if everyone is doing something, can we optimize that something
-(even a little)?}
-\item etc (see rest of this paper).
+It could be many things: the area of most current commercial
+interest; a ``hole'', i.e.\ an area no one is looking at; a
+``mountain'', i.e.\ an area everyone is working on; etc.
+For mountains, two questions can be insightful: (a)~if everyone
+is doing something, is everyone doing that something wrong (in
+some way)?
+(b)~if everyone is doing something, can we optimize that
+something (even a little)?}
+\item Write {\ttfamily paper[0]}: title, abstract, and elevator
+speech; if these cannot be written, return to step 7.
+\item Write {\ttfamily paper[i+1]}; unwritten sections stay as
+headers.
+\item Go away, social media off; read the draft for 30 to 60
+minutes, making comments.
+\item Apply the other critics; split their fixes into automatic
+and manual.
+\item Discuss the draft with other humans.
+\item Apply the fixes; then recode your own title and abstract,
+which must match the body's coding with zero flips.
+\item If the self-test fails, return to step 9; otherwise ship,
+with a replication package.
 \end{enumerate}
-Such a workflow of explicit steps, supported by LLM tooing, can be
+Such a workflow of explicit steps, supported by LLM tooling, can be
 taught to newcomers.
 Also, as shown later in this paper, LLM tooling can be used to avoid
-blankd and verose LLM text.
-In this waym we can address the first two problems listed above.
+bland and verbose LLM text.
+In this way we can address the first two problems listed above.
 
-The second source is an experience base; that is, a database, reverse
-engineered from the research corpus, holding (e.g.):
-\begin{itemize}
-\item state-of-the-art results; \item holes in that state of the art;
-\item the experimental standards of particular sub-fields; \item etc.
-\end{itemize}
-Imortantly, this base need not be not one-size-fits-all.
-Using LLMs, hundreds of papers can be downloaded and parsed in
-minutes, so a base can be computed fresh for the local task and the
-local authors.
-Hence our third problem shrinks, since months of manual reading
-becomes a background job that runs per project, not once per field.
+The loop's search steps (5 to 7) also shrink the third problem.
+Those steps build an {\em experience base}: a database, reverse
+engineered from the research corpus, of state-of-the-art results,
+holes in that state of the art, and the experimental standards of
+particular sub-fields.
+Such a base is computed fresh for the local task and the local
+authors, so months of manual reading becomes a background job that
+runs per project, not once per field.
 Further, \textbf{it is now possible to reverse engineer, from a
 researcher's own papers, what their particular strengths are and how
 those strengths might attack current problems in the field}.
 To our knowledge, that inversion was impractical before LLMs.
 
-Further, several services (defined in this paper) augment these two
+Further, several services (defined in this paper) augment these
 ideas:
 \begin{itemize}
 \item a catalog of anti-patterns seen in LLM-generated text, with
@@ -159,7 +179,9 @@ Rather, we propose a human-AI partnership where, at many points, we
 pause to reflect on current progress and possibly change direction.
 At many points in the process described below, humans receive succinct
 conclusions which they can inspect, dispute, and change before moving
-onwards.
+onwards.\footnote{Hints on how a team can share the writing itself
+(browser assistant, shared document, Overleaf, or git) appear in
+Appendix~\ref{sec:together}.}
 \begin{pause}{Pause and reflect}
 In what follows, those pauses appear as boxed call-outs, each listing
 the questions a reviewer should ask and naming exactly what to edit so

@@ -1,0 +1,78 @@
+\documentclass[sigconf,nonacm]{acmart}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\settopmatter{printfolios=true}
+\input{fig/litnums}
+
+% review comments: \note{who}{what}; resolve = delete.
+% make notes lists them all. acmart already loads xcolor.
+\newcommand{\note}[2]{\textcolor{red}{\textbf{[#1: #2]}}}
+
+% pause-and-review call-out boxes: \begin{pause}{topic}...
+\newcounter{pausebox}
+\newsavebox{\pauseboxsave}
+\newenvironment{pause}[1]{%
+  \refstepcounter{pausebox}\par\medskip\noindent
+  \begin{lrbox}{\pauseboxsave}%
+  \begin{minipage}{\dimexpr\linewidth-9mm}%
+  \small\noindent
+  \textbf{\textsc{Pause \& review \thepausebox: #1}}\\[0.2em]}%
+ {\end{minipage}\end{lrbox}%
+  \noindent\begin{tikzpicture}
+  \node[inner sep=5pt, anchor=west] (b) at (5mm,0)
+    {\usebox{\pauseboxsave}};
+  \fill[black!12]
+    ([xshift=-5mm]b.north west) rectangle (b.south west);
+  \draw[decorate, decoration={random steps, segment length=7pt,
+    amplitude=0.7pt}, line width=0.6pt]
+    ([xshift=-5mm]b.north west) -- (b.north east) --
+    (b.south east) -- (b.south west) --
+    ([xshift=-5mm]b.south west) -- cycle;
+  \end{tikzpicture}\par\medskip}
+
+% compact author block: one names line, one affils line
+\makeatletter
+\renewcommand\@authorfont{\Large\sffamily}
+\renewcommand\@affiliationfont{\normalsize}
+\makeatother
+
+\title{Follow Your Strengths: Writing Papers with LLMs}
+\subtitle{Paper0, rewritten in ASD-STE100 Simplified Technical
+English}
+% \note in title breaks headers; working title, timm to confirm.
+
+\author{Tim Menzies\textsuperscript{1},
+  Carmen Armenti\textsuperscript{2},
+  Dario Di Nucci\textsuperscript{3},\\
+  Matteo Esposito\textsuperscript{4},
+  Valentina Lenarduzzi\textsuperscript{4},
+  Klaus Schmid\textsuperscript{5}}
+\affiliation{\institution{%
+  \textsuperscript{1}NC State, USA;
+  \textsuperscript{2}USI, Switzerland;
+  \textsuperscript{3}Univ.~Salerno, Italy;\\
+  \textsuperscript{4}Univ.~Southern Denmark;
+  \textsuperscript{5}Univ.~Hildesheim, Germany\\
+  timm@ieee.org; carmen.armenti@usi.ch; d.dinucci@ieee.org;\\
+  esposito@imada.sdu.dk; lenarduzzi@imada.sdu.dk; schmid@sse.uni-hildesheim.de}\country{}}
+
+\input{sec2/abstract}
+
+\keywords{LLM agents, research writing, strengths, experience base,
+  science of science}
+
+\begin{document}
+\maketitle
+
+\input{sec2/intro}
+\input{sec2/together}
+\input{sec2/know}
+\input{sec2/map}
+\input{sec2/lit}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}
+
+\end{document}

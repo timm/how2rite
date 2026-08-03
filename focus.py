@@ -156,12 +156,14 @@ for r in range(NC):
     ax.text(X0 + NE * CW + 0.12, y + CH / 2, RPOLE[r], ha="left",
             va="center", fontsize=11, color=BLUE)
 
-# red element labels, rotated; topics italic
+# red element labels, rotated; topics italic. rotation_mode=
+# "anchor" pins the label's top-right corner to its column.
 for c, ei in enumerate(eorder):
     x = X0 + c * CW + CW / 2
     style = "italic" if ei >= NE - NTOPIC else "normal"
-    ax.text(x, Y0 - 0.14, ELEMENTS[ei], rotation=55, ha="right",
-            va="top", fontsize=10, color=RED, style=style)
+    ax.text(x, Y0 - 0.03, ELEMENTS[ei], rotation=55, ha="right",
+            va="center", rotation_mode="anchor", fontsize=10,
+            color=RED, style=style)
 
 # --- dendrogram helpers: draw merges as right-angle trees ---
 def draw_tree(merges, leaf_pos, axis, base, depth, color, scale_lo):
@@ -207,4 +209,6 @@ ax.set_xlim(0, cright + TREE_W + 0.6)
 ax.set_ylim(Y0 - 1.85, etop + TREE_H + 0.3)
 plt.savefig("fig/focus_grid.png", dpi=300, facecolor=BG,
             bbox_inches="tight", pad_inches=0.02)
-print("wrote fig/focus_grid.png")
+plt.savefig("fig/focus_grid.pdf", facecolor=BG,
+            bbox_inches="tight", pad_inches=0.02)
+print("wrote fig/focus_grid.png and .pdf")

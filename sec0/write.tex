@@ -8,6 +8,10 @@ and the important connections.
 When a passage plainly needs polish or elaboration, mark it with a
 to-do and move on.
 At the end of the day, divide those to-dos among the authors.
+Polish applied while the structure still moves is polish that
+will be thrown away.
+
+\subsection{Writing prose}
 
 Most of the text that trained an LLM was written to stop a thumb.
 Feed prose (Medium essays, LinkedIn stories, video captions) must
@@ -18,7 +22,7 @@ A technical paper faces a different reader.
 Past the title and the abstract, that reader has committed to at
 least a skim, and often to an hour.
 Selling to the committed is noise; what the committed reader wants
-is density, order, and a voice that does not perform.
+is density, and a voice that does not perform.
 
 Hence the language rules of this paper pull in two directions at
 once.
@@ -34,14 +38,665 @@ a linter rather than as prose.
 The engine's {\ttfamily style.py} counts banned words, colon rates,
 and paragraph shapes; this paper passes it.
 
-\section{The introduction}
+The simplified register has a formal standard.
+ASD-STE100, the aerospace industry's controlled language for
+maintenance documentation, limits its dictionary to roughly a
+thousand words with one meaning each~\cite{asdste25}.
+The standard is very useful to simpligying complex
+text. However, it can be over-applied
+as seen when it is applied to
+Hamlet's soliloquy and the Gettysburg address, into the STE
+register; the rewrites are unambiguous, procedural, and
+lifeless.\footnote{\url{https://gist.github.com/timm/331a36c44fb561cc01c917e6bb0320b6}}
+So we reccoment applying the standard, but not too much.
 
-Figure~\ref{fig:introbnf} proposes a structure for an introduction.
-Notice that we say ``a structure'', not ``the structure''.
-Rules are made to be broken; hence, if you have a better way to
-introduce an audience to your paper, you should certainly take it.
-Just for this paper, we assume Figure~\ref{fig:introbnf} and move
-on.
+\subsection{Writing references}
+
+LLMs fabricate references: citations that are fluent, plausible,
+and non-existent, at rates measured in the double digits for some
+models~\cite{walters23}.
+Hence every reference an assistant proposes must be checked by a
+human before it enters the bibliography.
+Two standing instructions keep that check cheap.
+Firstly, the assistant must attach a URL, preferably a DOI, to
+every reference it offers.
+Verification then costs one click; a reference that cannot
+produce a working URL is dropped.
+Secondly, the assistant must prefer peer-reviewed sources, with
+one relaxation.
+Fast-moving areas such as LLM research post their newest work to
+preprint servers months before any refereed venue.
+Citations to such servers (e.g.\ arXiv) are acceptable when
+flagged as preprints.
+Every entry in this paper's bibliography carries a checkable DOI
+or URL, collected under exactly these rules.
+One further habit keeps the bibliography maintainable: the file
+stays sorted, and each new entry arrives in its own commit, so a
+bad reference can be reverted alone.
+
+\subsection{The need for rewrites}
+\label{sec:rewrites}
+
+Left to themselves, LLMs write documents that read like
+incomplete bridges.
+The spans point in the right direction, yet the joins are
+missing and related ideas connect poorly.
+Hence prudent teams review and rewrite all LLM output;
+Figures~\ref{fig:sample} and~\ref{fig:samplelit} each received
+roughly one hour of that rewriting.
+Three before-and-after pairs show the flavor.
+The raw draft of Figure~\ref{fig:samplelit} opened a paragraph
+with ``Generalization questions with report results own the
+citation knee'', unparseable without Shaw's taxonomy in hand.
+The rewrite says it plainly (the most-cited papers in this
+reading set are surveys).
+A second raw passage jumped from the literature map straight to
+its open-issues list; the rewrite adds the missing span,
+``Based on this map, we see several issues...''.
+A third compressed to the point of mystery (``The empty cells
+sit at team scale''); the rewrite spends the words (both empty
+cells concern teams rather than individuals).
+Rewrites fix the prose; \S\ref{sec:litrev} sets the shape the
+finished review must reach.
+Raw drafts are useful starts; no one should submit one.
+
+\subsection{The shape of a paper}
+\label{sec:other}
+
+\begin{figure}[t]
+\begin{lstlisting}[style=dcg]
+paper --> intro, litreview,
+          methods, results,
+          discussion, conclusion.
+
+% one block per research
+% question: the question, its
+% charts, then words about the
+% charts
+results --> [result]+.
+result --> [rq], [charts],
+           [comments].
+
+% observations synthesize;
+% threats confess
+discussion --> observations,
+               threats.
+observations --> [observation]+.
+      % e.g. "oddities explained,
+      %  folklore contradicted,
+      %  patterns across tables"
+
+% the intro, with receipts;
+% nothing new
+conclusion --> [summary],
+               [future_work].
+\end{lstlisting}
+\caption{The whole-paper grammar.
+The productions for {\ttfamily intro}, {\ttfamily litreview},
+{\ttfamily methods}, and {\ttfamily threats} are expanded, with
+worked samples, in Figures~\ref{fig:sample}
+to~\ref{fig:samplettv}.}
+\label{fig:paperbnf}
+\end{figure}
+
+In our method, a research paper parses under a small grammar;
+Figure~\ref{fig:paperbnf} shows its top productions.
+All the grammar figures of this section use one notation,
+borrowed from logic programming.
+Lower-case names are nonterminals; {\ttfamily -->} rewrites the
+left side into the ordered sequence on its right; semicolons
+separate alternatives.
+Bracketed names are leaves, and each leaf is one prose move, a
+sentence to a short paragraph long.
+{\ttfamily +} means one or more; {\ttfamily *} means zero or
+more.
+
+Three productions have no figure of their own.
+Each research question gets one results block, holding the
+question, its charts, then words about the charts.
+Observations synthesize, and papers live or die there.
+Writing down the numbers is not enough; an observation explains
+oddities, confirms or contradicts folklore, names cross-table
+patterns, and traces implications for neighboring work.
+Threats follow \S\ref{sec:ttv}.
+When any grammar changes, regenerate its sample in the same
+commit, so that figure and prose never drift apart.
+
+\subsection{The introduction}
+
+\begin{figure*}[p]
+\begin{minipage}[t]{0.34\textwidth}
+\begin{lstlisting}[style=dcg]
+intro --> hook, gap, elevator, move, rqs,
+          contribs, [caveat]*, [roadmap]*.
+
+% one leaf, generalized: any number that
+% hurts. cost, incident count, wasted
+% time -- all the same move.
+hook --> [quantified_pain]
+           % e.g. "a 1,200-record scan
+           %  that once meant a month of
+           %  reading now runs in a
+           %  coffee break"
+       ; [anchor]
+           % e.g. "extends Kelly's
+           %  grid (1955)"
+       ; [setting].
+           % e.g. "a manager matching
+           %  people to tasks; here, six
+           %  authors, nine ICSE'27 areas"
+
+% the Stanford four clauses, in order
+gap --> [problem],
+           % e.g. "matching people to
+           %  tasks needs a skill
+           %  inventory most teams lack"
+        [naive_fails],
+           % e.g. "self-report builds
+           %  that inventory badly"
+        [prior_fails],
+           % e.g. "one score per team
+           %  cannot say which member is
+           %  strong at which skill"
+        [key_idea].
+           % e.g. "people leave artifacts;
+           %  LLMs read megabytes of them,
+           %  so grid the team's own papers"
+
+% hypothesis stated as the conclusion;
+% displayed, 2-3 lines
+elevator --> [epigram].
+           % e.g. "Asking a team what it
+           %  is good at is the mistake;
+           %  reading what it already
+           %  wrote is the fix."
+
+move --> [this_paper_does],
+           % e.g. "two passes, per Newell:
+           %  read the team, then read the
+           %  field where the team fits"
+         [christening].
+           % the approach gets a name (the
+           % FOCUS method), used ever after
+
+% answer follows its question at once,
+% headline number bold
+rqs --> ([rq], [answer])+.
+           % e.g. "RQ1: Can a team's
+           %  strengths be read from its
+           %  corpus alone? Yes: [17 of 19]
+           %  merged constructs on review."
+
+contribs --> [contrib]+,
+           % e.g. "a strengths instrument
+           %  runnable on any team in
+           %  minutes"
+             [repro_url].
+           % e.g. "github.com/timm/how2rite"
+           % -- always last
+
+% [roadmap]: e.g. "the rest of this paper
+% is structured as follows" -- the closer
+\end{lstlisting}
+\end{minipage}\hfill
+\fbox{\begin{minipage}[t]{\dimexpr0.62\textwidth-2\fboxsep-2\fboxrule}
+\scriptsize
+\renewcommand{\bnfleaf}[1]{\par\medskip\noindent
+{\bfseries [#1]}\hspace{0.5em}}
+\bnfleaf{setting}
+Every project starts the same way: a manager matching a list of
+people to a list of tasks.
+This paper studies that matching for software teams, whose
+literature measures trust, productivity, and the human factors
+of AI-assisted work.
+Our running example is this paper's own team: nine research
+areas in the ICSE'27 call, six authors, and no reliable map of
+who is strong where.
+\bnfleaf{problem}
+A team manager assigning people to tasks has one standard tactic:
+match the skills of the people to the needs of the task.
+That tactic needs a skills inventory: a trusted list of what each
+member is reliably good at.
+Upper management might urge managers to defer to expertise, yet
+never says how to locate it~\cite{milligan25}.
+The stakes rise when the task is complex and the team is small;
+choosing wrongly wastes the scarcest resource, the time of the
+most experienced members.
+\bnfleaf{naive\_fails}
+Self-report, the obvious way to build that inventory, answers
+badly.
+Our beleaguered manager cannot easily split the flattering
+account from the true one~\cite{paulhus84}.
+Worse, people underrate their easiest skills, since work that has
+become routine no longer feels like a strength to its
+owner~\cite{kruger99,ehrlinger03}.
+Surveys and interviews add a vocabulary problem: two members who
+name one skill differently count as two skills.
+\bnfleaf{prior\_fails}
+Formal instruments do no better.
+Studies of team trust~\cite{mayer95} and developer
+productivity~\cite{meyer14} compress a team into one score per
+trait.
+A single score cannot say which member is strong at which skill.
+\bnfleaf{key\_idea}
+The premise of this paper is:
+\bnfleaf{epigram}
+{\em ``Asking a team what it is good at is the mistake; reading
+what it already wrote is the fix.''}
+
+That is, when people work, they generate artifacts.
+Large language models can read hundreds of megabytes of those
+artifacts in minutes.
+Hence we propose team grouping via LLM feature extraction over
+the artifacts of potential team members.
+The extraction asks how team members are similar and how they
+differ.
+Those similarities can be expressed as a {\em repertory grid},
+computed from the team's own coded papers.
+Repertory grids~\cite{kelly55} are a knowledge elicitation
+technique from cognitive psychology.
+Such a grid rates a set of elements (here, the six authors)
+against bipolar constructs elicited by comparing elements three
+at a time.
+For an example grid, see Figure~\ref{fig:focus}.
+Hierarchical clustering of the elements and the constructs then
+supports partial matching of resources (here, people) to
+requirements (here, the skills a task needs).
+Grids therefore support informed staffing decisions: which few
+people should work which tasks.
+\bnfleaf{this\_paper\_does}
+This paper runs a two-pass, LLM-guided reading exercise on its
+own authors.
+The guide is Newell's heuristic: know what you are good at, work
+from those strengths, and aim them at the field's hardest open
+problems~\cite{newell91}.
+{\bfseries Pass 1} asks: what is this team good at?
+An LLM agent fetched each author's most-cited papers and coded
+them against the nine research topics of the ICSE'27 call.
+The agent then played triad interviewee.
+Constructs that agreed above 90\% became the rows of a repertory
+grid.
+The grid scored the team against the nine topics and priced its
+blind spots.
+Those scores name the topic where the whole team fits best.
+
+
+{\bfseries Pass 2} takes that topic and drafts its version~0
+artifacts: a literature review, a summary of the area's standard
+methods, and a list of the threats to validity such studies
+invite.
+The review ran from \litSE{} candidate papers in SE venues; the
+citation knee kept \litKnee{}; snowballing added \litRefs{}
+references and \litCiting{} citing works.
+Of this team's own papers, \litOwn{} already sit in that reading
+set.
+Hence the grid pointed at a territory the team borders without
+yet occupying.
+\bnfleaf{christening}
+We name this approach the FOCUS method, after the repertory grid
+sorting algorithm proposed by Shaw and Thomas~\cite{shaw78}.
+Using that method, we ask three research questions.
+\bnfleaf{rq}
+RQ1: Can a team's strengths be read from its corpus alone?
+\bnfleaf{answer}
+\textbf{Yes: on author review, the corpus grid reproduced [17 of
+19] merged constructs, and the two misses were vocabulary
+disputes, not new skills.}
+\bnfleaf{rq}
+RQ2: Does corpus measurement beat self-report?
+\bnfleaf{answer}
+\textbf{Yes: corpus columns matched the areas of the team's next
+accepted papers at [83\%], against [61\%] for self-report, and
+the corpus found both scarce skills that self-report missed.}
+\bnfleaf{rq}
+RQ3: Where should this team not work alone?
+\bnfleaf{answer}
+\textbf{Security and testing: no member sits within [78\%] of
+either area, the two areas cling to each other rather than to any
+person, and both are flagged for recruitment rather than
+retraining.}
+\bnfleaf{contrib}
+a strengths instrument, the FOCUS method, computed from public
+records alone: runnable on any team in minutes, with no survey
+and no interview;
+\bnfleaf{contrib}
+a method that scores any team against a venue's topic areas in
+the same construct space, pricing each blind spot as a
+recruit-or-retrain decision;
+\bnfleaf{contrib}
+a topic nominator: arithmetic over the grid (team centroid,
+worst-member fit, blends of area pairs) that names topics serving
+the whole team, not just its stars;
+\bnfleaf{repro\_url}
+a replication package: github.com/timm/how2rite.
+\bnfleaf{caveat}
+A corpus records what a team finished, not all it can do; hence
+the grid can misprice a skill that never reached print.
+We accept that bias because, for the purpose of staffing a paper,
+a strength that never survives to publication is not yet a
+strength.
+\bnfleaf{roadmap}
+The rest of this paper is structured as follows.
+Section 2 describes repertory grids and the FOCUS method.
+Section 3 computes the grid for this team; Section 4 maps the team
+to the field and prices its blind spots.
+Section 5 reports the three experiments behind RQ1 to RQ3.
+Section 6 discusses observations, threats to validity, and future
+work.
+Section 7 concludes with advice for teams that would repeat this
+exercise on their own corpus.
+\end{minipage}}
+\vspace{6mm}
+\caption{The left panel shows the introduction grammar, reverse
+engineered from four
+exemplars~\cite{shannon40,kocaguneli12,fu17,ladisa23} and Widom's
+audit questions~\cite{widom06}.
+The right panel shows the step-8 draft of {\ttfamily paper[0]}
+after roughly one hour of human rewriting
+(\S\ref{sec:rewrites}); its bold labels are the grammar's leaves,
+and its bold bracketed numbers are placeholders that step 9 must
+earn.}
+\label{fig:introbnf}
+\label{fig:sample}
+\end{figure*}
+
+\begin{figure*}[t!]
+\begin{minipage}[t]{0.40\textwidth}
+\begin{lstlisting}[style=dcg]
+lit --> scheme, wings, ours,
+        holes, issues, pivot.
+% name the axes once, then sort every
+% paper under them
+scheme --> [axes].
+      % e.g. "question asked, result
+      %  produced, validation offered
+      %  (Shaw'03)"
+% one wing = one crowded cell of the
+% question x result grid; name who did
+% what, where
+wings --> [wing]+.
+      % e.g. "generalization questions
+      %  with report results own the
+      %  citation knee"
+% place your own papers on the same
+% map, in the same words
+ours --> [where_we_sit].
+      % e.g. "the team's seeds sit in
+      %  that report-and-experience cell"
+% the map argues by its holes
+holes --> [crowded], [empty].
+      % e.g. "reports of individual
+      %  usage abound"
+      % e.g. "empirical models of teams
+      %  are absent"
+% each empty cell prices an open issue
+issues --> [issue]+.
+      % e.g. "team-level empirical
+      %  models of strength"
+% claim what you will fix; defer the
+% rest, with reasons
+pivot --> [claimed], [deferred].
+      % e.g. "this paper addresses
+      %  the first two"
+\end{lstlisting}
+\end{minipage}\hfill
+\fbox{\begin{minipage}[t]{\dimexpr0.56\textwidth-2\fboxsep-2\fboxrule}
+\scriptsize
+\bnfleaf{axes}
+Shaw sorts research papers by three axes~\cite{shaw03}.
+The question asked may seek a method of development, a method of
+analysis, the design or evaluation of an instance, a
+generalization, or a feasibility check.
+The result produced may be a procedure, a qualitative model, an
+empirical model, an analytic model, a tool, a solution, or a
+report.
+The validation offered ranges over analysis, evaluation,
+experience, example, persuasion, and assertion.
+Two of the axes form a grid, and the third axis grades every
+cell.
+The reading set of Figure~\ref{fig:lit} sorts cleanly under that
+scheme.
+\bnfleaf{wing}
+The most-cited papers in this reading set are surveys.
+In Shaw's terms, they ask generalization questions and produce
+reports.
+Giray's review of deep defect prediction (JSS'22) and Zhang's
+mapping of critical-scenario testing (TSE'22) each code hundreds
+of papers so that their readers need not.
+Surveys summarize experiments run by others; hence this wing adds
+no new evidence of its own.
+\bnfleaf{wing}
+A second wing builds tools.
+In Shaw's terms, these papers ask design questions and validate
+by evaluation.
+Xu's in-IDE code generation study (TOSEM'22) and Amaral's
+compliance checker (TSE'22) each ship a tool and then measure it.
+Evaluation is the rarest validation in this reading set; only the
+tooling wing offers it.
+\bnfleaf{wing}
+The newest wing reports lived experience.
+C\^amara's report on generative AI in modeling (SoSyM'23) and
+Khojah's observational study of ChatGPT use (Proc.\ ACM'24) each
+watch individual practitioners at work.
+Experience reports are quick to write and quick to date; they
+record current practice rather than settled knowledge.
+\bnfleaf{where\_we\_sit}
+The team's three seed papers sit in that same experience wing
+(Di Nucci on accessibility, EMSE; Schmid on MLOps and Esposito on
+AI agents, IEEE Software).
+We already live in the crowded cell; hence the empty cells matter
+most to us.
+\bnfleaf{crowded}
+The map shows one crowded cell: reports of individual usage,
+growing every year.
+\bnfleaf{empty}
+Both empty cells concern teams rather than individuals.
+No paper in this set builds an empirical model of a team, and
+none validates a team-level claim by evaluation.
+An empty cell is an address for a next paper, not a criticism of
+the field.
+Based on this map, we see several issues with the current
+literature on trust, productivity, and human studies of AI
+assistants.
+\bnfleaf{issue}
+Team-level empirical models of strength are missing; every model
+in this set predicts for one developer at a time.
+\bnfleaf{issue}
+Measurement of assistant drift (assistants changing behavior
+between versions) is missing; the experience wing notices drift,
+yet nothing here measures it.
+\bnfleaf{issue}
+Longitudinal designs separating tool effect from team learning
+are missing; a cross-section cannot say who improved, the
+assistant or the team.
+\bnfleaf{claimed}
+Accordingly, the rest of this paper addresses the first two
+issues; Sections 3 and 4 build the team-level model, and
+Section 5 validates it at evaluation grade.
+\bnfleaf{deferred}
+The third issue needs years of observation, hence it is left to
+future work.
+We flag it now so that the record shows a deliberate choice.
+\end{minipage}}
+\vspace{1mm}
+\caption{The left panel shows the literature grammar; its scheme
+leaf is Shaw's question, result, and validation
+taxonomy~\cite{shaw03}, and its pivot leaf answers Widom's audit
+question of why the problem is not already solved~\cite{widom06}.
+The right panel shows the step-9 characterization for the same
+topic as Figure~\ref{fig:sample}, after the same rewrite
+treatment (\S\ref{sec:rewrites}).}
+\label{fig:samplelit}
+\end{figure*}
+
+\begin{figure*}[t!]
+\begin{minipage}[t]{0.46\textwidth}
+\begin{lstlisting}[style=dcg]
+methods --> data, rig, baselines, measures,
+            stats, hyperparams, [worked_example].
+% what was collected, from where, and what
+% survived each filter
+data --> [source], [filters].
+      % e.g. "1,200 OpenAlex records; five most-
+      %  cited papers per author, two windows"
+% the pipeline, one checkable step per leaf
+rig --> [step]+.
+      % e.g. "constructs agreeing above 90%
+      %  merge into one grid row"
+% the rivals; no rival, no claim
+baselines --> [rival]+.
+      % e.g. "self-report, coded the same way"
+% define every number before use
+measures --> [metric]+.
+      % e.g. "match% = 1 - dist/max-dist"
+% claim gates: repeats, named tests, thresholds
+stats --> [tests], [thresholds].
+      % e.g. "20 repeats; Cliff's delta < 0.195
+      %  and KS at 95% decide ties"
+% knobs set before the run (chosen, not
+% learned): value, why, and ablation range
+hyperparams --> [settings], [justification],
+                [ablation].
+      % e.g. "merge threshold 90%; justified by
+      %  prior grids; varied 80-95%"
+% one example threads the section.
+% [worked_example]: e.g. "one author's column,
+% end to end"
+\end{lstlisting}
+\end{minipage}\hfill
+\fbox{\begin{minipage}[t]{\dimexpr0.50\textwidth-2\fboxsep-2\fboxrule}
+\scriptsize
+\bnfleaf{source}
+An LLM agent fetched each author's five most-cited papers,
+all-time and again for the last five years: [1,200] candidate
+records, [60] papers kept.
+\bnfleaf{filters}
+Records with no retrievable abstract were dropped ([n] of [60]);
+duplicates merged by DOI.
+The download rate is reported rather than hidden, since silent
+loss is selection bias.
+\bnfleaf{step}
+The agent coded every kept paper against the nine ICSE'27 areas.
+\bnfleaf{step}
+The agent then played triad interviewee: shown three authors, it
+named who stands apart and on what dimension.
+\bnfleaf{step}
+Constructs that agreed above 90\% merged into one grid row;
+Section [5] varies that threshold.
+\bnfleaf{step}
+FOCUS sorting reordered rows and columns so that similar
+neighbors adjoin, reversing poles where that raised the match.
+\bnfleaf{rival}
+The rival method is self-report.
+Each author wrote five sentences that name their own strengths.
+The same coding scheme scored those sentences against the nine
+areas.
+\bnfleaf{metric}
+The match between two columns is one minus their city-block
+distance, divided by the maximum possible distance.
+\bnfleaf{tests}
+RQ answers are gated by bootstrap over paper subsamples
+([1,000] resamples) plus an effect-size test.
+\bnfleaf{thresholds}
+A claim is stated only when the bootstrap interval excludes the
+baseline and the effect is at least small.
+\bnfleaf{settings}
+The pipeline has four hyperparameters: papers per author ([5]),
+time windows ([2]: all-time and five-year), the construct-merge
+threshold ([90\%]), and the agent model with its temperature.
+\bnfleaf{justification}
+Budget justifies the first: five papers per author keeps agent
+coding under [one hour] per team.
+Prior grid studies justify the threshold: merges above [90\%]
+agreement reproduced hand-built grids.
+\bnfleaf{ablation}
+Section [5] reruns the grid at merge thresholds from [80\%] to
+[95\%]; any conclusion that flips inside that range is reported
+as fragile.
+\bnfleaf{worked\_example}
+One column, [Menzies], is followed end to end: fetched papers,
+coded areas, elicited constructs, merged rows, final scores.
+\end{minipage}}
+\vspace{1mm}
+\caption{The left panel shows the methods grammar, reverse
+engineered from the exemplars~\cite{kocaguneli12,fu17,ladisa23}
+and this team's recent preprints.
+The right panel shows the step-8 draft of the methods section of
+{\ttfamily paper[0]}; its bracketed numbers are placeholders that
+later steps must earn.}
+\label{fig:methodsbnf}
+\label{fig:samplemethods}
+\end{figure*}
+
+\begin{figure*}[t!]
+\begin{minipage}[t]{0.46\textwidth}
+\begin{lstlisting}[style=dcg]
+threats --> [construct], [internal],
+            [external], [conclusion].
+% four categories after Cook & Campbell (SE
+% form: Wohlin et al.); each leaf names its
+% sub-threats, then ends with the mitigation
+% applied or the cost knowingly accepted.
+% construct: right thing measured? (mono-
+% operation, mono-method, hypothesis guessing)
+      % e.g. "citations proxy strength;
+      %  unpublished skill is invisible"
+% internal: pipeline made the result?
+% (selection, instrumentation, maturation)
+      % e.g. "one rater (the agent) coded all"
+% external: does it travel? (wrong people,
+% wrong setting, wrong time)
+      % e.g. "six authors, one field, one venue"
+% conclusion: evidence enough? (low power,
+% fishing, unreliable measures)
+      % e.g. "six elements; wide intervals"
+\end{lstlisting}
+\end{minipage}\hfill
+\fbox{\begin{minipage}[t]{\dimexpr0.50\textwidth-2\fboxsep-2\fboxrule}
+\scriptsize
+\bnfleaf{construct}
+Citation counts proxy strength, and the proxy is imperfect: a
+skill that never reached print is invisible to the grid.
+We accept that cost; for the purpose of staffing a paper, a
+strength with no published record is not yet a strength.
+\bnfleaf{internal}
+A single rater, the LLM agent, coded every paper, so any rater
+bias travels the whole pipeline.
+Mitigation: the authors reviewed every merged construct, and
+[17 of 19] survived that review.
+\bnfleaf{external}
+External validity carries three standard threats: wrong people
+(selection interacts with treatment), wrong setting (toy
+environments), and wrong time (history interacts with
+treatment)~\cite{wohlin12}.
+This study risks all three: six authors, one field, one venue's
+area list; nothing here licenses claims about other teams.
+Mitigation: the replication package reruns the pipeline on any
+team's corpus in minutes, so the reader can check their own
+case.
+\bnfleaf{conclusion}
+Six elements make wide bootstrap intervals, and close match
+percentages ([83\%] versus [61\%]) should be read as trends.
+Mitigation: every headline number ships with its interval, and
+no claim rests on a difference that fits inside one.
+\end{minipage}}
+\caption{The left panel shows the threats-to-validity grammar:
+four fixed leaves, one per validity question, each closing with
+its mitigation or its accepted cost.
+The right panel shows the step-8 draft of the threats section of
+{\ttfamily paper[0]}; its bracketed numbers are placeholders that
+later steps must earn.}
+\label{fig:ttvbnf}
+\label{fig:samplettv}
+\end{figure*}
+
+
+Figure~\ref{fig:introbnf} proposes one 
+way to structure an introduction.
+Of course,
+there are many others.
+But for the sake of argument, 
+we wll assume Figure~\ref{fig:introbnf}.
 
 That grammar distills two sources.
 The first is a set of four exemplar
@@ -51,41 +706,19 @@ an introduction~\cite{widom06}.
 Those questions ask what the problem is, why it matters, why it
 is hard, why it is not already solved, and what the key elements
 of the answer are.
-The gap production walks four of those questions in order
-(problem, hard, unsolved, answer); the why-it-matters question is
-answered earlier, inside the hook's numbers.
-
-That figure uses the following notation, which we borrow from
-logic programming.
-\begin{itemize}
-\item Lower-case names are nonterminals; {\ttfamily -->} rewrites
-the left side into the sequence on the right, and commas order that
-sequence.
-\item Semicolons separate alternatives; hence a hook is any one of
-its three forms.
-\item Bracketed names are leaves, and each leaf is one prose move,
-a sentence to a short paragraph long.
-\item {\ttfamily +} means one or more; {\ttfamily *} means zero or
-more.
-\end{itemize}
-
-Each production also carries a rule of craft, as follows.
+To expand on those questions, our grammar uses the following parts:
 \begin{itemize}
 \item {\ttfamily hook} opens with a number that hurts (dollars,
 hours, incident counts), an anchor to a prior result, or a lived
-setting.
-The importance argument lives inside those numbers, which is why no
-separate why-this-matters clause exists.
+setting; the importance argument lives inside those numbers,
+hence no separate why-this-matters clause.
 \item {\ttfamily gap} walks the Stanford four clauses in order.
-Name and define the problem.
-Show why the naive approach fails, and why prior work has not
-already fixed it.
-State the key idea in one sentence, which the rest of the paper
-unpacks.
-\item {\ttfamily elevator} states the hypothesis as the conclusion,
-displayed as a quote of two to three lines.
-Papers carry at most one or two displayed claims, and the elevator
-speech spends one of them.
+Name the problem; show why the naive approach fails and why
+prior work has not fixed it; state the key idea in one sentence.
+\item {\ttfamily elevator} states the hypothesis as the
+conclusion, displayed as a two-to-three-line quote; papers carry
+at most one or two displayed claims, and the elevator spends
+one.
 \item {\ttfamily move} says what this paper does, then christens
 it; the method gets a name at first use and keeps it ever after.
 \item {\ttfamily rqs} answers every question on the spot, its
@@ -108,4 +741,146 @@ Does your field replace any production (some venues ban the
 roadmap paragraph; this grammar ends with one)?\\[0.2em]
 To change the outcome: edit the grammar here, then regenerate the
 sample of Figure~\ref{fig:sample} against the new productions.
+\end{pause}
+
+\subsection{The literature review}
+\label{sec:litrev}
+
+
+
+
+Figure~\ref{fig:samplelit} proposes a structure for a literature
+review.
+The main move is respect, then disrespect.
+First the respect: describe clearly what prior work did, and what
+was good about it.
+Then the disrespect: explain, just as clearly, why that prior
+work is not good enough for the task at hand.
+The disrespect must name the mismatch precisely: wrong
+assumptions, wrong data, or wrong question.
+Vague complaints convince no reviewer.
+The review must end with a pivot of the following shape.
+``Based on the above, we offer the following as open and urgent
+issues in the research literature:'' followed by a short list of
+those issues.
+``Accordingly, the rest of this paper does X, so that Y can do Z
+better.''
+Everything downstream of the pivot must trace to an item on that
+list.
+A section that traces to nothing should be cut; otherwise, the
+list is incomplete.
+
+\begin{pause}{the literature review}
+Ask: does every wing name who did what, and how it was validated?
+Does the respect precede the disrespect, and is each mismatch
+named precisely?
+Does the pivot list trace to the empty cells, and does every
+later section trace to the pivot?\\[0.2em]
+To change the outcome: edit the grammar of
+Figure~\ref{fig:samplelit}, then regenerate the sample; stale
+wings usually mean the reading set, not the grammar, needs the
+rerun.
+\end{pause}
+
+\subsection{The methods section}
+\label{sec:methods}
+
+
+
+Figure~\ref{fig:samplemethods} proposes a structure for a methods
+section.
+The duty of the section is replication: name the data, the
+pipeline, the rivals, the measures, and the statistical gates,
+each in units a stranger could check.
+Three habits recur in the exemplars.
+Firstly, an inventory arrives early: the tasks, the algorithms,
+and the datasets, each in a table whose caption says what the
+table is for.
+Secondly, one worked example threads the whole section; it is
+introduced once and reused everywhere.
+Thirdly, hyperparameters are selected and justified in the open.
+A hyperparameter is a value the experimenter chooses before the
+run, rather than a value the run learns: a threshold, a budget,
+a model setting.
+Weak papers bury those choices; strong papers list every one,
+justify each by arithmetic, by budget, or by prior result, and
+vary the important ones in an ablation study.
+One exemplar justifies its labeling budget twice over: a
+probability argument for how few labels a search needs, and the
+dollar cost of a graduate student's annual LLM
+allowance~\cite{srinivasan26}.
+
+\begin{pause}{the methods}
+Ask: could a stranger rerun the study from this section alone?
+Is every hyperparameter listed with its value, its justification,
+and its ablation range?
+Does each rival get the same data and the same budget?\\[0.2em]
+To change the outcome: edit the productions of
+Figure~\ref{fig:samplemethods} and regenerate; a missing knob
+goes into the {\ttfamily settings} leaf first, since the
+justification and ablation leaves feed from it.
+\end{pause}
+
+\subsection{Threats to validity}
+\label{sec:ttv}
+
+
+
+Figure~\ref{fig:samplettv} proposes a structure for the threats
+section.
+The four fixed leaves are not ours.
+They are Cook and Campbell's validity categories, as adapted for
+software engineering by Wohlin et al.~\cite{wohlin12}.
+Each category carries its own named sub-threats; the left panel
+lists the common ones.
+The four leaves ask four questions.
+Construct validity asks: are we measuring the right thing?
+Internal validity asks: could the pipeline itself produce the
+result?
+External validity asks: does the result travel beyond this
+study?
+Conclusion validity asks: is the evidence strong enough for each
+claim?
+A threat named without a response reads as an unfixed bug.
+Hence every leaf ends the same way: the mitigation applied, or
+the cost knowingly accepted.
+The instrument tables of the coding pipeline (agreement rates,
+threshold sensitivity, download rates) belong in this section,
+since they argue instrument validity.
+
+\begin{pause}{the threats}
+Ask: does every leaf end with a mitigation or an accepted cost?
+Are the sub-threats of each category considered, not only the
+category headline?
+Do the instrument tables (agreement rates, thresholds, download
+rates) appear here rather than in the methods?\\[0.2em]
+To change the outcome: edit Figure~\ref{fig:samplettv}; a threat
+without a response is a to-do item, not a paragraph.
+\end{pause}
+
+\subsection{The conclusion}
+\label{sec:conclusion}
+
+A conclusion retells the introduction, now with receipts.
+The summary says what the paper has said, in more detail than
+the abstract: name the headline numbers from the charts, and
+attach each claim to the result that earned it.
+Nothing new appears here.
+If the conclusion and the introduction disagree, one of them is
+lying; fix it.
+Future work shows that the authors know what must follow next:
+the issues deferred by the literature review return here, sized
+and ordered.
+When the work has legs, future work may end with a call to
+action for the community.
+
+\begin{pause}{the conclusion}
+Ask: does every claim in the summary point at the chart that
+earned it?
+Do the introduction and the conclusion agree?
+Does future work return the deferred issues of the literature
+review, sized and ordered?\\[0.2em]
+To change the outcome: edit the introduction or the conclusion
+until neither lies; then regenerate the abstract, since the
+abstract carries the paper.
 \end{pause}

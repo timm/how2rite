@@ -1,6 +1,31 @@
 \documentclass[sigconf,nonacm]{acmart}
 \usepackage{booktabs}
 \usepackage{fancyvrb}
+\usepackage{wrapfig}
+\usepackage{listings}
+% dcg grammar panels: nonterminals blue, leaves red (matching the
+% grid figure's two tree colors), "% e.g." snippets grey italic
+\lstdefinestyle{dcg}{
+  basicstyle=\ttfamily\scriptsize,
+  commentstyle=\color{gray}\itshape,
+  comment=[l]{\%},
+  alsoletter={_},
+  keywordstyle=\color{blue!70!black}\bfseries,
+  morekeywords={intro,hook,gap,elevator,move,rqs,contribs,lit,
+    scheme,wings,ours,holes,issues,pivot,methods,data,rig,
+    baselines,measures,stats,hyperparams,ttv,paper,litreview,
+    results,result,discussion,observations,threats},
+  keywordstyle=[2]\color{red!65!black},
+  morekeywords=[2]{quantified_pain,anchor,setting,problem,
+    naive_fails,prior_fails,key_idea,epigram,this_paper_does,
+    christening,rq,answer,contrib,repro_url,caveat,roadmap,
+    axes,wing,where_we_sit,crowded,empty,issue,claimed,deferred,
+    source,filters,step,rival,metric,tests,thresholds,settings,
+    justification,ablation,worked_example,construct,internal,
+    external,conclusion,charts,comments,observation,summary,
+    future_work},
+  frame=single,
+  keepspaces=true}
 \usepackage{array}
 \usepackage{tikz}
 \usetikzlibrary{decorations.pathmorphing}
@@ -66,13 +91,18 @@
 \maketitle
 
 \input{sec0/intro}
-\input{sec0/together}
 \input{sec0/know}
 \input{sec0/map}
 \input{sec0/lit}
 \input{sec0/write}
+\input{sec0/critic}
+\input{sec0/summary}
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{refs}
+
+\appendix
+\section*{Appendix}
+\input{sec0/together}
 
 \end{document}

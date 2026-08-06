@@ -118,6 +118,14 @@ Parsed:
     bench division (workdir bench.md: stats gates are
     per-field norms), and Matteo's note in intro.tex
     about 30 years of EDA errors (TOSEM 3799715).
+    Klaus (Overleaf, 2026-08-06) endorses the section
+    and adds an angle: standard AI assistance for
+    statistical analysis, since stats is "the other
+    field" to most researchers; good AI support might
+    elevate typical study quality. Klaus also argues
+    AGAINST Matteo's energy/sustainability thread
+    (fair framing would be human lifetime vs
+    compute-time; too big to do justice here).
 
 12. RESOLVED 2026-08-02: working meta-paper is now
     paper3.tex (content of paper0, which is archived in

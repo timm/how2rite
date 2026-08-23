@@ -24,3 +24,9 @@ notes: ## list open review comments
 
 fmt: ## rewrap sec/*.tex to one sentence per line
 	@python3 fmt.py sec/*.tex
+
+sync: ## full round-trip: pull github+overleaf, push github+overleaf
+	@$(MK) pull
+	@git pull -q --no-edit overleaf main
+	@$(MK) push
+	@git push -q overleaf main

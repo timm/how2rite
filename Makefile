@@ -8,7 +8,7 @@ include .dot/Makefile
 	@echo $* > .aux/.last
 
 fast: ## recompile last-built paper, one pass, no bib update
-	@t=$$(cat .aux/.last 2>/dev/null || echo paper1); \
+	@t=$$(cat .aux/.last 2>/dev/null || echo paper3); \
 	  echo "fast: $$t.tex"; \
 	  tectonic --keep-intermediates -r 0 -o .aux $$t.tex; \
 	  mv .aux/$$t.pdf tmp/$$t.pdf
@@ -18,6 +18,9 @@ focus: ## regenerate fig/focus_grid.png (repgrid, sec0/know)
 
 lit: ## regenerate sec 5 figures/table/numbers (litfig.py)
 	@python3 litfig.py
+
+statsfig: ## regenerate fig/stats_xdf.png (appendix stats tut)
+	@python3 statsfig.py
 
 notes: ## list open review comments
 	@grep -n '^[^%]*\\note{' paper1.tex sec/*.tex || echo "none"

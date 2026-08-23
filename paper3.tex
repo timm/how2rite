@@ -26,7 +26,27 @@
     future_work},
   frame=single,
   keepspaces=true}
+% python tutorial listings (appendix stats): inconsolata is
+% already acmart's tt face; just add color + light frame
+\lstdefinestyle{py}{
+  language=Python,
+  basicstyle=\fontsize{8}{8.7}\selectfont\ttfamily,
+  keywordstyle=\color{blue!70!black}\bfseries,
+  stringstyle=\color{red!65!black},
+  commentstyle=\color{gray}\itshape,
+  emph={len,sorted,min,max,abs,mean,stdev,lambda},
+  emphstyle=\color{teal!60!black},
+  escapechar=|,
+  showstringspaces=false,
+  columns=flexible,
+  keepspaces=true,
+  xleftmargin=1em,
+  frame=leftline,
+  framerule=0.8pt,
+  rulecolor=\color{black!30},
+  aboveskip=0.8em, belowskip=0.8em}
 \usepackage{array}
+\usepackage{colortbl}
 \usepackage{tikz}
 \usetikzlibrary{decorations.pathmorphing}
 \settopmatter{printfolios=true}
@@ -104,5 +124,6 @@
 \appendix
 \section*{Appendix}
 \input{sec0/together}
+\input{sec0/stats}
 
 \end{document}

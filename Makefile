@@ -19,7 +19,7 @@ focus: ## regenerate fig/focus_grid.png (repgrid, sec0/know)
 lit: ## regenerate sec 5 figures/table/numbers (litfig.py)
 	@python3 litfig.py
 
-statsfig: ## regenerate fig/stats_xdf.png (appendix stats tut)
+statsfig: ## regenerate fig/stats_*.pdf + stats_grid.tex (appendix)
 	@python3 statsfig.py
 
 notes: ## list open review comments
@@ -28,8 +28,12 @@ notes: ## list open review comments
 fmt: ## rewrap sec/*.tex to one sentence per line
 	@python3 fmt.py sec/*.tex
 
-sync: ## full round-trip: pull github+overleaf, push github+overleaf
-	@$(MK) pull
+# overrides .dot push (the "overriding recipe" warning is expected):
+# tex + figures land in overleaf; overleaf compiles the pdf itself
+push: ## commit all (MSG=...), push github (CI pdf) + overleaf
+	@$(MK) dot
+	@git add -A
+	@git diff-index --quiet HEAD -- || git commit -qm "$(MSG)"
 	@git pull -q --no-edit overleaf main
-	@$(MK) push
+	@git push -q -u origin HEAD
 	@git push -q overleaf main

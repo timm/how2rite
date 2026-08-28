@@ -3,9 +3,9 @@ name: pdf
 on:
   push:
     branches: [main]
-    paths: ['**.tex', 'refs.bib', '.github/workflows/pdf.yml']
+    paths: ['**.tex', 'refs.bib', 'docs/**', '.github/workflows/pdf.yml']
   pull_request:
-    paths: ['**.tex', 'refs.bib', '.github/workflows/pdf.yml']
+    paths: ['**.tex', 'refs.bib', 'docs/**', '.github/workflows/pdf.yml']
   workflow_dispatch:
 
 permissions:
@@ -35,6 +35,7 @@ jobs:
           mkdir _site
           cp paper3.pdf _site/
           printf '<meta http-equiv="refresh" content="0; url=paper3.pdf">' > _site/index.html
+          cp -r docs _site/tricks
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
 

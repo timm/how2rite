@@ -1,0 +1,36 @@
+name: site
+
+# Fast path for docs-only edits: skip the tectonic build, reuse the
+# already-published paper3.pdf from the live site. ~30s vs ~4min.
+
+on:
+  push:
+    branches: [main]
+    paths: ['docs/**', 'site/**', '.github/workflows/site.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Stage site
+        run: |
+          mkdir _site
+          curl --fail -sL -o _site/paper3.pdf https://timm.github.io/how2rite/paper3.pdf
+          cp -r docs _site/tricks
+          cp site/index.html _site/
+      - uses: actions/upload-pages-artifact@v3
+      - id: deployment
+        uses: actions/deploy-pages@v4

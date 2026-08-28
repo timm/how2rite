@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trick 4: Write to a Grammar | how2rite</title>
+<meta name="theme-color" content="#d6d2ca" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1f1e1c" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<center><p class="f"><a href="index.html">&larr; all tricks</a></p></center>
+
+<h2>Trick 4: Write to a grammar</h2>
+<p class="f"><i>Every writer starts from a tested structure, not a
+blank page.</i></p>
+
+<p><b>The move.</b> A research paper parses under a small grammar,
+written in logic-programming notation: nonterminals rewrite to ordered
+sequences; each bracketed leaf is one prose move, a sentence to a short
+paragraph long.</p>
+
+<pre>paper --> intro, litreview, methods,
+          results, discussion, conclusion.
+
+results --> [result]+.
+result  --> [rq], [charts], [comments].
+
+intro --> hook, gap, elevator, move,
+          rqs, contribs, [caveat]*, [roadmap]*.
+gap   --> [problem], [naive_fails],
+          [prior_fails], [key_idea].</pre>
+
+<p><b>Per-section rules, each with a worked sample:</b></p>
+<div class="box">
+<b>Intro:</b> hook = quantified pain, an anchor, or a setting; the gap
+is the Stanford four clauses (problem, naive fails, prior fails, key
+idea); the elevator is a 2&ndash;3 line epigram; each RQ's answer
+follows at once, headline number bold; the repro URL always closes the
+contributions.<br><br>
+<b>Lit review:</b> respect, then disrespect. Say clearly what prior
+work did well; then name the mismatch precisely (wrong assumptions,
+wrong data, wrong question). End with the pivot: &ldquo;open and
+urgent issues&rdquo; &mdash; and every later section must trace to
+that list, or be cut.<br><br>
+<b>Methods:</b> duty = replication. Inventory tables early; one worked
+example threads the section; every hyperparameter listed, justified
+(by arithmetic, budget, or prior result), and ablated.<br><br>
+<b>Threats:</b> Cook &amp; Campbell's four categories (construct,
+internal, external, conclusion). A threat named without a response
+reads as an unfixed bug: every leaf ends with the mitigation applied
+or the cost knowingly accepted.<br><br>
+<b>Conclusion:</b> retells the intro, now with receipts. Nothing new.
+If intro and conclusion disagree, one of them is lying; fix it.
+</div>
+
+<p><b>Why grammars beat templates.</b> To disagree with a structure,
+edit its productions and ask an LLM to regenerate the worked sample;
+the experiment costs minutes. Your venue opens with related work, bans
+roadmaps, demands structured abstracts? Adjust the grammar, not your
+patience. When a grammar changes, regenerate its sample in the same
+commit so figure and prose never drift.</p>
+
+<p><b>Call to action.</b> Communities curate datasets and baselines;
+they could curate paper shapes the same way &mdash; a catalog of
+grammars for the empirical study, the systematic review, the tool
+paper, the vision paper.</p>
+
+<p class="combines"><b>Combines with:</b>
+<a href="prose.html">5 &mdash; un-slop the prose</a> polishes what the grammar drafts;
+<a href="critics.html">6 &mdash; assemble critics</a> attacks the result;
+<a href="receipts.html">8 &mdash; keep the receipts</a> is the conclusion rule enforced.</p>
+
+<center><p class="f"><a href="index.html">&larr; all tricks</a></p></center>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trick 6: Assemble Critics | how2rite</title>
+<meta name="theme-color" content="#d6d2ca" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1f1e1c" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<center><p class="f"><a href="index.html">&larr; all tricks</a></p></center>
+
+<h2>Trick 6: Assemble critics</h2>
+<p class="f"><i>Get the rejection before the venue sends it.</i></p>
+
+<p><b>Four critics, one human.</b> The first and most expensive critic
+cannot be delegated: an offline human read, 30&ndash;60 minutes, social
+media off. The cheapest is an LLM told to be hostile. The loop
+assembles four machine critics: Reviewer 2, the venue's award winners,
+the empirical standards, and the ten nearest prior papers.</p>
+
+<p><b>The Reviewer-2 prompt.</b> The model plays Reviewer 2 at the
+target venue, and the prompt embeds the venue's <i>own</i> review
+criteria (for ICSE'27: novelty, rigor, relevance, verifiability and
+transparency, presentation). It must quote the text that fails each
+criterion and end with one of the track's real outcomes. Structuring
+the critique under the venue's headings matters: those headings are
+the exact form the real rejection would arrive in. Run on this paper's
+own generated draft, it returned <b>reject</b> &mdash; correctly
+flagging placeholder numbers, an unrunnable ground truth, and six
+uncited papers.</p>
+
+<p><b>Then triage.</b> A follow-up prompt divides the review's
+findings:</p>
+<div class="box">
+<b>Part 1 &mdash; the model applies alone:</b> clarifications,
+reorderings, prunings, citation lookups. Cheap.<br><br>
+<b>Part 2 &mdash; humans decide:</b> experiments, ground-truth
+choices, scope. Not cheap.<br><br>
+The split <i>prices the remaining work</i> before anyone spends it.
+</div>
+
+<p><b>Close the loop.</b> After fixes, one automatic gate guards the
+front door: recode the title and abstract with the same topic flags as
+the reading set; they must match the body's coding with <b>zero
+flips</b>. Fail &rarr; back to drafting. Pass &rarr; ship, with a
+replication package.</p>
+
+<p class="combines"><b>Combines with:</b>
+<a href="grammar.html">4 &mdash; write to a grammar</a> produces what the critics attack;
+<a href="pause.html">7 &mdash; pause and reflect</a> keeps part-2 decisions human;
+<a href="receipts.html">8 &mdash; keep the receipts</a> answers the
+verifiability criterion in advance.</p>
+
+<center><p class="f"><a href="index.html">&larr; all tricks</a></p></center>
+
+</body>
+</html>

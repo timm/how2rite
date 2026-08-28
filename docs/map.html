@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trick 2: Map Team to Field | how2rite</title>
+<meta name="theme-color" content="#d6d2ca" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1f1e1c" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<center><p class="f"><a href="index.html">&larr; all tricks</a></p></center>
+
+<h2>Trick 2: Map team to field</h2>
+<p class="f"><i>Where could this team work, and what important issues
+live there?</i></p>
+
+<p><b>The move.</b> Take a working list of &ldquo;where&rdquo; from the
+venue itself &mdash; e.g. the nine areas of the ICSE'27 research-track
+call. Score each area on the <i>same</i> constructs as the people and
+add them to the grid as reference columns: archetypes of how that
+area's typical highly-cited researcher would rate. The cluster tree
+then answers what a topic list cannot: who stands nearest which
+area.</p>
+
+<p><b>What it showed here.</b> Strong pairings (Menzies 92% to
+analytics, Di Nucci 89% to evolution, Schmid 89% to requirements and
+architecture). The far columns matter as much: no author within 85% of
+security or testing &mdash; a priced blind spot. Papers there get
+written against the grain, or with a new collaborator who brings that
+column closer. And the tree showed the team splits in two wings: one
+measures, one crafts &mdash; a division of labor, one wing per half of
+any paper that both observes a corpus and builds a thing.</p>
+
+<p><b>Nominate a shared topic</b> &mdash; three calculations, same matrix:</p>
+<div class="box">
+(a) the area nearest the team centroid;<br>
+(b) maximin: the area whose worst-fitting member fits best;<br>
+(c) blends: midpoints of every pair of areas, scored the same way.<br><br>
+Here, blends won: AI-for-SE crossed with human/social aspects beat
+every single area &mdash; and describes the paper itself.
+</div>
+
+<p><b>The knob.</b> Disagree with an archetype column? Edit the area
+columns in <code>focus.py</code> (or swap in another venue's list),
+run <code>make focus</code>; centroid, maximin, and blend scores
+follow.</p>
+
+<p class="combines"><b>Combines with:</b>
+<a href="know.html">1 &mdash; know thyself</a> supplies the grid;
+<a href="read.html">3 &mdash; read above the knee</a> takes the nominated topic as its goal line.</p>
+
+<center><p class="f"><a href="index.html">&larr; all tricks</a></p></center>
+
+</body>
+</html>

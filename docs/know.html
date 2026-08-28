@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trick 1: Know Thyself | how2rite</title>
+<meta name="theme-color" content="#d6d2ca" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1f1e1c" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<center><p class="f"><a href="index.html">&larr; all tricks</a></p></center>
+
+<h2>Trick 1: Know thyself</h2>
+<p class="f"><i>&ldquo;Know thyself&rdquo; &mdash; Temple of Apollo at
+Delphi. Self-report names strengths badly; the corpus names them well.</i></p>
+
+<p><b>The move.</b> Before reading any outside literature, reverse
+engineer the team from its own papers. Instrument: the repertory grid
+of Kelly's personal construct theory (1955). Grids are elicited by
+triads &mdash; pick three team members, ask which stands apart and on
+what dimension; each answer is one bipolar construct; repeat until no
+new dimensions appear; rate everyone on everything.</p>
+
+<p><b>The LLM twist.</b> Data collection took minutes, not weeks. For
+six authors, an LLM agent fetched each author's five most-cited papers
+(all-time and last five years &mdash; some 1,200 paper records), coded
+them against the ICSE'27 research-track areas, then played triad
+interviewee. Constructs agreeing above 90% merged. FOCUS sorting
+reorders rows and columns so similar neighbors adjoin, and builds trees
+by merging adjacent clusters only.</p>
+
+<p><b>Three readings of the grid.</b></p>
+<div class="box">
+&bull; <b>Near-synonyms:</b> construct rows that merge early name one
+local dimension twice (here: corpus-scale work co-travels with being
+AI-centred).<br>
+&bull; <b>Birds of a feather:</b> tight pairs anchor the team (here:
+a quality-and-evolution core matching at ~90%).<br>
+&bull; <b>Complements:</b> the farthest members hold the scarce skills
+&mdash; the grid is a division of labor <i>and</i> a price list of
+blind spots, computed before reading a single outside paper.
+</div>
+
+<p><b>Caveats, stated in the open:</b> one rater (the agent), citations
+as the sole strength proxy, early-career authors rated on few papers.</p>
+
+<p><b>The knob.</b> Disagree with a pole or a rating? Edit the
+<code>CONSTRUCTS</code> table in <code>focus.py</code>, run
+<code>make focus</code>; trees, pairings, and topic arithmetic all
+recompute from that one table.</p>
+
+<p class="combines"><b>Combines with:</b>
+<a href="map.html">2 &mdash; map team to field</a> reuses the same grid to pick a topic;
+<a href="pause.html">7 &mdash; pause and reflect</a> is why the knob exists.</p>
+
+<center><p class="f"><a href="index.html">&larr; all tricks</a></p></center>
+
+</body>
+</html>

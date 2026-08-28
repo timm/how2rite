@@ -11,7 +11,7 @@ document.querySelectorAll('pre.py').forEach(function (p) {
       .replace(/\b(def|return|while|for|in|if|else|not|and|or|lambda|None|True|False)\b/g,
                '<span class="k">$1</span>')
       .replace(/(^|[^\w.])(\.?\d+(?:\.\d+)?(?:e-?\d+)?)/g,
-               '$1<span class="d">$2</span>');
+               '$1<span class="n">$2</span>');
     if (com) com = '<span class="c">' + esc(com) + '</span>';
     return code + com;
   }).join('\n');

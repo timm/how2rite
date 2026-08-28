@@ -11,6 +11,8 @@ span.d { padding-left: 2em; display: block; }
 table { border-collapse: collapse; background: #e5e1d8; border-radius: 8px; }
 td, th { padding: 2px 8px; text-align: left; vertical-align: top; }
 img { max-width: 100%; border-radius: 8px; }
+img.fig { background: #fff; padding: 8px; box-sizing: border-box; display: block; margin: 0.5em auto; }
+p.cap { font-size: small; text-align: center; margin-top: 0.2em; }
 hr { border: 0; border-top: 1px solid #b8b4ac; margin: 1.5em 0; }
 .f { font-size: small; }
 .combines { border-left: 4px solid #cc0000; padding: 0.5em 0.8em; background: #e5e1d8; border-radius: 8px; }
@@ -22,4 +24,5 @@ hr { border: 0; border-top: 1px solid #b8b4ac; margin: 1.5em 0; }
   a { color: #e06a5a; }
   hr { border-top-color: #4a4844; }
   img { opacity: 0.9; }
+  img.fig { background: #fff; opacity: 1; }
 }

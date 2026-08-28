@@ -34,6 +34,12 @@ roaming outside the field on purpose;<br>
 silently drop missing papers.
 </div>
 
+<img class="fig" src="fig/lit.png" alt="Left: sorted-citations curve with the knee marked; right: the two wing queries and their overlap">
+<p class="cap">Left: the sorted-cites curve of the goal query, searched
+within SE venues only; the dashed drop marks the knee &mdash; read
+everything above it. Right: the two wings as separate queries, and
+their overlap. Regenerate: <code>litfig.py</code>.</p>
+
 <p><b>Why the venue rule earned its place, twice.</b> A first draft
 skipped it: the reading set filled with general-AI blockbusters (an ML
 survey, the GPT-4 report, a metaverse position paper). A second draft
@@ -50,7 +56,12 @@ missed about half the topic flags, so code full text above the knee.
 And the own-papers rule pays: list which of the team's papers already
 sit inside the set &mdash; territory adjacent to you, not yet occupied
 by you. Coding the set against topic flags then exposes the empty
-overlap &mdash; the under-researched corner the paper writes toward.</p>
+overlap &mdash; the under-researched corner the paper writes toward:</p>
+
+<img class="fig" src="fig/lit2.png" alt="Venn diagram coding the reading set against three topic flags; the three-way overlap is nearly empty" style="max-width: 60%;">
+<p class="cap">The reading set coded against three topic flags (trust,
+productivity, human-method). The nearly-empty three-way overlap is the
+target the paper writes toward.</p>
 
 <p><b>The knob.</b> Edit the query strings, <code>VENUES</code>, and
 <code>FLAGS</code> in <code>litfig.py</code>, delete the cache, rerun;

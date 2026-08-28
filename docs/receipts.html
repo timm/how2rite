@@ -49,6 +49,86 @@ treatments as pdf (left) and cdf (right).</p>
 significance <i>and</i> effect size earn the word
 &ldquo;better&rdquo;.</p>
 
+<h3>The code</h3>
+
+<p>The whole kit is five functions, stdlib only, every pass linear on
+pre-sorted data. The gate: two treatments are the <i>same</i> unless
+significance (KS) and both effect sizes (Cliff's &delta;, Cohen's d)
+all vote different.</p>
+
+<pre class="py">def same(xs, ys,
+         c0=.35,   # cohen threshold (Cohen'88, Sawilowsky'09)
+         d0=.195,  # cliffs threshold (Romano'06)
+         k0=1.36,  # ks threshold (Massey'51)
+         is_sorted=True):
+    if not is_sorted:
+        xs, ys = sorted(xs), sorted(ys)
+    return (cohen(xs, ys)  &lt;= c0 and
+            cliffs(xs, ys) &lt;= d0 and
+            ks(xs, ys)     &lt;= k0)</pre>
+
+<p>Significance: KS walks both sorted lists one distinct value at a
+time; the statistic is the largest vertical gap between the two cdfs,
+rescaled to critical units (under 1.36 = insignificant at the usual
+5% false-alarm rate).</p>
+
+<pre class="py">def ks(xs, ys):
+    nx, ny = len(xs), len(ys)
+    d = p = q = 0
+    while p &lt; nx and q &lt; ny:
+        v = min(xs[p], ys[q])
+        while p &lt; nx and xs[p] == v: p += 1
+        while q &lt; ny and ys[q] == v: q += 1
+        d = max(d, abs(p/nx - q/ny))
+    return d / ((nx + ny) / (nx * ny)) ** 0.5</pre>
+
+<p>Effect size, non-parametric: Cliff's &delta; asks how often x beats
+y minus how often y beats x. Naively quadratic; sorting first makes it
+linear.</p>
+
+<pre class="py">def cliffs(xs, ys):
+    gt = lt = j = k = 0
+    for x in xs:
+        while j &lt; len(ys) and ys[j] &lt; x: j += 1; k = j
+        while k &lt; len(ys) and ys[k] == x: k += 1
+        gt += j; lt += len(ys) - k
+    return abs(gt - lt) / (len(xs) * len(ys))</pre>
+
+<p>Effect size, pragmatic: Cohen's d catches differences that are real
+but dull &mdash; smaller than anyone cares about. No imports needed:
+on sorted data the 10th-to-90th percentile gap spans 2.56 standard
+deviations, so one subtraction estimates the deviation.</p>
+
+<pre class="py">TINY = 1e-32
+
+def mean(a): return sum(a) / len(a)
+def stdev(a): n = len(a)//10; return (a[9*n]-a[n])/2.56
+
+def cohen(xs, ys):
+    n, m = len(xs), len(ys)
+    sd = (((n-1)*stdev(xs)**2 +
+           (m-1)*stdev(ys)**2) / (n+m-2)) ** 0.5
+    return abs(mean(xs) - mean(ys)) / (sd + TINY)</pre>
+
+<p>Many treatments: no pairwise p-hacking. Sort by medians, sweep once
+best-to-worst; each treatment joins the current rank while
+<code>same</code> holds, else opens a new rank. Rank zero holds the
+winners.</p>
+
+<pre class="py">def ranks(d, big=False):
+    mid  = lambda t: t[len(t) // 2]
+    dd   = {k: sorted(v) for k, v in d.items()}
+    out, win, rank, best = {}, [], -1, None
+    for k in sorted(dd, key=lambda k: mid(dd[k]), reverse=big):
+        if best is None or not same(dd[best], dd[k]):
+            rank, best = rank + 1, k
+        if rank == 0: win.append(k)
+        out[k] = rank
+    return win, out</pre>
+
+<p class="f">Full tutorial with the worked example: the paper's
+Appendix B. Regenerate figures: <code>make statsfig</code>.</p>
+
 <p><b>Conclusions with receipts.</b> The conclusion retells the
 introduction, now with the headline numbers from the charts, each
 claim attached to the result that earned it. Every threat-to-validity
@@ -69,5 +149,6 @@ threats productions enforce this).</p>
 
 <center><p class="f"><a href="index.html">&larr; all tricks</a></p></center>
 
+<script src="hl.js"></script>
 </body>
 </html>

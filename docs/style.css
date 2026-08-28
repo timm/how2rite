@@ -15,6 +15,9 @@ img.fig { background: #fff; padding: 8px; box-sizing: border-box; display: block
 p.cap { font-size: small; text-align: center; margin-top: 0.2em; }
 hr { border: 0; border-top: 1px solid #b8b4ac; margin: 1.5em 0; }
 .f { font-size: small; }
+pre .k { color: #cc0000; font-weight: bold; }
+pre .c { color: #8a8578; font-style: italic; }
+pre .d { color: #1a6a9a; }
 .combines { border-left: 4px solid #cc0000; padding: 0.5em 0.8em; background: #e5e1d8; border-radius: 8px; }
 @media (prefers-color-scheme: dark) {
   html { background: #1f1e1c; }
@@ -25,4 +28,7 @@ hr { border: 0; border-top: 1px solid #b8b4ac; margin: 1.5em 0; }
   hr { border-top-color: #4a4844; }
   img { opacity: 0.9; }
   img.fig { background: #fff; opacity: 1; }
+  pre .k { color: #e06a5a; }
+  pre .c { color: #7d7970; }
+  pre .d { color: #6aa5c8; }
 }

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Advanced Tricks | how2rite</title>
+<meta name="theme-color" content="#d6d2ca" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1f1e1c" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<center><p class="f"><a href="index.html">&larr; all tricks</a></p></center>
+
+<h2>Advanced tricks</h2>
+<p class="f"><i>The eight tricks are moves. These are moves that
+generate new moves.</i></p>
+
+<h3>Don't write a grammar &mdash; learn one</h3>
+
+<p>The grammars of <a href="grammar.html">trick 4</a> were reverse
+engineered by hand from exemplars. Skip the hand work:</p>
+
+<div class="box">
+1. Collect PDFs of papers you admire into one directory.<br>
+2. Start an LLM session in that directory.<br>
+3. Show it two or three sample grammars (this site's, or the
+paper's Figures 7&ndash;10) so it learns the notation.<br>
+4. Name a section: &ldquo;describe, in this notation, the grammar of
+the introduction in <i>these</i> papers.&rdquo;<br>
+5. Diff the learned grammar against the default one. Keep the
+productions you like; the diff itself is a finding about your taste.
+</div>
+
+<p>The same session then writes to the grammar it just learned &mdash;
+so the style you admire becomes the style you draft in, without ever
+naming its rules yourself.</p>
+
+<h3>Other advanced tricks</h3>
+
+<p><b>Venue-tune the grammar.</b> Feed the last three years of your
+target venue's distinguished papers instead of personal favorites.
+Now the grammar encodes what that program committee already rewards.
+(The paper flags this as the upgrade path for its area archetypes
+too: build each area column from distinguished papers, not from call
+text.)</p>
+
+<p><b>Parse your draft; the parse errors are the todo list.</b> Once a
+section has a grammar, ask the LLM to parse your draft against it:
+which leaves are present, which are missing, which appear out of
+order? A missing <code>[naive_fails]</code> is a sharper review
+comment than &ldquo;the motivation is weak.&rdquo;</p>
+
+<p><b>Learn the anti-grammar.</b> Trick 5's banned-word linter was
+written by hand. Instead: collect slop (LLM drafts you rejected,
+padded blog prose) and ask what productions distinguish it from the
+keepers. The ban list becomes learned, refreshable, and yours.</p>
+
+<p><b>Grid a would-be collaborator.</b> Before inviting a co-author,
+add their column to the <a href="know.html">FOCUS grid</a>. Do they
+cluster with the team, adding nothing new &mdash; or do they land on
+the priced blind spot? Recruit for the empty column, not the crowded
+one.</p>
+
+<p><b>paper[0] as pre-registration.</b> The loop's rule &mdash; if
+title, abstract, and elevator cannot be written, return to problem
+selection &mdash; is a cheap pre-registration gate. Write the claim
+first, with bracketed placeholder numbers; the brackets are a public
+list of exactly what the experiments still owe.</p>
+
+<p><b>Grammars for the other genres.</b> Nothing limits this to
+papers. Proposals already have a folk grammar (the Heilmeier
+catechism); rebuttals, theses, and registered reports each have
+exemplars to learn from. Same five steps as above, different PDF
+directory.</p>
+
+<p class="combines"><b>Combines with:</b>
+<a href="grammar.html">4 &mdash; write to a grammar</a> supplies the notation;
+<a href="critics.html">6 &mdash; assemble critics</a> runs the parse-as-review;
+<a href="pause.html">7 &mdash; pause and reflect</a>: every learned grammar
+still gets a human read before it drives a draft.</p>
+
+<center><p class="f"><a href="index.html">&larr; all tricks</a></p></center>
+
+</body>
+</html>

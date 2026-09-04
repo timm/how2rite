@@ -26,11 +26,13 @@ pre .k { color: #cc0000; font-weight: bold; }
 pre .c { color: #8a8578; font-style: italic; }
 pre .n { color: #1a6a9a; }
 .combines { border-left: 4px solid #cc0000; padding: 0.5em 0.8em; background: #e5e1d8; border-radius: 8px; }
+.num { color: #cc0000; font-size: 1.1em; vertical-align: middle; margin-right: 0.15em; }
 @media (prefers-color-scheme: dark) {
   html { background: #1f1e1c; }
   body { color: #c8c4bc; }
   p.card, pre, .box, table, .combines { background: #2b2a27; }
   p.card b.q { color: #e06a5a; }
+  .num { color: #e06a5a; }
   a { color: #e06a5a; }
   hr { border-top-color: #4a4844; }
   img { opacity: 0.9; }

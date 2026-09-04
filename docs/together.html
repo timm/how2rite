@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Step 0: Write Together | how2rite</title>
+<meta name="theme-color" content="#d6d2ca" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1f1e1c" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+.ladder td:first-child { white-space: nowrap; color: #781e1e; font-weight: bold; }
+@media (prefers-color-scheme: dark) { .ladder td:first-child { color: #e06a5a; } }
+svg.plot { width: 100%; height: auto; display: block; margin: 0.5em auto; }
+svg.plot text { font-family: "Ubuntu Mono", monospace; }
+</style>
+</head>
+<body>
+
+<center><p class="f"><a href="index.html">&larr; all tricks</a></p></center>
+
+<h2>Step 0: Write together</h2>
+<p class="f"><i>Pick the shared page before you pick the tricks.</i></p>
+
+<p><b>Teams arrive with unequal tooling comfort.</b> Some authors live
+in the terminal; others have never typed a git command and never
+should. Forcing one tool on everyone loses authors at both ends.
+Hence a ladder: eleven ways to share one paper with an LLM in the
+loop, from zero-install to full automation. Every author picks their
+own rung; git (or a shared doc) merges the difference.</p>
+
+<p><b>Two dimensions, not one.</b> The rungs sort by two things at
+once: how much <i>infrastructure</i> you stand up (browser-only
+&rarr; git + CI), and how much <i>autonomy</i> the LLM gets
+(copy-paste chat &rarr; an agent that commits and opens PRs). Most
+rungs walk the diagonal; the interesting corners are off it &mdash;
+top-left is an agent loose inside a shared doc, bottom-right is a
+git purist who lets the LLM check grammar and nothing else.</p>
+
+<svg class="plot" viewBox="0 0 660 430" role="img"
+  aria-label="Scatter plot of eleven sharing rungs: x axis infrastructure from browser-only to git plus CI, y axis LLM autonomy from copy-paste to agent commits. This paper uses rungs 1, 2, 5, and 6.">
+  <title>Eleven rungs of shared writing: infrastructure vs LLM autonomy</title>
+  <!-- frame -->
+  <g stroke="currentColor" stroke-opacity="0.35" fill="none">
+    <line x1="70" y1="360" x2="620" y2="360"/>
+    <line x1="70" y1="30"  x2="70"  y2="360"/>
+  </g>
+  <!-- axis labels -->
+  <g fill="currentColor" font-size="13">
+    <text x="80"  y="392">browser-only</text>
+    <text x="620" y="392" text-anchor="end">git + CI</text>
+    <text x="345" y="418" text-anchor="middle" font-weight="bold">infrastructure &rarr;</text>
+    <text x="26" y="355" transform="rotate(-90 26 355)">copy-paste chat</text>
+    <text x="26" y="200" transform="rotate(-90 26 200)" text-anchor="middle" font-weight="bold">LLM autonomy &rarr;</text>
+    <text x="26" y="40"  transform="rotate(-90 26 40)"  text-anchor="end">agent commits</text>
+  </g>
+  <!-- corner notes -->
+  <g fill="currentColor" fill-opacity="0.55" font-size="12" font-style="italic">
+    <text x="82" y="48">agent in the doc</text>
+    <text x="608" y="348" text-anchor="end">git purist</text>
+  </g>
+  <!-- points: cx = 70 + x*52, cy = 360 - y*31 ; filled red = this paper's rungs -->
+  <g font-size="12" text-anchor="middle">
+    <!-- other modes: hollow -->
+    <g fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="70"  cy="267" r="10"><title>0: shared doc, built-in AI (Gemini in Google Docs)</title></circle>
+      <circle cx="226" cy="329" r="10"><title>3: markdown pad (HackMD) + copy-paste LLM</title></circle>
+      <circle cx="278" cy="267" r="10"><title>4: GitHub web UI + Copilot; PR prose, no clone</title></circle>
+      <circle cx="434" cy="143" r="10"><title>7: LLM co-author via PR; agent branches, human merges</title></circle>
+      <circle cx="486" cy="205" r="10"><title>8: CI on push: build PDF, lint prose, publish site</title></circle>
+      <circle cx="538" cy="112" r="10"><title>9: CI critics: Reviewer-2 agents run on every push</title></circle>
+      <circle cx="590" cy="50"  r="10"><title>10: scheduled agents draft overnight; humans wake to PRs</title></circle>
+    </g>
+    <!-- this paper's rungs: filled -->
+    <g fill="#cc0000" class="mine">
+      <circle cx="122" cy="329" r="10"><title>1: shared Google Doc + claude.ai (copy-paste)</title></circle>
+      <circle cx="174" cy="298" r="10"><title>2: Overleaf in the browser + its AI assist</title></circle>
+      <circle cx="330" cy="236" r="10"><title>5: local clone, git, one subdir per person, LLM in the editor</title></circle>
+      <circle cx="382" cy="236" r="10"><title>6: the git bridge: push syncs GitHub and Overleaf</title></circle>
+    </g>
+    <!-- numbers -->
+    <g fill="currentColor">
+      <text x="70"  y="271">0</text><text x="226" y="333">3</text>
+      <text x="278" y="271">4</text><text x="434" y="147">7</text>
+      <text x="486" y="209">8</text><text x="538" y="116">9</text>
+      <text x="590" y="54">10</text>
+    </g>
+    <g fill="#fff">
+      <text x="122" y="333">1</text><text x="174" y="302">2</text>
+      <text x="330" y="240">5</text><text x="382" y="240">6</text>
+    </g>
+  </g>
+  <!-- legend -->
+  <g font-size="12">
+    <circle cx="440" cy="26" r="7" fill="#cc0000" class="mine"/>
+    <text x="452" y="30" fill="currentColor">this paper's rungs</text>
+    <circle cx="440" cy="46" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+    <text x="452" y="50" fill="currentColor">other ways</text>
+  </g>
+</svg>
+<p class="cap">Eleven rungs. Filled red: the four this paper actually
+ran. Hover a dot for its name.</p>
+
+<p><b>The full ladder.</b></p>
+<table class="ladder">
+<tr><td>0</td><td>shared Google Doc; the built-in AI (Gemini) drafts and comments in place. Zero install, zero accounts beyond Google.</td></tr>
+<tr><td>1</td><td>shared doc + chat LLM by copy-paste (Google Docs + claude.ai; Word/Copilot and Notion AI sit here too). <b>This paper's rung 1.</b></td></tr>
+<tr><td>2</td><td>live LaTeX in the browser: Overleaf plus its own AI assist. Needs only a project invite. <b>This paper's rung 2.</b></td></tr>
+<tr><td>3</td><td>collaborative markdown pad (HackMD) + copy-paste LLM; convert to LaTeX later.</td></tr>
+<tr><td>4</td><td>GitHub web UI + Copilot: prose via pull request, no clone, no terminal.</td></tr>
+<tr><td>5</td><td>local clone, git, one subdirectory (or file) per person, LLM in the editor or CLI. <b>This paper's rung 3.</b></td></tr>
+<tr><td>6</td><td>dual remotes: the git bridge; one push updates GitHub and Overleaf together. <b>This paper's rung 4.</b></td></tr>
+<tr><td>7</td><td>the LLM becomes a co-author: an agent opens branches and PRs; a human merges (this repo's standing rule for agents).</td></tr>
+<tr><td>8</td><td>CI on every push: build the PDF, lint the prose, publish the site.</td></tr>
+<tr><td>9</td><td>CI critics: Reviewer-2 agents (<a href="critics.html">trick 6</a>) run automatically on every push.</td></tr>
+<tr><td>10</td><td>scheduled agents draft and critique overnight; humans wake to PRs to accept or reject.</td></tr>
+</table>
+
+<p style="margin-top:0.8em"><b>Running the four rungs of this paper.</b>
+Two habits make every rung mergeable: start a new line after every
+full stop (git then merges by the sentence), and keep prose in many
+small files, one per section, joined by <i>\input</i>
+under a thin root.</p>
+
+<table style="width:100%">
+<tr><th style="width:17%">rung</th><th style="width:44%">one-time setup</th><th>daily cycle</th></tr>
+<tr><td><b>1</b>: Google Docs + claude.ai</td>
+<td>open the shared Doc link</td>
+<td>draft and comment in the Doc; paste passages to claude.ai for
+rewrites; paste results back as suggestions</td></tr>
+<tr><td><b>2</b>: Overleaf browser</td>
+<td>accept the project invite; set <i>Menu &rarr; Settings &rarr;
+Main document</i> to the paper being built</td>
+<td>edit prose in <i>sec0/</i>; new line after every full stop;
+comment via <i>\note{you}{...}</i>; Cmd-Enter recompiles</td></tr>
+<tr><td><b>3</b>: GitHub</td>
+<td><i>git clone github.com/timm/how2rite</i></td>
+<td>pull; edit <i>sec0/</i>; <i>make fmt</i>; commit; push</td></tr>
+<tr><td><b>4</b>: the git bridge</td>
+<td>rung 3, plus: in Overleaf, <i>Account Settings &rarr; Git
+Integration &rarr; Generate token</i> (username <i>git</i>, password
+the token); then <i>git remote add overleaf
+https://git.overleaf.com/&lt;project-id&gt;</i></td>
+<td><i>git pull overleaf main</i> (collect browser edits); edit;
+<i>make fmt</i>; build; push to both: <i>git push origin main; git
+push overleaf main:main</i></td></tr>
+</table>
+
+<p class="combines" style="margin-top:0.8em"><b>Combines with:</b>
+everything &mdash; step 0 is the floor the eight tricks stand on.
+In particular <a href="critics.html">6 &mdash; assemble critics</a>
+becomes rung 9 when wired into CI, and
+<a href="pause.html">7 &mdash; pause and reflect</a> is what keeps
+rungs 7&ndash;10 answering to humans.</p>
+
+<center><p class="f"><a href="index.html">&larr; all tricks</a></p></center>
+
+<script>
+if (matchMedia('(prefers-color-scheme: dark)').matches)
+  document.querySelectorAll('svg.plot .mine, svg.plot circle.mine')
+    .forEach(e => e.setAttribute('fill', '#e06a5a'));
+</script>
+</body>
+</html>

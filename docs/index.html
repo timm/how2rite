@@ -33,19 +33,33 @@
 <a href="advanced.html">&#9733; advanced</a></p>
 </center>
 
-<p class="card"><i>&ldquo;If you're a bit better than most at a
-particular kind of analysis or a specific domain, choose research
-topics where you can use that.&rdquo;</i> &mdash; Herb Simon.
-This is not one rigid pipeline. It is eight separate tricks.
-Each works alone; most work better in pairs. Pick what you like.
-Each page is a two-minute read.</p>
+<p class="card">There are many ways to write faster.
+Here we offer eight tricks; use none, one, or all of them,
+depending on your needs (see the decision tree below).
+Each trick is a two-minute read. Every trick is optional:
+start from whatever you already have, skip everything
+before your entry point.</p>
 
-<a href="know.html"><img class="fig" src="fig/focus_grid.png" alt="FOCUS-sorted repertory grid of six authors and nine ICSE'27 areas"></a>
-<p class="cap">An example trick: repertory grids are a way to study
-the overlap of authors' research areas and a field's topic areas.
-LLMs can generate such grids automatically, in a minute or two.
-For more on this trick, see <a href="know.html">1</a> and
-<a href="map.html">2</a>.</p>
+<p class="f">Where are you? (each leaf links to a trick)</p>
+
+<pre class="dt">
+have topic? ─no─▶ <a href="know.html">(1)</a> <a href="map.html">(2)</a>      <span class="c">│ grid team; map it to venue</span>
+    │yes                       <span class="c">│</span>
+have abstract? ─no─▶ <a href="read.html">(3)</a>       <span class="c">│ read above citation knee</span>
+    │yes                       <span class="c">│</span>
+have full draft? ─no─▶ <a href="grammar.html">(4)</a> <a href="prose.html">(5)</a> <span class="c">│ grammar expands; un-slop it</span>
+    │yes                       <span class="c">│</span>
+reviews back? ─no─▶ <a href="critics.html">(6)</a> <a href="receipts.html">(8)</a>    <span class="c">│ critics, then audit claims</span>
+    │yes                       <span class="c">│</span>
+    ▼                          <span class="c">│</span>
+<a href="critics.html">(6)</a> <a href="prose.html">(5)</a> <a href="receipts.html">(8)</a>                    <span class="c">│ critics replay real reviews;</span>
+                               <span class="c">│ rewrite; audit response letter</span>
+                               <span class="c">│</span>
+at any point:                  <span class="c">│</span>
+  more than one author? ─▶ <a href="together.html">(0)</a> <span class="c">│ every author picks a rung</span>
+  dividing up sections? ─▶ <a href="know.html">(1)</a> <span class="c">│ regrid: authors &times; sections</span>
+  machine did the work? ─▶ <a href="pause.html">(7)</a> <span class="c">│ pause; check the knobs</span>
+</pre>
 
 <p class="card"><b class="q">Where will your team write &mdash; before it writes anything?</b><br>
 <span class="d"><span class="fa-stack num" aria-hidden="true"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-0 fa-stack-1x fa-inverse"></i></span><a href="together.html"><b>Write together</b></a> &mdash;
@@ -55,8 +69,18 @@ git merges the difference.</span></p>
 
 <p class="card"><b class="q">Want to know what your team is actually good at?</b><br>
 <span class="d"><span class="fa-stack num" aria-hidden="true"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-1 fa-stack-1x fa-inverse"></i></span><a href="know.html"><b>Know thyself</b></a> &mdash;
-self-report lies. Grid the team from its own papers: an LLM reads
+<i>&ldquo;If you're a bit better than most at a particular kind
+of analysis or a specific domain, choose research topics where
+you can use that&rdquo;</i> (Herb Simon).
+Self-report lies. Grid the team from its own papers: an LLM reads
 1,200 paper records in minutes and plays triad interviewee.</span></p>
+
+<a href="know.html"><img class="fig" src="fig/focus_grid.png" alt="FOCUS-sorted repertory grid of six authors and nine ICSE'27 areas"></a>
+<p class="cap">An example: a repertory grid showing the overlap of
+authors' research areas and a field's topic areas.
+LLMs can generate such grids automatically, in a minute or two.
+For more, see <a href="know.html">1</a> and
+<a href="map.html">2</a>.</p>
 
 <p class="card"><b class="q">Have strengths &mdash; but where should you aim them?</b><br>
 <span class="d"><span class="fa-stack num" aria-hidden="true"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-2 fa-stack-1x fa-inverse"></i></span><a href="map.html"><b>Map team to field</b></a> &mdash;
@@ -111,13 +135,6 @@ venue-tune it; parse drafts against it; learn the anti-grammar from
 slop.</span></p>
 
 <hr>
-
-<p class="f"><b>Sample combos.</b>
-Pick a topic: 1+2. &nbsp;
-Survive review: 6+8. &nbsp;
-Fix the writing: 4+5. &nbsp;
-Stay in charge: 7 + any. &nbsp;
-The full 14-step loop of the paper: all eight, in order.</p>
 
 <center class="f">
 <p>Engine: <a href="https://github.com/timm/rite">github.com/timm/rite</a>.

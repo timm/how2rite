@@ -33,106 +33,109 @@
 <a href="advanced.html">&#9733; advanced</a></p>
 </center>
 
-<p class="card">There are many ways to write faster.
-Here we offer eight tricks; use none, one, or all of them,
-depending on your needs (see the decision tree below).
-Each trick is a two-minute read. Every trick is optional:
-start from whatever you already have, skip everything
-before your entry point.</p>
+<p class="card">Eight tricks for writing papers with LLMs, plus a step 0
+on how a team divides the work. The tricks are independent.
+Use none, one, or all of them. Each is a two-minute read.
+Start from whatever you already have and skip the rest.
+The tree below says where to start.</p>
 
 <p class="f">Where are you? (each leaf links to a trick)</p>
 
 <pre class="dt">
-have topic? ─no─▶ <a href="know.html">(1)</a> <a href="map.html">(2)</a>      <span class="c">│ grid team; map it to venue</span>
+have topic? ─no─▶ <a href="know.html">(1)</a> <a href="map.html">(2)</a>      <span class="c">│ score the team; score the venue</span>
     │yes                       <span class="c">│</span>
-have abstract? ─no─▶ <a href="read.html">(3)</a>       <span class="c">│ read above citation knee</span>
+have abstract? ─no─▶ <a href="read.html">(3)</a>       <span class="c">│ sort by cites; read the top</span>
     │yes                       <span class="c">│</span>
-have full draft? ─no─▶ <a href="grammar.html">(4)</a> <a href="prose.html">(5)</a> <span class="c">│ grammar expands; un-slop it</span>
+have full draft? ─no─▶ <a href="grammar.html">(4)</a> <a href="prose.html">(5)</a> <span class="c">│ draft from a grammar; then cut</span>
     │yes                       <span class="c">│</span>
-reviews back? ─no─▶ <a href="critics.html">(6)</a> <a href="receipts.html">(8)</a>    <span class="c">│ critics, then audit claims</span>
+reviews back? ─no─▶ <a href="critics.html">(6)</a> <a href="receipts.html">(8)</a>    <span class="c">│ review it yourself; check claims</span>
     │yes                       <span class="c">│</span>
     ▼                          <span class="c">│</span>
-<a href="critics.html">(6)</a> <a href="prose.html">(5)</a> <a href="receipts.html">(8)</a>                    <span class="c">│ critics replay real reviews;</span>
-                               <span class="c">│ rewrite; audit response letter</span>
+<a href="critics.html">(6)</a> <a href="prose.html">(5)</a> <a href="receipts.html">(8)</a>                    <span class="c">│ re-run the review; rewrite;</span>
+                               <span class="c">│ check the response letter</span>
                                <span class="c">│</span>
 at any point:                  <span class="c">│</span>
-  more than one author? ─▶ <a href="together.html">(0)</a> <span class="c">│ every author picks a rung</span>
-  dividing up sections? ─▶ <a href="know.html">(1)</a> <span class="c">│ regrid: authors &times; sections</span>
-  machine did the work? ─▶ <a href="pause.html">(7)</a> <span class="c">│ pause; check the knobs</span>
+  more than one author? ─▶ <a href="together.html">(0)</a> <span class="c">│ each author picks a level</span>
+  dividing up sections? ─▶ <a href="know.html">(1)</a> <span class="c">│ score authors &times; sections</span>
+  machine did the work? ─▶ <a href="pause.html">(7)</a> <span class="c">│ pause; check the settings</span>
 </pre>
 
-<p class="card"><b class="q">Where will your team write &mdash; before it writes anything?</b><br>
+<p class="card"><b class="q">Before writing: decide how the team writes.</b><br>
 <span class="d"><span class="fa-stack num" aria-hidden="true"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-0 fa-stack-1x fa-inverse"></i></span><a href="together.html"><b>Write together</b></a> &mdash;
-eleven rungs of shared writing, from Gemini inside a Google Doc to
-agents that open PRs overnight. Every author picks their own rung;
-git merges the difference.</span></p>
+eleven levels of LLM use, from Gemini inside a Google Doc to agents
+that open pull requests. Authors need not agree on a level.
+Each picks their own. Git merges the results.</span></p>
 
-<p class="card"><b class="q">Want to know what your team is actually good at?</b><br>
+<p class="card"><b class="q">Find what your team is good at.</b><br>
 <span class="d"><span class="fa-stack num" aria-hidden="true"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-1 fa-stack-1x fa-inverse"></i></span><a href="know.html"><b>Know thyself</b></a> &mdash;
 <i>&ldquo;If you're a bit better than most at a particular kind
 of analysis or a specific domain, choose research topics where
 you can use that&rdquo;</i> (Herb Simon).
-Self-report lies. Grid the team from its own papers: an LLM reads
-1,200 paper records in minutes and plays triad interviewee.</span></p>
+Authors misreport their own strengths, so score them from their
+papers instead. An LLM reads 1,200 paper records in minutes and
+runs the repertory grid interview.</span></p>
 
 <a href="know.html"><img class="fig" src="fig/focus_grid.png" alt="FOCUS-sorted repertory grid of six authors and nine ICSE'27 areas"></a>
-<p class="cap">An example: a repertory grid showing the overlap of
-authors' research areas and a field's topic areas.
-LLMs can generate such grids automatically, in a minute or two.
-For more, see <a href="know.html">1</a> and
-<a href="map.html">2</a>.</p>
+<p class="cap">A repertory grid, scoring six authors against nine
+topic areas from one venue. An LLM builds such a grid in a minute
+or two. See <a href="know.html">1</a> and <a href="map.html">2</a>.</p>
 
-<p class="card"><b class="q">Have strengths &mdash; but where should you aim them?</b><br>
+<p class="card"><b class="q">Pick a topic.</b><br>
 <span class="d"><span class="fa-stack num" aria-hidden="true"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-2 fa-stack-1x fa-inverse"></i></span><a href="map.html"><b>Map team to field</b></a> &mdash;
-score the venue's areas on the same grid as the people. Centroid,
-maximin, and blends nominate the topic; blind spots get priced.</span></p>
+score the venue's topics on the same grid as your people, then match
+the two. Three ways to match: the team average, the team's weakest
+member, or a blend. The gaps show what the team would have to learn.</span></p>
 
-<p class="card"><b class="q">Drowning in 10,000 search hits?</b><br>
-<span class="d"><span class="fa-stack num" aria-hidden="true"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-3 fa-stack-1x fa-inverse"></i></span><a href="read.html"><b>Read above the knee</b></a> &mdash;
-filter by venue <i>inside</i> the query, read above the citation knee,
-snowball both directions, and treat the download rate as a finding.</span></p>
+<p class="card"><b class="q">Too much related work.</b><br>
+<span class="d"><span class="fa-stack num" aria-hidden="true"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-3 fa-stack-1x fa-inverse"></i></span><a href="read.html"><b>Read the top papers</b></a> &mdash;
+do not read all of it. Name the venues inside the query. Sort by
+cites. Read the top papers, plus a few others you judge important.
+From those, follow citations forward and back.</span></p>
 
-<p class="card"><b class="q">Staring at a blank page?</b><br>
+<p class="card"><b class="q">Blank page.</b><br>
 <span class="d"><span class="fa-stack num" aria-hidden="true"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-4 fa-stack-1x fa-inverse"></i></span><a href="grammar.html"><b>Write to a grammar</b></a> &mdash;
-a paper parses under a small grammar: intro, lit review, methods,
-threats, conclusion. Disagree? Edit the productions, regenerate the
-sample; the experiment costs minutes.</span></p>
+a paper has a fixed shape: intro, lit review, methods, threats,
+conclusion. Write that shape as a small grammar and draft from it.
+If you disagree with the shape, edit the grammar and draft again.
+That costs minutes.</span></p>
 
-<p class="card"><b class="q">Does your draft smell like AI slop?</b><br>
-<span class="d"><span class="fa-stack num" aria-hidden="true"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-5 fa-stack-1x fa-inverse"></i></span><a href="prose.html"><b>Un-slop the prose</b></a> &mdash;
-keep the STE skeleton (short, active, one meaning per word); subtract
-the engagement tells (hooks, applause paragraphs). Ship the ban list
-as a linter, then rewrite the missing bridges by hand.</span></p>
+<p class="card"><b class="q">Draft reads like AI.</b><br>
+<span class="d"><span class="fa-stack num" aria-hidden="true"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-5 fa-stack-1x fa-inverse"></i></span><a href="prose.html"><b>Cut the slop</b></a> &mdash;
+keep the ASD-STE100 rules: short sentences, active voice, one
+meaning per word. Cut the hooks and the applause paragraphs. Put
+the banned words in a linter, then rewrite by hand what the linter
+breaks.</span></p>
 
-<p class="card"><b class="q">Want Reviewer 2's verdict before Reviewer 2 gets it?</b><br>
+<p class="card"><b class="q">Before you submit.</b><br>
 <span class="d"><span class="fa-stack num" aria-hidden="true"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-6 fa-stack-1x fa-inverse"></i></span><a href="critics.html"><b>Assemble critics</b></a> &mdash;
-an LLM plays Reviewer 2 using the venue's own review criteria; a
-triage prompt splits findings into machine fixes and human decisions.</span></p>
+review the paper yourself first. Give an LLM the venue's own review
+form and let it write the review. Then sort its comments into two
+piles: what a machine can fix, and what you must decide.</span></p>
 
-<p class="card"><b class="q">Afraid the machine will run away with your paper?</b><br>
+<p class="card"><b class="q">The machine did the work.</b><br>
 <span class="d"><span class="fa-stack num" aria-hidden="true"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-7 fa-stack-1x fa-inverse"></i></span><a href="pause.html"><b>Pause and reflect</b></a> &mdash;
-every computed step ends in a boxed call-out: the questions a reviewer
-should ask, and the exact knob to edit so the rest follows the human,
-not the machine.</span></p>
+every computed step ends in a box holding two things: the questions
+a reviewer should ask, and the setting to change. The human keeps
+the settings.</span></p>
 
-<p class="card"><b class="q">Will your claims survive an audit?</b><br>
+<p class="card"><b class="q">Check your claims.</b><br>
 <span class="d"><span class="fa-stack num" aria-hidden="true"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-8 fa-stack-1x fa-inverse"></i></span><a href="receipts.html"><b>Keep the receipts</b></a> &mdash;
-every citation carries a clickable DOI; claims wait for their
-statistics (significance + effect size); the conclusion retells the
-intro with numbers attached; title and abstract must recode with zero
-flips.</span></p>
+put a clickable DOI on every citation. Report significance and
+effect size with every claim. Make the conclusion repeat the intro,
+with numbers. Re-score your own title and abstract; the scores
+should not move.</span></p>
 
-<p class="card"><b class="q">Just want words to paste?</b><br>
+<p class="card"><b class="q">Words to paste.</b><br>
 <span class="d"><a href="prompts.html"><b>&#9998; Sample prompts</b></a> &mdash;
-the triad interview, the lit search, the STE rewrite (with permission
-for the occasional flourish), learn-a-grammar, Reviewer 2, triage,
-the zero-flip gate.</span></p>
+one prompt per trick: the grid interview, the lit search, the STE
+rewrite, learning a grammar, Reviewer 2, triage, and the claim
+audit.</span></p>
 
-<p class="card"><b class="q">Mastered the eight? Make your own.</b><br>
+<p class="card"><b class="q">Past the eight.</b><br>
 <span class="d"><a href="advanced.html"><b>&#9733; Advanced tricks</b></a> &mdash;
-don't write a grammar, <i>learn</i> one from papers you admire;
-venue-tune it; parse drafts against it; learn the anti-grammar from
-slop.</span></p>
+learn a grammar from papers you admire rather than writing one by
+hand. Tune it per venue. Parse drafts against it. Learn a second
+grammar from bad papers and check against that too.</span></p>
 
 <hr>
 
